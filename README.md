@@ -4,7 +4,7 @@
 **Brief description:** Cross-platform video game for two local players.  
 **Technologies:** C.  
 
-*Twenty Squares* can also be found as a mini-game in Persistence. It's based upon the oldest game known to mankind: a five millenia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur. Its purpose is to provide a "classic" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.  
+*Twenty Squares* can also be found as a mini-game in [Persistence](https://github.com/TheLycorisRadiata/game_persistence). It's based upon the oldest game known to mankind: a five millenia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur. Its purpose is to provide a "classic" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.  
 
 The game has four levels:
 1. Classic Infinite.
