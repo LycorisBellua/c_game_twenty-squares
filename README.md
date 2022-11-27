@@ -12,7 +12,9 @@ The game has four levels:
 3. Deadly Sins Infinite.
 4. Deadly Sins Dispatch.
 
-On these notes, I reserve special thanks to Irving Finkel of the British Museum and Tom Scott, who was his guest in the Museum's introductory video on the Royal Game of Ur. This video is how I came to learn of the game, and I've used the simple rules described in it to make the first level.  
+On these notes, I reserve special thanks to Irving Finkel of the British Museum and Tom Scott, who was his guest in the Museum's [introductory video on the Royal Game of Ur](https://www.youtube.com/watch?v=WZskjLq040I). This video is how I came to learn of the game, and I've used the simple rules described in it to make the first level.  
+
+The download links are in the [Mofumofu page](https://www.mofumofustudios.com/works/product/4bfde5d2).  
 
 ![](./ingame_screenshot.png)
 
