@@ -14,3 +14,5 @@ The game has four levels:
 
 On these notes, I reserve special thanks to Irving Finkel of the British Museum and Tom Scott, who was his guest in the Museum's introductory video on the Royal Game of Ur. This video is how I came to learn of the game, and I've used the simple rules described in it to make the first level.  
 
+![](./ingame_screenshot.png)
+
