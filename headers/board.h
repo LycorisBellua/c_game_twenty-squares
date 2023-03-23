@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "main.h"
+#include "start.h"
 
 void print_board(const int number_of_turns, const int level, const int current_player_id, Player* players, Cell* all_cells);
 void print_turn_line(const int number_of_turns);

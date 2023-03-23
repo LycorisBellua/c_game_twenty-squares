@@ -1,7 +1,7 @@
 #ifndef SELECTION_H
 #define SELECTION_H
 
-#include "main.h"
+#include "start.h"
 
 Stone* select_stone(char* input, Player* current_player);
 int select_number_of_cells_forward(const Player* current_player, const Stone* chosen_stone);

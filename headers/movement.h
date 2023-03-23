@@ -1,7 +1,7 @@
 #ifndef MOVEMENT_H
 #define MOVEMENT_H
 
-#include "main.h"
+#include "start.h"
 
 int set_number_of_moveable_stones_and_every_can_stone_move(Player* current_player, const int level, const int dice);
 int can_this_classic_stone_move(const Stone* stone, Player* current_player, const int dice);

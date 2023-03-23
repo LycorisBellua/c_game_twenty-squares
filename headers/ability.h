@@ -1,7 +1,7 @@
 #ifndef ABILITY_H
 #define ABILITY_H
 
-#include "main.h"
+#include "start.h"
 
 int set_ability(const int level, Cell*** target_cell, const Player* players, const Player* current_player);
 void describe_ability(const int ability, const int dice);

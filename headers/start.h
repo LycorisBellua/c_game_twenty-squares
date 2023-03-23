@@ -1,5 +1,7 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef START_H
+#define START_H
+
+int start(void);
 
 #ifndef STANDARD_LIBRARY_STDIO
 #define STANDARD_LIBRARY_STDIO

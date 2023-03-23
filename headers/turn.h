@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#include "main.h"
+#include "start.h"
 
 void start_game(char* input);
 void game_loop(char* input, const int level, Player* players, Cell* all_cells);
