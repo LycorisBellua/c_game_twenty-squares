@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -MMD -ansi -pedantic -Wall -Wextra 
+CFLAGS = -fPIC -MMD -ansi -pedantic -Wall -Wextra 
 LDFLAGS = 
 
 OBJDIR = builds
@@ -10,15 +10,16 @@ EXECUTABLE = $(OBJDIR)/twenty-squares
 SOURCE_FILES = $(wildcard sources/*.c)
 OBJ_FILES = $(patsubst sources/%.c, $(OBJDIR_OBJ)/%.o, $(SOURCE_FILES))
 
+# -fPIC flag: Needed for the creation of a shared object (dynamic library, also known as a plugin).
+#  Certain objects need to be compiled with this flag or they cannot be used to create the lib.
+
 # -MMD flag + The line below: Automatic dependency generation for the source files
 # 	Objects are automatically rebuilt if the header files they depend on have changed.
 # 	Of course, this only works if both the *.o and *.d files are kept around.
 -include $(OBJ_FILES:.o=.d)
 
-# Default rule: Build the executable + Run "make clean"
-# 	-s is for silent mode, otherwise Make will print stuff
+# Default rule: Build the executable
 all: $(EXECUTABLE)
-	@$(MAKE) -s clean
 
 # Rule to build the executable
 # 	$^ refers to the list of dependencies
