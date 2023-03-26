@@ -6,6 +6,7 @@ DIR_BUILD = builds
 DIR_OBJ = $(DIR_BUILD)/unix/objects
 
 EXECUTABLE = $(DIR_BUILD)/unix/twenty-squares
+PLUGIN = $(DIR_BUILD)/unix/libts.so
 
 SOURCE_FILES = $(wildcard sources/*.c)
 OBJ_FILES = $(patsubst sources/%.c, $(DIR_OBJ)/%.o, $(SOURCE_FILES))
@@ -18,8 +19,8 @@ OBJ_FILES = $(patsubst sources/%.c, $(DIR_OBJ)/%.o, $(SOURCE_FILES))
 # 	Of course, this only works if both the *.o and *.d files are kept around.
 -include $(OBJ_FILES:.o=.d)
 
-# Default rule to build the executable
-all: $(EXECUTABLE)
+# Default rule to build the executable and the plugin
+all: $(EXECUTABLE) $(PLUGIN)
 
 # Rule to build the executable
 # 	$^ refers to the list of dependencies
@@ -34,6 +35,9 @@ $(DIR_OBJ)/%.o: sources/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(PLUGIN): $(filter-out main.o, $(OBJ_FILES))
+	@$(CC) -shared -o $@ $^
+
 # "make clean"
 # 	.PHONY indicates that "clean" is not a file but a command
 .PHONY: clean
@@ -41,9 +45,9 @@ $(DIR_OBJ)/%.o: sources/%.c
 clean:
 	@rm -rf builds/
 clean-obj:
-	@rm -rf builds/unix/objects/
-	@rm -rf builds/win64/objects/
-	@rm -rf builds/win32/objects/
+	@rm -rf builds/unix/objects/ && rm builds/unix/*.so
+	@rm -rf builds/win64/objects/ && rm builds/win64/*.so
+	@rm -rf builds/win32/objects/ && rm builds/win32/*.so
 
 # Edit the compiler and executable variables based on the platform specified in the command
 # NPM package: gcc-mingw-w64
@@ -54,10 +58,12 @@ win64:
 	@$(MAKE) -s all \
 	CC=x86_64-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win64/objects \
-	EXECUTABLE=$(DIR_BUILD)/win64/TwentySquares-64bit.exe
+	EXECUTABLE=$(DIR_BUILD)/win64/TwentySquares-64bit.exe \
+	PLUGIN=$(DIR_BUILD)/win64/libts64.so
 win32:
 	@$(MAKE) -s all \
 	CC=i686-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win32/objects \
-	EXECUTABLE=$(DIR_BUILD)/win32/TwentySquares-32bit.exe
+	EXECUTABLE=$(DIR_BUILD)/win32/TwentySquares-32bit.exe \
+	PLUGIN=$(DIR_BUILD)/win32/libts32.so
 
