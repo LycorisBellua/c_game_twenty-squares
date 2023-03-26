@@ -118,9 +118,3 @@ void press_enter_to_continue(void)
     return;
 }
 
-void clear_terminal(void)
-{
-    printf("\033c");
-    return;
-}
-

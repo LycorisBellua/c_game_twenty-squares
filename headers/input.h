@@ -18,6 +18,16 @@
 #include <ctype.h>
 #endif
 
+#ifndef CLEAR_TERMINAL
+    #ifdef _WIN32
+	    #define CLEAR_TERMINAL system("cls")
+    #elif defined(__ANDROID__)
+	    #define CLEAR_TERMINAL system("clear")
+    #else
+	    #define CLEAR_TERMINAL printf("\033c")
+    #endif
+#endif
+
 void get_string_input(char* input, const char context[], const char question[], const char choices[]);
 int get_number_input(const int min_number, const int max_number, const char question[]);
 int get_number_input_amongst_array(const int number_array[], const int array_count, const char question[]);

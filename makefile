@@ -47,15 +47,16 @@ clean-obj:
 
 # Edit the compiler and executable variables based on the platform specified in the command
 # NPM package: gcc-mingw-w64
+# 	-s option for make is the silent mode
 .PHONY: win64
 .PHONY: win32
 win64:
-	$(MAKE) all \
+	@$(MAKE) -s all \
 	CC=x86_64-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win64/objects \
 	EXECUTABLE=$(DIR_BUILD)/win64/TwentySquares-64bit.exe
 win32:
-	$(MAKE) all \
+	@$(MAKE) -s all \
 	CC=i686-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win32/objects \
 	EXECUTABLE=$(DIR_BUILD)/win32/TwentySquares-32bit.exe

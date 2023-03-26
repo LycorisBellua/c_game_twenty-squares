@@ -4,7 +4,7 @@
 void print_board(const int number_of_turns, const int level, const int current_player_id, Player* players, Cell* all_cells)
 {
     int line;
-    clear_terminal();
+    CLEAR_TERMINAL;
     print_turn_line(number_of_turns);
 
     for (line = 0; line < 42; ++line)
