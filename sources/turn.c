@@ -16,7 +16,7 @@ void start_game(char* input)
 
     while (1)
     {
-        CLEAR_TERMINAL;
+        CLEAR_TERMINAL
         printf("TWENTY SQUARES\n\n");
         printf("Level 1: Classic Infinite.\nLevel 2: Classic Dispatch.\nLevel 3: Deadly Sins Infinite.\nLevel 4: Deadly Sins Dispatch.\n\n");
         level = get_number_input(1, 4, "Which level would you like to play?");

@@ -3,11 +3,11 @@
 
 #ifndef SLEEP_FUNCTION
 #define SLEEP_FUNCTION
-#ifdef __WINDOWS__
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
+    #ifdef _WIN32
+        #include <windows.h>
+    #else
+        #include <unistd.h>
+    #endif
 #endif
 
 #include "start.h"

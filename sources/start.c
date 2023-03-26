@@ -5,8 +5,10 @@
 int start(void)
 {
     char input[INPUT_SIZE];
+    
+    TERMINAL_UTF8_ENCODING
 
-    CLEAR_TERMINAL;
+    CLEAR_TERMINAL
     printf("TWENTY SQUARES\n\n");
     printf("This game is based upon the oldest game known to mankind: a five millenia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur.\n");
     printf("Its purpose is to provide a \"classic\" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.\n");
@@ -15,7 +17,7 @@ int start(void)
     get_string_input(input, "yes_no", "Do you know the rules of the game?", "Yes/No");
     if (strcmp(input, "no") == 0)
     {
-        CLEAR_TERMINAL;
+        CLEAR_TERMINAL
         printf("GUIDE - PAGE 1/3\n\n");
         printf("The Twenty Squares is a board game where two players face each other using, well... A board, and also stones and a dice from 0 to 4. The goal is to bring each of our seven stones beyond the finish line.\n");
 
@@ -44,7 +46,7 @@ int start(void)
         printf("What do these abilities do, and can the stones move less than the dice throw? To find out, let's see the different levels!\n\n");
         press_enter_to_continue();
 
-        CLEAR_TERMINAL;
+        CLEAR_TERMINAL
         printf("GUIDE - PAGE 2/3\n\n");
         printf("Level 1: Classic Infinite.\n");
         printf("Level 2: Classic Dispatch.\n");
@@ -59,7 +61,7 @@ int start(void)
             printf("When it comes to the Deadly Sins stones movements, the dice throw is a range, not a finality. How does each stone pick their cell?\n\n");
         press_enter_to_continue();
 
-        CLEAR_TERMINAL;
+        CLEAR_TERMINAL
         printf("GUIDE - PAGE 3/3\n\n");
         printf("Lust has eyes only for you. It listens to everything you say and will go to the cell you pick.\n\n");
         printf("Pride doesn't do well with orders. It rejects what you picked and goes where it wants. It can also refuse to move just to be a bother.\n\n");
@@ -73,7 +75,7 @@ int start(void)
 
     start_game(input);
 
-    CLEAR_TERMINAL;
+    CLEAR_TERMINAL
     return EXIT_SUCCESS;
 }
 

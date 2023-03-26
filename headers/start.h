@@ -5,19 +5,19 @@ int start(void);
 
 #ifndef STANDARD_LIBRARY_STDIO
 #define STANDARD_LIBRARY_STDIO
-#include <stdio.h>
+    #include <stdio.h>
 #endif
 #ifndef STANDARD_LIBRARY_STDLIB
 #define STANDARD_LIBRARY_STDLIB
-#include <stdlib.h>
+    #include <stdlib.h>
 #endif
 #ifndef STANDARD_LIBRARY_STRING
 #define STANDARD_LIBRARY_STRING
-#include <string.h>
+    #include <string.h>
 #endif
 #ifndef STANDARD_LIBRARY_CTYPE
 #define STANDARD_LIBRARY_CTYPE
-#include <ctype.h>
+    #include <ctype.h>
 #endif
 
 #define ID_STONE_ONE                    1
