@@ -38,17 +38,6 @@ $(DIR_OBJ)/%.o: sources/%.c
 $(PLUGIN): $(filter-out main.o, $(OBJ_FILES))
 	@$(CC) -shared -o $@ $^
 
-# "make clean"
-# 	.PHONY indicates that "clean" is not a file but a command
-.PHONY: clean
-.PHONY: clean-obj
-clean:
-	@rm -rf builds/
-clean-obj:
-	@rm -rf builds/unix/objects/ && rm builds/unix/*.so
-	@rm -rf builds/win64/objects/ && rm builds/win64/*.so
-	@rm -rf builds/win32/objects/ && rm builds/win32/*.so
-
 # Edit the compiler and executable variables based on the platform specified in the command
 # NPM package: gcc-mingw-w64
 # 	-s option for make is the silent mode
@@ -59,11 +48,42 @@ win64:
 	CC=x86_64-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win64/objects \
 	EXECUTABLE=$(DIR_BUILD)/win64/TwentySquares-64bit.exe \
-	PLUGIN=$(DIR_BUILD)/win64/libts64.so
+	PLUGIN=$(DIR_BUILD)/win64/libts64.dll
 win32:
 	@$(MAKE) -s all \
 	CC=i686-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win32/objects \
 	EXECUTABLE=$(DIR_BUILD)/win32/TwentySquares-32bit.exe \
-	PLUGIN=$(DIR_BUILD)/win32/libts32.so
+	PLUGIN=$(DIR_BUILD)/win32/libts32.dll
+
+# "make clean"
+# 	.PHONY indicates that "clean" is not a file but a command
+.PHONY: clean
+.PHONY: clean-unix
+.PHONY: clean-win64
+.PHONY: clean-win32
+.PHONY: clean-obj
+.PHONY: clean-obj-unix
+.PHONY: clean-obj-win64
+.PHONY: clean-obj-win32
+clean:
+	@make -s clean-unix
+	@make -s clean-win64
+	@make -s clean-win32
+clean-unix:
+	@rm -rf builds/unix/
+clean-win64:
+	@rm -rf builds/win64/
+clean-win32:
+	@rm -rf builds/win32/
+clean-obj:
+	@make -s clean-obj-unix
+	@make -s clean-obj-win64
+	@make -s clean-obj-win32
+clean-obj-unix:
+	@rm -rf builds/unix/objects/ && rm builds/unix/*.so
+clean-obj-win64:
+	@rm -rf builds/win64/objects/ && rm builds/win64/*.so
+clean-obj-win32:
+	@rm -rf builds/win32/objects/ && rm builds/win32/*.so
 
