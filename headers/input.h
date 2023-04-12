@@ -80,9 +80,9 @@
     #endif
 #endif
 
-void get_string_input(char* input, const char context[], const char question[], const char choices[]);
-int get_number_input(const int min_number, const int max_number, const char question[]);
-int get_number_input_amongst_array(const int number_array[], const int array_count, const char question[]);
+int get_yes_no_input(const char* question);
+int get_number_input(const int min_number, const int max_number, const char* question);
+int get_number_input_amongst_array(const int number_array[], const int array_count, const char* question);
 void flush_stdin(void);
 void only_one_greaterthan_sign_is_printed(void);
 void press_enter_to_continue(void);

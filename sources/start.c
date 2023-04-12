@@ -5,8 +5,6 @@
 
 int start(void)
 {
-    char input[INPUT_SIZE];
-    
     TERMINAL_UTF8_ENCODING
 
     CLEAR_TERMINAL
@@ -15,8 +13,7 @@ int start(void)
     write_line("Its purpose is to provide a \"classic\" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.\n");
     write_line("On these notes, I reserve special thanks to Irving Finkel of the British Museum and Tom Scott, who was his guest in the Museum's introductory video on the Royal Game of Ur. This video is how I came to learn of the game, and I've used the simple rules described in it to make the first level.\n\n");
 
-    get_string_input(input, "yes_no", "Do you know the rules of the game?", "Yes/No");
-    if (strcmp(input, "no") == 0)
+    if (!get_yes_no_input("Do you know the rules of the game?"))
     {
         CLEAR_TERMINAL
         write_line("GUIDE - PAGE 1/3\n\n");
@@ -58,8 +55,8 @@ int start(void)
         write_line("ts are counted, and the winner is determined.\n\n");
         write_line("'Classic' and 'Deadly Sins,' on the other hand, refer to the stones' movements and the abilities. In Classic levels, the stones can only move up to the dice throw, and the abilities are automatically used upon receiving. Classic levels have two abilities, always given together: Air and Earth. Air gives the player a free turn, while Earth protects the stone as long as it stands still or as long as Water is not used against it.\n\n");
         write_line("In Deadly Sins levels, the four abilities are available, but only one at a time, and the stone is responsible for whether they are used, discarded, or the decision let to the player. Lust, Pride, Envy and Greed leave the decision to the player, while Gluttony uses it, Sloth discards, and as for Wrath, it discards or uses it depending on which ability it is.\n\n");
-    write_line("As for the effect of the last two abilities, Water and Fire: from 1 to the dice throw result, Water lets you select stones to bring back to their respective homebases. Fire, however, kills the enemy stone of our choice. Of course, in Infinite this means the stone goes back to homebase.\n\n");
-            write_line("When it comes to the Deadly Sins stones movements, the dice throw is a range, not a finality. How does each stone pick their cell?\n\n");
+        write_line("As for the effect of the last two abilities, Water and Fire: from 1 to the dice throw result, Water lets you select stones to bring back to their respective homebases. Fire, however, kills the enemy stone of our choice. Of course, in Infinite this means the stone goes back to homebase.\n\n");
+        write_line("When it comes to the Deadly Sins stones movements, the dice throw is a range, not a finality. How does each stone pick their cell?\n\n");
         press_enter_to_continue();
 
         CLEAR_TERMINAL
@@ -74,7 +71,7 @@ int start(void)
         press_enter_to_continue();
     }
 
-    start_game(input);
+    start_game();
 
     CLEAR_TERMINAL
     return EXIT_SUCCESS;

@@ -161,79 +161,45 @@ int select_number_of_cells_forward(const Player* current_player, const Stone* ch
     return chosen_number;
 }
 
-void select_use_ability(char* input, const Player* current_player, const int ability, const int ds_decision, Cell*** target_cell)
+int select_use_ability(const Player* current_player, const int ability, const int ds_decision, Cell*** target_cell)
 {
-    int i;
-    int is_input_valid = 0;
-    char choices[3][INPUT_SIZE] = {0};
+    int choice = -1;
 
     if (ability == ABILITY_CLASSIC || ds_decision == DS_DECISION_USE)
     {
-        memcpy(input, "yes", INPUT_SIZE);
-        return;
+        choice = 1;
+        return choice;
     }
     else if (ds_decision == DS_DECISION_DISCARD)
     {
-        memcpy(input, "no", INPUT_SIZE);
-        return;
+        choice = 0;
+        return choice;
     }
 
     if (current_player->is_artificial_intelligence)
     {
         if (ability == ABILITY_EARTH && (*(*target_cell))->coordinate == current_player->racetrack[INDEX_2_ON_2_END_ROAD]->coordinate)
-            memcpy(input, "no", INPUT_SIZE);
+            choice = 0;
         else
         {
             if (get_random_number_minmax(0, 1))
-                memcpy(input, "yes", INPUT_SIZE);
+                choice = 1;
             else
-                memcpy(input, "no", INPUT_SIZE);
+                choice = 0;
         }
     }
     else
     {
-        memcpy(choices[0], "quit", INPUT_SIZE);
-        memcpy(choices[1], "yes", INPUT_SIZE);
-        memcpy(choices[2], "no", INPUT_SIZE);
-        write_line("Do you use the ability? Yes/No\n\n");
-
-        while (!is_input_valid)
-        {
-            write_line("> ");
-            if (fgets(input, INPUT_SIZE, stdin) != NULL)
-            {
-                for (i = 0; i < INPUT_SIZE; ++i)
-                {
-                    if (input[i] == '\n')
-                    {
-                        input[i] = '\0';
-                        break;
-                    }
-                    input[i] = tolower(input[i]);
-                }
-
-                for (i = 0; i < 3; ++i)
-                {
-                    if (strcmp(input, choices[i]) == 0)
-                    {
-                        is_input_valid = 1;
-                        break;
-                    }
-                }
-            }
-
-            flush_stdin();
-            only_one_greaterthan_sign_is_printed();
-        }
-        if (strcmp(input, "quit") != 0)
+        choice = get_yes_no_input("Do you use the ability?");
+        if (choice != -1)
             write_line("\n");
     }
 
-    if (strcmp(input, "yes") == 0)
+    if (choice == 1)
         write_line("%s uses the ability.\n\n", current_player->name);
-    else if (strcmp(input, "no") == 0)
+    else if (choice == 0)
         write_line("%s discards the ability.\n\n", current_player->name);
-    return;
+    return choice;
 }
 
 int select_number_of_stones_for_water(const int max_number, const Player* current_player)

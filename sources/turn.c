@@ -9,7 +9,7 @@
 #include "../headers/rng.h"
 #include "../headers/turn.h"
 
-void start_game(char* input)
+void start_game(void)
 {
     int level, human_player;
     Cell* all_cells = calloc(21, sizeof(Cell)); /* 21st is of coordinate "1" */
@@ -29,10 +29,9 @@ void start_game(char* input)
         initialize_all_cells(all_cells);
         initialize_players(level, human_player, players, all_cells);
         sleep(1);
-        game_loop(input, level, players, all_cells);
+        game_loop(level, players, all_cells);
 
-        get_string_input(input, "yes_no", "\nPlay again?", "Yes/No");
-        if (strcmp(input, "no") == 0)
+        if (!get_yes_no_input("\nPlay again?"))
         {
             free(players);
             free(all_cells);
@@ -42,8 +41,10 @@ void start_game(char* input)
     return;
 }
 
-void game_loop(char* input, const int level, Player* players, Cell* all_cells)
+void game_loop(const int level, Player* players, Cell* all_cells)
 {
+    char input[INPUT_SIZE] = {0};
+    int yes_no_quit = -1;
     int number_of_turns = 1, dice, number_of_cells_forward, number_of_moveable_stones, ability, ds_decision;
     int has_stone_moved, is_turn_played_twice;
     Stone* chosen_stone;
@@ -114,11 +115,14 @@ void game_loop(char* input, const int level, Player* players, Cell* all_cells)
                             write_line("Enter 'Quit' to leave.\n\n");
                             describe_ability(ability, dice);
                             ds_decision = ds_stones_handle_ability(chosen_stone, ability, level, current_player, other_player);
-                            select_use_ability(input, current_player, ability, ds_decision, &target_cell);
+                            yes_no_quit = select_use_ability(current_player, ability, ds_decision, &target_cell);
 
-                            if (strcmp(input, "quit") == 0)
+                            if (yes_no_quit == -1)
+                            {
+                                memcpy(input, "quit", INPUT_SIZE);
                                 write_line("\nYou're quitting the game...\n\n");
-                            else if (strcmp(input, "no") == 0)
+                            }
+                            else if (yes_no_quit == 0)
                                 press_enter_to_continue();
                             else
                             {

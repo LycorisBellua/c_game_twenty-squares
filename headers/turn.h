@@ -12,8 +12,8 @@
 
 #include "start.h"
 
-void start_game(char* input);
-void game_loop(char* input, const int level, Player* players, Cell* all_cells);
+void start_game(void);
+void game_loop(const int level, Player* players, Cell* all_cells);
 void count_points(Player* players);
 void determine_winner(char* input, Player* players);
 
