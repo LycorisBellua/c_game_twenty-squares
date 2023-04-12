@@ -1,7 +1,7 @@
 #ifndef START_H
 #define START_H
 
-int start(void);
+int start_twenty_squares(void);
 
 #ifndef STANDARD_LIBRARY_STDIO
 #define STANDARD_LIBRARY_STDIO

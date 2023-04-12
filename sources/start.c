@@ -3,7 +3,7 @@
 #include "../headers/output.h"
 #include "../headers/turn.h"
 
-int start(void)
+int start_twenty_squares(void)
 {
     TERMINAL_UTF8_ENCODING
 

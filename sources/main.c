@@ -2,6 +2,6 @@
 
 int main(void)
 {
-    return start();
+    return start_twenty_squares();
 }
 
