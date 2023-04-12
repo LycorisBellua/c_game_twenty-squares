@@ -1,6 +1,7 @@
-#include "../headers/input.h"
-#include "../headers/rng.h"
 #include "../headers/selection.h"
+#include "../headers/input.h"
+#include "../headers/output.h"
+#include "../headers/rng.h"
 
 Stone* select_stone(char* input, Player* current_player)
 {
@@ -11,18 +12,18 @@ Stone* select_stone(char* input, Player* current_player)
     Stone* chosen_stone;
 
     /* Print the available choices + set moveable_stones_names[] and number_of_moveable_stones at the same time */
-    printf("Stone:\n");
+    write_line("Stone:\n");
     memcpy(moveable_stones_names[0], "quit", LENGTH_STONE_NAME);
     for (i = 0, j = 1; i < 7; ++i)
     {
         if (current_player->stoneset[i].can_stone_move)
         {
-            printf("- %s ", current_player->stoneset[i].name);
+            write_line("- %s ", current_player->stoneset[i].name);
             memcpy(moveable_stones_names[j++], current_player->stoneset[i].name, LENGTH_STONE_NAME);
         }
     }
     number_of_moveable_stones = j - 1;
-    printf("-\n\n");
+    write_line("-\n\n");
 
     if (current_player->is_artificial_intelligence)
     {
@@ -33,7 +34,7 @@ Stone* select_stone(char* input, Player* current_player)
             {
                 memcpy(input, moveable_stones_names[random], LENGTH_STONE_NAME);
                 chosen_stone = &(current_player->stoneset[i]);
-                printf("Stone: %s.\n\n", input);
+                write_line("Stone: %s.\n\n", input);
                 break;
             }
         }
@@ -47,7 +48,7 @@ Stone* select_stone(char* input, Player* current_player)
         ++number_of_moveable_stones;
         while (!is_input_valid)
         {
-            printf("> ");
+            write_line("> ");
             if (fgets(input, INPUT_SIZE, stdin) != NULL)
             {
                 for (i = 0; i < INPUT_SIZE; ++i)
@@ -77,7 +78,7 @@ Stone* select_stone(char* input, Player* current_player)
         if (strcmp(input, "quit") != 0)
         {
             input[0] = toupper(input[0]);
-            printf("\nStone: %s.\n\n", input);
+            write_line("\nStone: %s.\n\n", input);
             for (i = 0; i < 7; ++i)
             {
                 if (strcmp(current_player->stoneset[i].name, input) == 0)
@@ -126,18 +127,18 @@ int select_number_of_cells_forward(const Player* current_player, const Stone* ch
     }
     else
     {
-        printf("How many cells forwards should the stone move? ");
+        write_line("How many cells forwards should the stone move? ");
         for (i = min_index; i <= max_index; ++i)
         {
             if (i == max_index)
-                printf("%d.\n\n", chosen_stone->possible_movements[i]);
+                write_line("%d.\n\n", chosen_stone->possible_movements[i]);
             else
-                printf("%d - ", chosen_stone->possible_movements[i]);
+                write_line("%d - ", chosen_stone->possible_movements[i]);
         }
 
         while (!is_chosen_number_valid)
         {
-            printf("> ");
+            write_line("> ");
             if (fgets(input, 8, stdin) != NULL)
             {
                 chosen_number = atoi(input);
@@ -153,10 +154,10 @@ int select_number_of_cells_forward(const Player* current_player, const Stone* ch
             flush_stdin();
             only_one_greaterthan_sign_is_printed();
         }
-        printf("\n");
+        write_line("\n");
     }
 
-    printf("Movement: %d %s forwards.\n", chosen_number, chosen_number == 1 ? "cell" : "cells");
+    write_line("Movement: %d %s forwards.\n", chosen_number, chosen_number == 1 ? "cell" : "cells");
     return chosen_number;
 }
 
@@ -194,11 +195,11 @@ void select_use_ability(char* input, const Player* current_player, const int abi
         memcpy(choices[0], "quit", INPUT_SIZE);
         memcpy(choices[1], "yes", INPUT_SIZE);
         memcpy(choices[2], "no", INPUT_SIZE);
-        printf("Do you use the ability? Yes/No\n\n");
+        write_line("Do you use the ability? Yes/No\n\n");
 
         while (!is_input_valid)
         {
-            printf("> ");
+            write_line("> ");
             if (fgets(input, INPUT_SIZE, stdin) != NULL)
             {
                 for (i = 0; i < INPUT_SIZE; ++i)
@@ -225,13 +226,13 @@ void select_use_ability(char* input, const Player* current_player, const int abi
             only_one_greaterthan_sign_is_printed();
         }
         if (strcmp(input, "quit") != 0)
-            printf("\n");
+            write_line("\n");
     }
 
     if (strcmp(input, "yes") == 0)
-        printf("%s uses the ability.\n\n", current_player->name);
+        write_line("%s uses the ability.\n\n", current_player->name);
     else if (strcmp(input, "no") == 0)
-        printf("%s discards the ability.\n\n", current_player->name);
+        write_line("%s discards the ability.\n\n", current_player->name);
     return;
 }
 
@@ -239,7 +240,7 @@ int select_number_of_stones_for_water(const int max_number, const Player* curren
 {
     if (current_player->is_artificial_intelligence)
     {
-        printf("%s chooses the number of stones they'll pick.\n", current_player->name);
+        write_line("%s chooses the number of stones they'll pick.\n", current_player->name);
         return get_random_number_minmax(1, max_number);
     }
     else

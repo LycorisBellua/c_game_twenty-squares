@@ -1,11 +1,12 @@
+#include "../headers/selection.h"
+#include "../headers/input.h"
+#include "../headers/output.h"
 #include "../headers/ability.h"
 #include "../headers/board.h"
 #include "../headers/cells.h"
-#include "../headers/input.h"
 #include "../headers/movement.h"
 #include "../headers/players.h"
 #include "../headers/rng.h"
-#include "../headers/selection.h"
 #include "../headers/turn.h"
 
 void start_game(char* input)
@@ -17,14 +18,14 @@ void start_game(char* input)
     while (1)
     {
         CLEAR_TERMINAL
-        printf("TWENTY SQUARES\n\n");
-        printf("Level 1: Classic Infinite.\nLevel 2: Classic Dispatch.\nLevel 3: Deadly Sins Infinite.\nLevel 4: Deadly Sins Dispatch.\n\n");
+        write_line("TWENTY SQUARES\n\n");
+        write_line("Level 1: Classic Infinite.\nLevel 2: Classic Dispatch.\nLevel 3: Deadly Sins Infinite.\nLevel 4: Deadly Sins Dispatch.\n\n");
         level = get_number_input(1, 4, "Which level would you like to play?");
-        printf("Level: %s.\n\n", level == 1 ? "Classic Infinite" : level == 2 ? "Classic Dispatch" : level == 3 ? "Deadly Sins Infinite" : "Deadly Sins Dispatch");
+        write_line("Level: %s.\n\n", level == 1 ? "Classic Infinite" : level == 2 ? "Classic Dispatch" : level == 3 ? "Deadly Sins Infinite" : "Deadly Sins Dispatch");
         human_player = get_number_input(1, 2, "Which player would you want to be?") - 1;
-        printf("Player: %s.\n\n", human_player == 0 ? "Player One" : "Player Two");
+        write_line("Player: %s.\n\n", human_player == 0 ? "Player One" : "Player Two");
 
-        printf("Setting the game...\n");
+        write_line("Setting the game...\n");
         initialize_all_cells(all_cells);
         initialize_players(level, human_player, players, all_cells);
         sleep(1);
@@ -75,24 +76,24 @@ void game_loop(char* input, const int level, Player* players, Cell* all_cells)
 
         if (dice == 0)
         {
-            printf("Dice: 0. The turn passes to the other player.\n");
+            write_line("Dice: 0. The turn passes to the other player.\n");
             memcpy(input, "", LENGTH_STONE_NAME);
             press_enter_to_continue();
         }
         else if (number_of_moveable_stones == 0)
         {
-            printf("Dice: %d. No stone can move. The turn passes to the other player.\n", dice);
+            write_line("Dice: %d. No stone can move. The turn passes to the other player.\n", dice);
             memcpy(input, "", LENGTH_STONE_NAME);
             press_enter_to_continue();
         }
         else
         {
-            printf("Enter 'Quit' to leave.\n\n");
-            printf("Dice: %d.\n", dice);
+            write_line("Enter 'Quit' to leave.\n\n");
+            write_line("Dice: %d.\n", dice);
             chosen_stone = select_stone(input, current_player);
 
             if (strcmp(input, "quit") == 0)
-                printf("\nYou're quitting the game...\n\n");
+                write_line("\nYou're quitting the game...\n\n");
             else
             {
                 number_of_cells_forward = level > 2 ? select_number_of_cells_forward(current_player, chosen_stone) : dice;
@@ -110,13 +111,13 @@ void game_loop(char* input, const int level, Player* players, Cell* all_cells)
                         ability = set_ability(level, &target_cell, players, current_player);
                         if (ability != ABILITY_NONE)
                         {
-                            printf("Enter 'Quit' to leave.\n\n");
+                            write_line("Enter 'Quit' to leave.\n\n");
                             describe_ability(ability, dice);
                             ds_decision = ds_stones_handle_ability(chosen_stone, ability, level, current_player, other_player);
                             select_use_ability(input, current_player, ability, ds_decision, &target_cell);
 
                             if (strcmp(input, "quit") == 0)
-                                printf("\nYou're quitting the game...\n\n");
+                                write_line("\nYou're quitting the game...\n\n");
                             else if (strcmp(input, "no") == 0)
                                 press_enter_to_continue();
                             else
@@ -132,7 +133,7 @@ void game_loop(char* input, const int level, Player* players, Cell* all_cells)
 
                                 if (ability == ABILITY_WATER || ability == ABILITY_FIRE)
                                 {
-                                    printf("Enter 'Quit' to leave.\n\n");
+                                    write_line("Enter 'Quit' to leave.\n\n");
                                     print_board(number_of_turns, level, current_player->id, players, all_cells);
                                     ability == ABILITY_FIRE ? execute_ability_fire(level, players, current_player, all_cells) 
                                              : execute_ability_water(dice, level, players, current_player, all_cells);
@@ -167,7 +168,7 @@ void determine_winner(char* input, Player* players)
         else if (PLAYER_ONE->points == PLAYER_TWO->points)
             winner = 3;
 
-        printf("The game has ended. The winner is %s!\n", winner == 0 ? "[ERROR]" : winner == 1 ? PLAYER_ONE->name : winner == 2 ? PLAYER_TWO->name : "both of you");
+        write_line("The game has ended. The winner is %s!\n", winner == 0 ? "[ERROR]" : winner == 1 ? PLAYER_ONE->name : winner == 2 ? PLAYER_TWO->name : "both of you");
         memcpy(input, "quit", INPUT_SIZE);
     }
     return;

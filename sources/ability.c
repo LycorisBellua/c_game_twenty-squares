@@ -1,5 +1,6 @@
 #include "../headers/ability.h"
 #include "../headers/input.h"
+#include "../headers/output.h"
 #include "../headers/rng.h"
 #include "../headers/selection.h"
 
@@ -57,32 +58,32 @@ void describe_ability(const int ability, const int dice)
 {
     if (ability == ABILITY_CLASSIC)
     {
-        printf("This Special Cell obtains the abilities 'Air' and 'Earth'.\n");
-        printf("Effects: The current player gets a free turn and the stone is untouchable while standing on the cell.\n\n");
+        write_line("This Special Cell obtains the abilities 'Air' and 'Earth'.\n");
+        write_line("Effects: The current player gets a free turn and the stone is untouchable while standing on the cell.\n\n");
     }
     else if (ability == ABILITY_AIR)
     {
-        printf("This Special Cell obtains the ability 'Air'.\n");
-        printf("Effect: The current player gets a free turn.\n\n");
+        write_line("This Special Cell obtains the ability 'Air'.\n");
+        write_line("Effect: The current player gets a free turn.\n\n");
     }
     else if (ability == ABILITY_EARTH)
     {
-        printf("This Special Cell obtains the ability 'Earth'.\n");
-        printf("Effect: The stone is untouchable while standing on the cell.\n\n");
+        write_line("This Special Cell obtains the ability 'Earth'.\n");
+        write_line("Effect: The stone is untouchable while standing on the cell.\n\n");
     }
     else if (ability == ABILITY_WATER)
     {
-        printf("This Special Cell obtains the ability 'Water'.\n");
-        printf("Effect: ");
+        write_line("This Special Cell obtains the ability 'Water'.\n");
+        write_line("Effect: ");
         if (dice == 1)
-            printf("Pick a living stone you want to put back to homebase.\n\n");
+            write_line("Pick a living stone you want to put back to homebase.\n\n");
         else
-            printf("From 1 to %d, pick living stones you want to put back to their respective homebase.\n\n", dice);
+            write_line("From 1 to %d, pick living stones you want to put back to their respective homebase.\n\n", dice);
     }
     else if (ability == ABILITY_FIRE)
     {
-        printf("This Special Cell obtains the ability 'Fire'.\n");
-        printf("Effect: Pick an enemy stone standing on the board and not protected by Earth, and have it die.\n\n");
+        write_line("This Special Cell obtains the ability 'Fire'.\n");
+        write_line("Effect: Pick an enemy stone standing on the board and not protected by Earth, and have it die.\n\n");
     }
     return;
 }
@@ -91,54 +92,54 @@ int ds_stones_handle_ability(const Stone* chosen_stone, const int ability, const
 {
     if (chosen_stone->id == ID_STONE_GLUTTONY)
     {
-        printf("Gluttony uses the ability. No waste.\n");
+        write_line("Gluttony uses the ability. No waste.\n");
         return DS_DECISION_USE;
     }
     else if (chosen_stone->id == ID_STONE_SLOTH)
     {
-        printf("Sloth discards the ability. Leave them alone.\n");
+        write_line("Sloth discards the ability. Leave them alone.\n");
         return DS_DECISION_DISCARD;
     }
     else if (chosen_stone->id == ID_STONE_WRATH)
     {
         if (ability == ABILITY_WATER)
         {
-            printf("Wrath discards the ability, because this one is not very... \"killing friendly.\"\n");
+            write_line("Wrath discards the ability, because this one is not very... \"killing friendly.\"\n");
             return DS_DECISION_DISCARD;
         }
         else if (ability == ABILITY_AIR)
         {
             if (other_player->number_of_playable_stones == 0)
             {
-                printf("Wrath discards the ability, because... What good would it be to play on a board devoid of enemies?\n");
+                write_line("Wrath discards the ability, because... What good would it be to play on a board devoid of enemies?\n");
                 return DS_DECISION_DISCARD;
             }
             else if (chosen_stone->coordinate == current_player->racetrack[INDEX_3_ON_3_NO_KILLING_ROAD]->coordinate)
             {
-                printf("Wrath uses the ability. This way, it can be used on a more useful stone.\n");
+                write_line("Wrath uses the ability. This way, it can be used on a more useful stone.\n");
                 return DS_DECISION_USE;
             }
             else
             {
-                printf("Wrath uses the ability. One more chance to play! Please pick them! ...Pretty please?\n");
+                write_line("Wrath uses the ability. One more chance to play! Please pick them! ...Pretty please?\n");
                 return DS_DECISION_USE;
             }
         }
         else if (ability == ABILITY_FIRE)
         {
-            printf("Wrath uses the ability. Haha, perfect! Don't run little stone... Not that you can anyway.\n");
+            write_line("Wrath uses the ability. Haha, perfect! Don't run little stone... Not that you can anyway.\n");
             return DS_DECISION_USE;
         }
         else if (ability == ABILITY_EARTH)
         {
             if (chosen_stone->coordinate == current_player->racetrack[INDEX_3_ON_3_NO_KILLING_ROAD]->coordinate)
             {
-                printf("Wrath discards the ability. There is no point in sticking around.\n");
+                write_line("Wrath discards the ability. There is no point in sticking around.\n");
                 return DS_DECISION_DISCARD;
             }
             else
             {
-                printf("Wrath uses the ability. With that, they will remain longer on the board... Even a bit is fine. Even one more stone.\n");
+                write_line("Wrath uses the ability. With that, they will remain longer on the board... Even a bit is fine. Even one more stone.\n");
                 return DS_DECISION_USE;
             }
         }
@@ -149,12 +150,12 @@ int ds_stones_handle_ability(const Stone* chosen_stone, const int ability, const
         {
             if (current_player->is_artificial_intelligence)
             {
-                printf("%s lets %s decide what to do with the ability.\n", chosen_stone->name, current_player->name);
+                write_line("%s lets %s decide what to do with the ability.\n", chosen_stone->name, current_player->name);
             }
             else
             {
-                printf("%s lets you decide what to do with the ability.\n", chosen_stone->name);
-                printf("If it's not used right away, it will be discarded.\n");
+                write_line("%s lets you decide what to do with the ability.\n", chosen_stone->name);
+                write_line("If it's not used right away, it will be discarded.\n");
             }
         }
         return DS_DECISION_PLAYER;
@@ -167,12 +168,12 @@ void execute_ability_fire(const int level, Player* players, Player* current_play
 {
     if (current_player->id)
     {
-        printf("Fire will kill one of %s's stones.\n", PLAYER_ONE->name);
+        write_line("Fire will kill one of %s's stones.\n", PLAYER_ONE->name);
         remove_stone_from_board(all_cells, ABILITY_FIRE, level, PLAYER_ONE, current_player);
     }
     else
     {
-        printf("Fire will kill one of %s's stones.\n", PLAYER_TWO->name);
+        write_line("Fire will kill one of %s's stones.\n", PLAYER_TWO->name);
         remove_stone_from_board(all_cells, ABILITY_FIRE, level, PLAYER_TWO, current_player);
     }
     return;
@@ -186,7 +187,7 @@ void execute_ability_water(const int dice, const int level, Player* players, Pla
     int max_number_of_stones_to_select = total_stones_on_board < dice ? total_stones_on_board : dice;
     int number = max_number_of_stones_to_select == 1 ? 1 : select_number_of_stones_for_water(max_number_of_stones_to_select, current_player);
 
-    printf("Water will wash %d %s away.\n", number, number == 1 ? "stone" : "stones");
+    write_line("Water will wash %d %s away.\n", number, number == 1 ? "stone" : "stones");
     for (i = 0; i < number; ++i)
     {
         if (PLAYER_ONE->number_of_stones_on_board > 0 && PLAYER_TWO->number_of_stones_on_board > 0)
@@ -211,7 +212,7 @@ void remove_stone_from_board(Cell* all_cells, const int ability, const int level
 
     if (current_player->is_artificial_intelligence)
     {
-        printf("%s %s.\n", current_player->name, ability == ABILITY_FIRE ? "selects an enemy stone" : "selects a stone");
+        write_line("%s %s.\n", current_player->name, ability == ABILITY_FIRE ? "selects an enemy stone" : "selects a stone");
 
         for (i = 0, j = 0; i < 7; ++i)
         {
@@ -228,10 +229,10 @@ void remove_stone_from_board(Cell* all_cells, const int ability, const int level
     }
     else
     {
-        printf("%s - Stone:\n", targeted_player->name);
+        write_line("%s - Stone:\n", targeted_player->name);
         while (!is_input_valid)
         {
-            printf("> ");
+            write_line("> ");
             if (fgets(input, INPUT_SIZE, stdin) != NULL)
             {
                 for (i = 0; i < INPUT_SIZE; ++i)
@@ -279,7 +280,7 @@ void remove_stone_from_board(Cell* all_cells, const int ability, const int level
     }
 
     --(targeted_player->number_of_stones_on_board);
-    printf("%s: %s.\n", targeted_player->name, targeted_stone->name);
+    write_line("%s: %s.\n", targeted_player->name, targeted_stone->name);
     return;
 }
 

@@ -1,4 +1,5 @@
 #include "../headers/movement.h"
+#include "../headers/output.h"
 #include "../headers/rng.h"
 
 int set_number_of_moveable_stones_and_every_can_stone_move(Player* current_player, const int level, const int dice)
@@ -531,7 +532,7 @@ int move_stone(const int level, int number_of_cells_forward, Stone* chosen_stone
                 if (racetrack_index_of_origin_cell + (*chosen_stone).possible_movements[i] >= 14)
                 {
                     pride_has_chosen = 1;
-                    printf("\nPride seizes the opportunity to get rid of %s, and leaves.\n\n", current_player->is_artificial_intelligence ? current_player->name : "you");
+                    write_line("\nPride seizes the opportunity to get rid of %s, and leaves.\n\n", current_player->is_artificial_intelligence ? current_player->name : "you");
                     break;
                 }
             }
@@ -544,12 +545,12 @@ int move_stone(const int level, int number_of_cells_forward, Stone* chosen_stone
             pride_has_chosen = i - 1 == 0 ? 0 : get_random_number_minmax(0, i - 1);
             if (number_of_cells_forward == (*chosen_stone).possible_movements[pride_has_chosen])
             {
-                printf("\nPride refuses to move. The turn passes.\n\n");
+                write_line("\nPride refuses to move. The turn passes.\n\n");
                 return 0;
             }
             else
             {
-                printf("\n\"%s\", huh? Pride will move somewhere else.\n\n", 
+                write_line("\n\"%s\", huh? Pride will move somewhere else.\n\n", 
                       number_of_cells_forward == 1 ? "One" 
                     : number_of_cells_forward == 2 ? "Two" 
                     : number_of_cells_forward == 3 ? "Three" 
