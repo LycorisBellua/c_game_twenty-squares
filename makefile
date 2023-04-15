@@ -43,7 +43,7 @@ $(DYNAMIC_LIB): $(filter-out main.o, $(OBJ_FILES))
 	@$(CC) -shared -o $@ $^
 
 # Edit the compiler and executable variables based on the platform specified in the command
-# NPM package: gcc-mingw-w64
+# Package: gcc-mingw-w64
 # 	-s option for make is the silent mode
 .PHONY: win64
 .PHONY: win32
