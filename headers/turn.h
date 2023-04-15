@@ -1,12 +1,14 @@
 #ifndef TURN_H
 #define TURN_H
 
-#ifndef SLEEP_FUNCTION
-#define SLEEP_FUNCTION
+#ifndef STANDARD_LIBRARY_UNISTD
+#define STANDARD_LIBRARY_UNISTD
+    #include <unistd.h>
+#endif
+#ifndef STANDARD_LIBRARY_WINDOWS
+#define STANDARD_LIBRARY_WINDOWS
     #ifdef _WIN32
-        #include <windows.h>
-    #else
-        #include <unistd.h>
+    #include <windows.h>
     #endif
 #endif
 
