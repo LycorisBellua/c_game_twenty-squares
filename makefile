@@ -54,10 +54,6 @@ win32:
 .PHONY: clean-unix
 .PHONY: clean-win64
 .PHONY: clean-win32
-.PHONY: clean-obj
-.PHONY: clean-obj-unix
-.PHONY: clean-obj-win64
-.PHONY: clean-obj-win32
 clean:
 	@make -s clean-unix
 	@make -s clean-win64
@@ -68,14 +64,4 @@ clean-win64:
 	@rm -rf builds/win64/
 clean-win32:
 	@rm -rf builds/win32/
-clean-obj:
-	@make -s clean-obj-unix
-	@make -s clean-obj-win64
-	@make -s clean-obj-win32
-clean-obj-unix:
-	@rm -rf builds/unix/objects/ && rm builds/unix/*.a && rm builds/unix/*.so
-clean-obj-win64:
-	@rm -rf builds/win64/objects/ && rm builds/win64/*.lib && rm builds/win64/*.dll
-clean-obj-win32:
-	@rm -rf builds/win32/objects/ && rm builds/win32/*.lib && rm builds/win32/*.dll
 
