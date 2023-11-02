@@ -9,7 +9,7 @@ int start_twenty_squares(void)
 
     CLEAR_TERMINAL
     write_line("TWENTY SQUARES\n\n");
-    write_line("This game is based upon the oldest game known to mankind: a five millenia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur.\n");
+    write_line("This game is based upon the oldest game known to mankind: a five millennia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur.\n");
     write_line("Its purpose is to provide a \"classic\" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.\n");
     write_line("On these notes, I reserve special thanks to Irving Finkel of the British Museum and Tom Scott, who was his guest in the Museum's introductory video on the Royal Game of Ur. This video is how I came to learn of the game, and I've used the simple rules described in it to make the first level.\n\n");
 

@@ -6,7 +6,7 @@ It can be found as a mini-game in [Treasure Venture](https://github.com/TheLycor
 
 ---
 
-It's based upon the oldest game known to mankind: a five millenia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur. Its purpose is to provide a "classic" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.  
+It's based upon the oldest game known to mankind: a five millennia old mesopotamian board game, known today as the Game of Twenty Squares or the Royal Game of Ur. Its purpose is to provide a "classic" version of the game, as well as a new take on it, that exploits possibilities brought by a computer.  
 
 The game has four levels:
 1. Classic Infinite.
