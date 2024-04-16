@@ -2,7 +2,7 @@
 
 *Twenty Squares* is a CLI video game, that is to say that it runs in a computer's terminal. It's also cross-platform, so it can be run on Windows 64-bit and 32-bit, as well as on Unix-based systems like MacOS and Linux. As for the API used to develop it, it's the C programming language.  
 
-It can be found as a mini-game in [Treasure Venture](https://github.com/TheLycorisRadiata/c_game_treasureventure).  
+It can be found as a mini-game in [Treasure Venture](https://github.com/LycorisDev/c_game_treasure-venture).  
 
 ---
 
