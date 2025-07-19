@@ -1,7 +1,7 @@
-#include "../headers/start.h"
-#include "../headers/input.h"
-#include "../headers/output.h"
-#include "../headers/turn.h"
+#include "start.h"
+#include "input.h"
+#include "output.h"
+#include "turn.h"
 
 int start_twenty_squares(void)
 {

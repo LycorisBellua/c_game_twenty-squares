@@ -1,8 +1,8 @@
-#include "../headers/ability.h"
-#include "../headers/input.h"
-#include "../headers/output.h"
-#include "../headers/rng.h"
-#include "../headers/selection.h"
+#include "ability.h"
+#include "input.h"
+#include "output.h"
+#include "rng.h"
+#include "selection.h"
 
 int set_ability(const int level, Cell*** target_cell, const Player* players, const Player* current_player)
 {

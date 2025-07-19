@@ -1,10 +1,4 @@
-# Temporary files
-
 *~
 *.swp
-
-# Test builds
-
-[Bb]uild/
-[Bb]uilds/
-
+.vscode
+build/

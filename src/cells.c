@@ -1,4 +1,4 @@
-#include "../headers/cells.h"
+#include "cells.h"
 
 void initialize_all_cells(Cell* all_cells)
 {

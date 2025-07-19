@@ -1,27 +1,20 @@
 CC = gcc
-CFLAGS = -fPIC -MMD -ansi -pedantic -Wall -Wextra 
+CFLAGS = -fPIC -MMD -Iinclude -ansi -pedantic -Wall -Wextra 
 LDFLAGS = -O2 
-
-DIR_BUILD = builds
+DIR_BUILD = build
 DIR_OBJ = $(DIR_BUILD)/unix/objects
-
 EXECUTABLE = $(DIR_BUILD)/unix/twenty-squares
 STATIC_LIB = $(DIR_BUILD)/unix/libts.a
 DYNAMIC_LIB = $(DIR_BUILD)/unix/libts.so
-
-SOURCE_FILES = $(wildcard sources/*.c)
-OBJ_FILES = $(patsubst sources/%.c, $(DIR_OBJ)/%.o, $(SOURCE_FILES))
+SRC_FILES = $(shell find src -name '*.c')
+OBJ_FILES = $(patsubst src/%.c, $(DIR_OBJ)/%.o, $(SRC_FILES))
 
 all: $(EXECUTABLE) $(STATIC_LIB) $(DYNAMIC_LIB)
 
-# 	$^ refers to the list of dependencies
-# 	$@ refers to the name of the executable
 $(EXECUTABLE): $(OBJ_FILES)
 	@$(CC) $(LDFLAGS) $^ -o $@
 
-# 	$(@D) refers to the directory part of target file name
-# 	$< refers to the first element of the dependency list (yes, $^ could have been used here)
-$(DIR_OBJ)/%.o: sources/%.c
+$(DIR_OBJ)/%.o: src/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 -include $(DIR_OBJ)/%.d
@@ -59,9 +52,9 @@ clean:
 	@make -s clean-win64
 	@make -s clean-win32
 clean-unix:
-	@rm -rf builds/unix/
+	@rm -rf build/unix/
 clean-win64:
-	@rm -rf builds/win64/
+	@rm -rf build/win64/
 clean-win32:
-	@rm -rf builds/win32/
+	@rm -rf build/win32/
 

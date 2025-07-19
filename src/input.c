@@ -1,5 +1,5 @@
-#include "../headers/input.h"
-#include "../headers/output.h"
+#include "input.h"
+#include "output.h"
 
 int get_yes_no_input(const char* question)
 {

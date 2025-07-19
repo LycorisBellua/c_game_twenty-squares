@@ -1,6 +1,6 @@
-#include "../headers/movement.h"
-#include "../headers/output.h"
-#include "../headers/rng.h"
+#include "movement.h"
+#include "output.h"
+#include "rng.h"
 
 int set_number_of_moveable_stones_and_every_can_stone_move(Player* current_player, const int level, const int dice)
 {

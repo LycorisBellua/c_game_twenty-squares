@@ -1,4 +1,4 @@
-#include "../headers/output.h"
+#include "output.h"
 
 void write_int(int num)
 {

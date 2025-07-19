@@ -1,13 +1,13 @@
-#include "../headers/selection.h"
-#include "../headers/input.h"
-#include "../headers/output.h"
-#include "../headers/ability.h"
-#include "../headers/board.h"
-#include "../headers/cells.h"
-#include "../headers/movement.h"
-#include "../headers/players.h"
-#include "../headers/rng.h"
-#include "../headers/turn.h"
+#include "selection.h"
+#include "input.h"
+#include "output.h"
+#include "ability.h"
+#include "board.h"
+#include "cells.h"
+#include "movement.h"
+#include "players.h"
+#include "rng.h"
+#include "turn.h"
 
 void start_game(void)
 {

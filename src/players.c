@@ -1,4 +1,4 @@
-#include "../headers/players.h"
+#include "players.h"
 
 void initialize_players(const int level, const int human_player, Player* players, Cell* all_cells)
 {

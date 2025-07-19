@@ -1,4 +1,4 @@
-#include "../headers/start.h"
+#include "start.h"
 
 int main(void)
 {

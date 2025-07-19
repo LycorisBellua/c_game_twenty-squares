@@ -1,7 +1,7 @@
-#include "../headers/selection.h"
-#include "../headers/input.h"
-#include "../headers/output.h"
-#include "../headers/rng.h"
+#include "selection.h"
+#include "input.h"
+#include "output.h"
+#include "rng.h"
 
 Stone* select_stone(char* input, Player* current_player)
 {
