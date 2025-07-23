@@ -3,8 +3,10 @@
 #include "output.h"
 #include "turn.h"
 
-int start_twenty_squares(void)
+int	start(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
     TERMINAL_UTF8_ENCODING
 
     CLEAR_TERMINAL

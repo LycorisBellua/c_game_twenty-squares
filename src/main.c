@@ -1,7 +1,7 @@
 #include "start.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
-    return start_twenty_squares();
+    return start(argc, argv);
 }
 
