@@ -1,16 +1,17 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 int	rng_seed;
+
+static void	set_utf8_encoding(void);
 
 int	start(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
+	set_utf8_encoding();
 	rng_seed = generate_seed();
-	TERMINAL_UTF8_ENCODING
 
-	CLEAR_TERMINAL
+	clear_window();
 	printf("TWENTY SQUARES\n\n");
 	printf("This game is based upon the oldest game known to mankind: a five "
 		"millennia old mesopotamian board game, known today as the Game of "
@@ -26,7 +27,7 @@ int	start(int argc, char **argv)
 
 	if (!get_yes_no_input("Do you know the rules of the game?"))
 	{
-		CLEAR_TERMINAL
+		clear_window();
 		printf("GUIDE - PAGE 1/3\n\n");
 		printf("The Twenty Squares is a board game where two players face each "
 			"other using, well... A board, and also stones and a dice from 0 "
@@ -70,7 +71,7 @@ int	start(int argc, char **argv)
 			"the dice throw? To find out, let's see the different levels!\n\n");
 		press_enter_to_continue();
 
-		CLEAR_TERMINAL
+		clear_window();
 		printf("GUIDE - PAGE 2/3\n\n");
 		printf("Level 1: Classic Infinite.\n");
 		printf("Level 2: Classic Dispatch.\n");
@@ -108,7 +109,7 @@ int	start(int argc, char **argv)
 			"cell?\n\n");
 		press_enter_to_continue();
 
-		CLEAR_TERMINAL
+		clear_window();
 		printf("GUIDE - PAGE 3/3\n\n");
 		printf("Lust has eyes only for you. It listens to everything you say "
 			"and will go to the cell you pick.\n\n");
@@ -137,6 +138,14 @@ int	start(int argc, char **argv)
 
 	start_game();
 
-	CLEAR_TERMINAL
+	clear_window();
 	return EXIT_SUCCESS;
+}
+
+static void	set_utf8_encoding(void)
+{
+	#ifdef _WIN32
+	SetConsoleOutputCP(CP_UTF8);
+	#endif
+	return;
 }

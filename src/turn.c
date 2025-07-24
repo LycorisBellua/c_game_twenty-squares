@@ -1,5 +1,4 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 void	start_game(void)
 {
@@ -9,8 +8,8 @@ void	start_game(void)
 
 	while (1)
 	{
-		CLEAR_TERMINAL
-			printf("TWENTY SQUARES\n\n");
+		clear_window();
+		printf("TWENTY SQUARES\n\n");
 		printf("Level 1: Classic Infinite.\n"
 			"Level 2: Classic Dispatch.\n"
 			"Level 3: Deadly Sins Infinite.\n"

@@ -1,13 +1,12 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 void	print_board(int number_of_turns, int level, int current_player_id,
 			Player *players, Cell *all_cells)
 {
 	int line;
-	CLEAR_TERMINAL
-		print_turn_line(number_of_turns);
 
+	clear_window();
+	print_turn_line(number_of_turns);
 	for (line = 0; line < 42; ++line)
 	{
 		print_column0(line, level, current_player_id, players);

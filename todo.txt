@@ -1,0 +1,9 @@
+- Refactor input, fix the issue with Ctrl-D, and remove the following functions:
+	fflush
+	fgets
+	fseek
+	getchar
+	putchar
+	puts
+	stdin
+

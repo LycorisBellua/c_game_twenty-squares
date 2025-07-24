@@ -1,5 +1,4 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 int	set_ability(int level, Cell ***target_cell, const Player *players,
 		const Player *current_player)

@@ -1,5 +1,4 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 int	get_yes_no_input(const char *question)
 {

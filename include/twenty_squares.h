@@ -10,6 +10,12 @@
 #include <windows.h>
 #endif
 
+#define INPUT_SIZE                      40
+#define LENGTH_STONE_NAME               9
+#define LENGTH_PLAYER_NAME              11
+#define PLAYER_ONE                      (players + 0)
+#define PLAYER_TWO                      (players + 1)
+
 #define ID_STONE_ONE                    1
 #define ID_STONE_TWO                    2
 #define ID_STONE_THREE                  3
@@ -55,11 +61,6 @@
 #define INDEX_2_ON_3_NO_KILLING_ROAD    12
 #define INDEX_3_ON_3_NO_KILLING_ROAD    13
 
-#define LENGTH_STONE_NAME               9
-#define LENGTH_PLAYER_NAME              11
-#define PLAYER_ONE                      (players + 0)
-#define PLAYER_TWO                      (players + 1)
-
 typedef struct
 {
 	char	name[LENGTH_STONE_NAME];
@@ -98,6 +99,7 @@ extern int rng_seed;
 /* Init --------------------------------------------------------------------- */
 
 int		start(int argc, char **argv);
+void	clear_window(void);
 
 /* Abilities ---------------------------------------------------------------- */
 
@@ -130,6 +132,16 @@ void	print_column4(int line, int level, int current_player_id,
 /* Cells -------------------------------------------------------------------- */
 
 void	initialize_all_cells(Cell *all_cells);
+
+/* Input -------------------------------------------------------------------- */
+
+int		get_yes_no_input(const char *question);
+int		get_number_input(int min_number, int max_number, const char *question);
+int		get_number_input_amongst_array(const int *number_array, int array_count,
+			const char *question);
+void	flush_stdin(void);
+void	only_one_greaterthan_sign_is_printed(void);
+void	press_enter_to_continue(void);
 
 /* Movement ----------------------------------------------------------------- */
 

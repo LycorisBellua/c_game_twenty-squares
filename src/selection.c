@@ -1,5 +1,4 @@
 #include "twenty_squares.h"
-#include "input.h"
 
 Stone	*select_stone(char *input, Player *current_player)
 {
