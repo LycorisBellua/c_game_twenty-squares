@@ -1,45 +1,5 @@
 #include "twenty_squares.h"
 
-void	start_game(void)
-{
-	int level, human_player;
-	Cell* all_cells = calloc(21, sizeof(Cell)); /* 21st is of coordinate "1" */
-	Player* players = calloc(2, sizeof(Player));
-
-	while (1)
-	{
-		clear_window();
-		printf("TWENTY SQUARES\n\n");
-		printf("Level 1: Classic Infinite.\n"
-			"Level 2: Classic Dispatch.\n"
-			"Level 3: Deadly Sins Infinite.\n"
-			"Level 4: Deadly Sins Dispatch.\n\n");
-		level = get_number_input(1, 4, "Which level would you like to play?");
-		printf("Level: %s.\n\n",
-			level == 1 ? "Classic Infinite"
-			: level == 2 ? "Classic Dispatch"
-			: level == 3 ? "Deadly Sins Infinite"
-			: "Deadly Sins Dispatch");
-		human_player = get_number_input(1, 2,
-			"Which player would you want to be?") - 1;
-		printf("Player: %s.\n\n", !human_player ? "Player One" : "Player Two");
-
-		printf("Setting the game...\n");
-		initialize_all_cells(all_cells);
-		initialize_players(level, human_player, players, all_cells);
-		sleep(1);
-		game_loop(level, players, all_cells);
-
-		if (!get_yes_no_input("\nPlay again?"))
-		{
-			free(players);
-			free(all_cells);
-			break;
-		}
-	}
-	return;
-}
-
 void	game_loop(int level, Player *players, Cell *all_cells)
 {
 	char input[INPUT_SIZE] = {0};
@@ -51,16 +11,16 @@ void	game_loop(int level, Player *players, Cell *all_cells)
 	Cell** target_cell = 0;
 	Player *current_player, *other_player;
 
-	/* target_cell is a double pointer here, and a triple pointer in fonctions, 
-		so it can take a cell's address through current_player. It wouldn't 
-		work otherwise. Am I missing something? */
+	// target_cell is a double pointer here, and a triple pointer in fonctions, 
+	// so it can take a cell's address through current_player. It wouldn't 
+	// work otherwise. Am I missing something?
 
 	while (strcmp(input, "quit"))
 	{
-		/* (number_of_turns % 2) --> 1 --> 1 is true --> number_of_turns is an 
-			odd number.
-			(number_of_turns & 1) only works on twos-complement machines. If 
-			it's a 1-complement, use "1U" instead of "1" */
+		// (number_of_turns % 2) --> 1 --> 1 is true --> number_of_turns is an 
+		// odd number.
+		// (number_of_turns & 1) only works on twos-complement machines. If 
+		// it's a 1-complement, use "1U" instead of "1"
 		if (number_of_turns & 1)
 		{
 			current_player = players + 0;
@@ -179,25 +139,5 @@ void	game_loop(int level, Player *players, Cell *all_cells)
 			++number_of_turns;
 	}
 	press_enter_to_continue();
-	return;
-}
-
-void	determine_winner(char *input, Player *players)
-{
-	int winner = 0;
-	if (!PLAYER_ONE->number_of_playable_stones
-		|| !PLAYER_TWO->number_of_playable_stones)
-	{
-		if (PLAYER_ONE->points > PLAYER_TWO->points)
-			winner = 1;
-		else if (PLAYER_TWO->points > PLAYER_ONE->points)
-			winner = 2;
-		else if (PLAYER_ONE->points == PLAYER_TWO->points)
-			winner = 3;
-		printf("The game has ended. The winner is %s!\n",
-			!winner ? "[ERROR]" : winner == 1 ? PLAYER_ONE->name
-			: winner == 2 ? PLAYER_TWO->name : "both of you");
-		memcpy(input, "quit", INPUT_SIZE);
-	}
 	return;
 }

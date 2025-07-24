@@ -1,6 +1,6 @@
-#include "twenty_squares.h"
+int	start(int argc, char **argv);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	return start(argc, argv);
+	return (start(argc, argv));
 }

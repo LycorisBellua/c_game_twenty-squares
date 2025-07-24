@@ -1,65 +1,67 @@
 #ifndef TWENTY_SQUARES_H
-#define TWENTY_SQUARES_H
+# define TWENTY_SQUARES_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
-#ifdef _WIN32
-#include <windows.h>
-#endif
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <string.h>
+# include <ctype.h>
+# ifdef _WIN32
+#  include <windows.h>
+# endif
 
-#define INPUT_SIZE                      40
-#define LENGTH_STONE_NAME               9
-#define LENGTH_PLAYER_NAME              11
-#define PLAYER_ONE                      (players + 0)
-#define PLAYER_TWO                      (players + 1)
+# define FS '\x1C'
 
-#define ID_STONE_ONE                    1
-#define ID_STONE_TWO                    2
-#define ID_STONE_THREE                  3
-#define ID_STONE_FOUR                   4
-#define ID_STONE_FIVE                   5
-#define ID_STONE_SIX                    6
-#define ID_STONE_SEVEN                  7
-#define ID_STONE_LUST                   8
-#define ID_STONE_PRIDE                  9
-#define ID_STONE_GLUTTONY               10
-#define ID_STONE_SLOTH                  11
-#define ID_STONE_ENVY                   12
-#define ID_STONE_WRATH                  13
-#define ID_STONE_GREED                  14
+# define INPUT_SIZE                      40
+# define LENGTH_STONE_NAME               9
+# define LENGTH_PLAYER_NAME              11
+# define PLAYER_ONE                      (players + 0)
+# define PLAYER_TWO                      (players + 1)
 
-#define ABILITY_NONE                    0
-#define ABILITY_CLASSIC                 1
-#define ABILITY_AIR                     2
-#define ABILITY_EARTH                   3
-#define ABILITY_WATER                   4
-#define ABILITY_FIRE                    5
+# define ID_STONE_ONE                    1
+# define ID_STONE_TWO                    2
+# define ID_STONE_THREE                  3
+# define ID_STONE_FOUR                   4
+# define ID_STONE_FIVE                   5
+# define ID_STONE_SIX                    6
+# define ID_STONE_SEVEN                  7
+# define ID_STONE_LUST                   8
+# define ID_STONE_PRIDE                  9
+# define ID_STONE_GLUTTONY               10
+# define ID_STONE_SLOTH                  11
+# define ID_STONE_ENVY                   12
+# define ID_STONE_WRATH                  13
+# define ID_STONE_GREED                  14
 
-#define DS_DECISION_PLAYER              0
-#define DS_DECISION_USE                 1
-#define DS_DECISION_DISCARD             2
+# define ABILITY_NONE                    0
+# define ABILITY_CLASSIC                 1
+# define ABILITY_AIR                     2
+# define ABILITY_EARTH                   3
+# define ABILITY_WATER                   4
+# define ABILITY_FIRE                    5
 
-#define INDEX_1_ON_4_INITIAL_ROAD       0
-#define INDEX_2_ON_4_INITIAL_ROAD       1
-#define INDEX_3_ON_4_INITIAL_ROAD       2
-#define INDEX_4_ON_4_INITIAL_ROAD       3
-#define INDEX_1_ON_8_COMMON_ROAD        4
-#define INDEX_2_ON_8_COMMON_ROAD        5
-#define INDEX_3_ON_8_COMMON_ROAD        6
-#define INDEX_4_ON_8_COMMON_ROAD        7
-#define INDEX_5_ON_8_COMMON_ROAD        8
-#define INDEX_6_ON_8_COMMON_ROAD        9
-#define INDEX_7_ON_8_COMMON_ROAD        10
-#define INDEX_8_ON_8_COMMON_ROAD        11
-#define INDEX_1_ON_2_END_ROAD           12
-#define INDEX_2_ON_2_END_ROAD           13
-#define INDEX_OUT_OF_BOUND              14
-#define INDEX_1_ON_3_NO_KILLING_ROAD    11
-#define INDEX_2_ON_3_NO_KILLING_ROAD    12
-#define INDEX_3_ON_3_NO_KILLING_ROAD    13
+# define DS_DECISION_PLAYER              0
+# define DS_DECISION_USE                 1
+# define DS_DECISION_DISCARD             2
+
+# define INDEX_1_ON_4_INITIAL_ROAD       0
+# define INDEX_2_ON_4_INITIAL_ROAD       1
+# define INDEX_3_ON_4_INITIAL_ROAD       2
+# define INDEX_4_ON_4_INITIAL_ROAD       3
+# define INDEX_1_ON_8_COMMON_ROAD        4
+# define INDEX_2_ON_8_COMMON_ROAD        5
+# define INDEX_3_ON_8_COMMON_ROAD        6
+# define INDEX_4_ON_8_COMMON_ROAD        7
+# define INDEX_5_ON_8_COMMON_ROAD        8
+# define INDEX_6_ON_8_COMMON_ROAD        9
+# define INDEX_7_ON_8_COMMON_ROAD        10
+# define INDEX_8_ON_8_COMMON_ROAD        11
+# define INDEX_1_ON_2_END_ROAD           12
+# define INDEX_2_ON_2_END_ROAD           13
+# define INDEX_OUT_OF_BOUND              14
+# define INDEX_1_ON_3_NO_KILLING_ROAD    11
+# define INDEX_2_ON_3_NO_KILLING_ROAD    12
+# define INDEX_3_ON_3_NO_KILLING_ROAD    13
 
 typedef struct
 {
@@ -96,88 +98,90 @@ typedef struct
 
 extern int rng_seed;
 
-/* Init --------------------------------------------------------------------- */
-
-int		start(int argc, char **argv);
-void	clear_window(void);
-
 /* Abilities ---------------------------------------------------------------- */
 
-int		set_ability(int level, Cell ***target_cell, const Player *players,
-			const Player *current_player);
-void	describe_ability(int ability, int dice);
-int		ds_stones_handle_ability(const Stone *chosen_stone, int ability,
-			int level, const Player *current_player,
-			const Player *other_player);
-void	execute_ability_fire(int level, Player *players, Player *current_player,
-			Cell *all_cells);
-void	execute_ability_water(int dice, int level, Player *players,
-			Player *current_player, Cell *all_cells);
-void	remove_stone_from_board(Cell *all_cells, int ability, int level,
-			Player *targeted_player, Player *current_player);
+int			set_ability(int level, Cell ***target_cell, const Player *players,
+				const Player *current_player);
+void		describe_ability(int ability, int dice);
+int			ds_stones_handle_ability(const Stone *chosen_stone, int ability,
+				int level, const Player *current_player,
+				const Player *other_player);
+void		execute_ability_fire(int level, Player *players,
+				Player *current_player, Cell *all_cells);
+void		execute_ability_water(int dice, int level, Player *players,
+				Player *current_player, Cell *all_cells);
+void		remove_stone_from_board(Cell *all_cells, int ability, int level,
+				Player *targeted_player, Player *current_player);
 
 /* Board -------------------------------------------------------------------- */
 
-void	print_board(int number_of_turns, int level, int current_player_id,
-			Player *players, Cell *all_cells);
-void	print_turn_line(int number_of_turns);
-void	print_column0(int line, int level, int current_player_id,
-			Player *players);
-void	print_column1(int line, int current_player_id, Cell *all_cells);
-void	print_column2(int line, int current_player_id, Cell *all_cells);
-void	print_column3(int line, int current_player_id, Cell *all_cells);
-void	print_column4(int line, int level, int current_player_id,
-			Player *players);
+void		print_board(int number_of_turns, int level, int current_player_id,
+				Player *players, Cell *all_cells);
+void		print_turn_line(int number_of_turns);
+void		print_column0(int line, int level, int current_player_id,
+				Player *players);
+void		print_column1(int line, int current_player_id, Cell *all_cells);
+void		print_column2(int line, int current_player_id, Cell *all_cells);
+void		print_column3(int line, int current_player_id, Cell *all_cells);
+void		print_column4(int line, int level, int current_player_id,
+				Player *players);
 
 /* Cells -------------------------------------------------------------------- */
 
-void	initialize_all_cells(Cell *all_cells);
+void		initialize_cells(Cell *all_cells);
 
 /* Input -------------------------------------------------------------------- */
 
-int		get_yes_no_input(const char *question);
-int		get_number_input(int min_number, int max_number, const char *question);
-int		get_number_input_amongst_array(const int *number_array, int array_count,
-			const char *question);
-void	flush_stdin(void);
-void	only_one_greaterthan_sign_is_printed(void);
-void	press_enter_to_continue(void);
+const char	**get_input(void);
+int			ask_yes_no(const char *question);
+int			ask_nbr(int min_nbr, int max_nbr, const char *question);
+int			ask_nbr_from_arr(const int *arr, int len, const char *question);
+void		press_enter_to_continue(void);
 
 /* Movement ----------------------------------------------------------------- */
 
-int		set_number_of_moveable_stones_and_every_can_stone_move(
-			Player *current_player, int level, int dice);
-int		can_this_classic_stone_move(const Stone *stone, Player *current_player,
-			int dice);
-int		can_this_ds_stone_move(Stone *stone, Player *current_player, int dice);
-int		move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
-			Cell ***target_cell, Player *current_player, Player *other_player);
+int			set_number_of_moveable_stones_and_every_can_stone_move(
+				Player *current_player, int level, int dice);
+int			can_this_classic_stone_move(const Stone *stone,
+				Player *current_player, int dice);
+int			can_this_ds_stone_move(Stone *stone, Player *current_player,
+				int dice);
+int			move_stone(int level, int number_of_cells_forward,
+				Stone *chosen_stone, Cell ***target_cell,
+				Player *current_player, Player *other_player);
 
 /* Players ------------------------------------------------------------------ */
 
-void	initialize_players(int level, int human_player, Player *players,
-			Cell *all_cells);
-
-/* RNG ---------------------------------------------------------------------- */
-
-int		generate_seed(void);
-int		rng_minmax(int *seed, int min, int max);
+void		initialize_players(int level, int human_player, Player *players,
+				Cell *all_cells);
 
 /* Selection ---------------------------------------------------------------- */
 
-Stone	*select_stone(char *input, Player *current_player);
-int		select_number_of_cells_forward(const Player *current_player,
-			const Stone *chosen_stone);
-int		select_use_ability(const Player *current_player, int ability,
-			int ds_decision, Cell ***target_cell);
-int		select_number_of_stones_for_water(int max_number,
-			const Player *current_player);
-int		select_player_for_water(const Player *current_player);
+Stone		*select_stone(char *input, Player *current_player);
+int			select_number_of_cells_forward(const Player *current_player,
+				const Stone *chosen_stone);
+int			select_use_ability(const Player *current_player, int ability,
+				int ds_decision, Cell ***target_cell);
+int			select_number_of_stones_for_water(int max_number,
+				const Player *current_player);
+int			select_player_for_water(const Player *current_player);
 
 /* Turn --------------------------------------------------------------------- */
 
-void	start_game(void);
-void	game_loop(int level, Player *players, Cell *all_cells);
-void	determine_winner(char *input, Player *players);
+void		start_game(void);
+void		game_loop(int level, Player *players, Cell *all_cells);
+void		determine_winner(char *input, Player *players);
+
+/* Utils -------------------------------------------------------------------- */
+
+size_t		count_arr(void **arr);
+void		free_arr(void **arr, void (*free_fct)(void *));
+void		remove_arr_elems(void **arr, size_t from, size_t to,
+				void (*free_fct)(void *));
+void		clear_window(void);
+char		*gnl(int fd);
+int			generate_seed(void);
+int			rng_minmax(int *seed, int min, int max);
+char		**split(const char *s, char c);
 
 #endif

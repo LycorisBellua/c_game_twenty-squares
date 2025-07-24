@@ -1,6 +1,6 @@
 #include "twenty_squares.h"
 
-void	initialize_all_cells(Cell *all_cells)
+void	initialize_cells(Cell *all_cells)
 {
 	(all_cells +  0)->coordinate = 11;
 	(all_cells +  0)->stone_in_cell = 0;
