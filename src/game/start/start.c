@@ -38,17 +38,14 @@ static void	display_intro_page(void)
 {
 	clear_window();
 	printf("TWENTY SQUARES\n\n");
-	printf("This game is based upon the oldest game known to mankind: a five "
-		"millennia old mesopotamian board game, known today as the Game of "
-		"Twenty Squares or the Royal Game of Ur.\n");
-	printf("Its purpose is to provide a \"classic\" version of the game, as "
-		"well as a new take on it, that exploits possibilities brought by a "
-		"computer.\n");
-	printf("On these notes, I reserve special thanks to Irving Finkel of the "
-		"British Museum and Tom Scott, who was his guest in the Museum's "
-		"introductory video on the Royal Game of Ur. This video is how I came "
-		"to learn of the game, and I've used the simple rules described in it "
-		"to make the first level.\n\n");
+	printf("This game is based upon a mesopotamian game which is at least 4.5 "
+		"millenia old. Known today as the \"Royal Game of Ur\" or the \"Game "
+		"of Twenty Squares\", this board game was later on overthrown by "
+		"Backgammon. This project, Twenty Squares, is the opportunity to "
+		"discover the oldest board game known to mankind. And, on top of a "
+		"classic way of playing, I've provided my own twist by giving life to "
+		"the stones in the Deadly Sins modes. The marvel of technology, pawns "
+		"thinking for themselves...\n\n");
 	return ;
 }
 
@@ -56,11 +53,10 @@ static void	display_first_page(void)
 {
 	clear_window();
 	printf("GUIDE - PAGE 1/3\n\n");
-	printf("The Twenty Squares is a board game where two players face each "
-		"other using, well... A board, and also stones and a dice from 0 to 4. "
-		"The goal is to bring each of our seven stones beyond the finish "
-		"line.\n");
-	printf("                                                       \n");
+	printf("This board game is a race game. Two players, seven stones each, "
+	"and the winner is whoever made all of their stones cross the other side "
+	"first. To aid us, a dice going from 0 to 4. Let's explain the "
+	"rules...\n\n");
 	printf("             ___ ___ ___               ___ ___ ___     \n");
 	printf("            |▒▒▒|   |▒▒▒|             | 4 | 5 |   |    \n");
 	printf("            |▒▒▒|___|▒▒▒|             |___|___|___|    \n");

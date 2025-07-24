@@ -7,13 +7,15 @@ mini-game in
 
 ---
 
-It's based upon the oldest game known to mankind: a five millennia old 
-mesopotamian board game, known today as the "royal game of Ur" or the "game of 
-twenty squares". The purpose of this project is to provide a classic version of 
-the game, as well as a new take on it, which exploits possibilities offered by 
-a computer.  
+It's based upon a mesopotamian game which is at least 4.5 millenia old. Known 
+today as the "Royal Game of Ur" or the "Game of Twenty Squares", this board 
+game was later on overthrown by Backgammon. This project, *Twenty Squares*, is 
+the opportunity to discover the oldest board game known to mankind. And, on top 
+of a classic way of playing, I've provided my own twist by giving life to the 
+stones in the Deadly Sins modes. The marvel of technology, pawns thinking for 
+themselves...  
 
-The game has four modes:
+The game has indeed four modes:
 1. Classic Infinite.
 2. Classic Dispatch.
 3. Deadly Sins Infinite.
@@ -21,12 +23,20 @@ The game has four modes:
 
 Classic Infinite is the mode which reproduces an existing ruleset. There are 
 different ones out there, and I've picked Finkel. This is the most popular 
-ruleset, and for good reason: it's probably the most accurate. To me, this is 
-actually it, but... What do I know? Again, I'm not an immortal, trust 😉  
+ruleset, and for good reason: instead of guessing the rules, it's work coming 
+from translating a tablet. And, although in life certainty is an illusion, and 
+the ruleset cannot be confirmed to be perfect, it's the best candidate out 
+there. I wish I could confirm it for you, but again, I'm not an immortal, am I? 
+😉  
 
-On these notes, I reserve special thanks to Irving Finkel of the British Museum 
-and Tom Scott, who was his guest in the Museum's 
-[introductory video on the royal game of Ur](https://www.youtube.com/watch?v=WZskjLq040I). 
-Let's make this game known worldwide!  
+On these notes, I reserve special thanks to someone who is definitely not an 
+ancient mage, Irving Finkel of the British Museum, for his precious work to 
+bring back to life both the game and mesopotamian culture in general. The 
+Museum's 
+[introductory video on the Royal Game of Ur](https://www.youtube.com/watch?v=WZskjLq040I) 
+is how I learned of the game, and it's a fun video, you can go check it out! 
+And if you enjoy ancient stuff, as well as music, you should also check out 
+[Peter Pringle](https://www.youtube.com/@copperleaves)! These two men have my 
+eternal gratitude and if they haven't met yet then they should.  
 
 ![](./screenshot.png)
