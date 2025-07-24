@@ -107,28 +107,28 @@ int			ds_stones_handle_ability(const Stone *chosen_stone, int ability,
 				int level, const Player *current_player,
 				const Player *other_player);
 void		execute_ability_fire(int level, Player *players,
-				Player *current_player, Cell *all_cells);
+				Player *current_player, Cell *cells);
 void		execute_ability_water(int dice, int level, Player *players,
-				Player *current_player, Cell *all_cells);
-void		remove_stone_from_board(Cell *all_cells, int ability, int level,
+				Player *current_player, Cell *cells);
+void		remove_stone_from_board(Cell *cells, int ability, int level,
 				Player *targeted_player, Player *current_player);
 
 /* Board -------------------------------------------------------------------- */
 
 void		print_board(int number_of_turns, int level, int current_player_id,
-				Player *players, Cell *all_cells);
+				Player *players, Cell *cells);
 void		print_turn_line(int number_of_turns);
 void		print_column0(int line, int level, int current_player_id,
 				Player *players);
-void		print_column1(int line, int current_player_id, Cell *all_cells);
-void		print_column2(int line, int current_player_id, Cell *all_cells);
-void		print_column3(int line, int current_player_id, Cell *all_cells);
+void		print_column1(int line, int current_player_id, Cell *cells);
+void		print_column2(int line, int current_player_id, Cell *cells);
+void		print_column3(int line, int current_player_id, Cell *cells);
 void		print_column4(int line, int level, int current_player_id,
 				Player *players);
 
 /* Cells -------------------------------------------------------------------- */
 
-void		initialize_cells(Cell *all_cells);
+void		initialize_cells(Cell *cells);
 
 /* Input -------------------------------------------------------------------- */
 
@@ -153,7 +153,7 @@ int			move_stone(int level, int number_of_cells_forward,
 /* Players ------------------------------------------------------------------ */
 
 void		initialize_players(int level, int human_player, Player *players,
-				Cell *all_cells);
+				Cell *cells);
 
 /* Selection ---------------------------------------------------------------- */
 
@@ -169,7 +169,7 @@ int			select_player_for_water(const Player *current_player);
 /* Turn --------------------------------------------------------------------- */
 
 void		start_game(void);
-void		game_loop(int level, Player *players, Cell *all_cells);
+void		game_loop(int level, Player *players, Cell *cells);
 void		determine_winner(char *input, Player *players);
 
 /* Utils -------------------------------------------------------------------- */

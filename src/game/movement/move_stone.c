@@ -3,35 +3,36 @@
 int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 		Cell ***target_cell, Player *current_player, Player *other_player)
 {
-	int i;
-	int racetrack_index_of_origin_cell = 0;
-	int pride_has_chosen = 0;
-	*target_cell = &current_player->racetrack[14];
+	int	i;
+	int	racetrack_index_of_origin_cell;
+	int	pride_has_chosen;
 
+	racetrack_index_of_origin_cell = 0;
+	pride_has_chosen = 0;
+	*target_cell = &current_player->racetrack[14];
 	// I don't understand why, but racetrack_index_of_origin_cell needs to be 
 	// set to 0, or after the first time entering the function, the variable 
 	// will take a garbage value
-
-	for (i = 0; i < 14; ++i)
+	i = -1;
+	while (++i < 14)
 	{
 		if ((*chosen_stone).coordinate
 			== current_player->racetrack[i]->coordinate)
 		{
 			racetrack_index_of_origin_cell = i;
-			break;
+			break ;
 		}
 	}
-
 	if ((*chosen_stone).id == ID_STONE_PRIDE)
 	{
 		// If possible, Pride wants to go out of bounds. As target_cell is 
 		// already set to racetrack index 14, which means "out of bounds", we 
 		// don't need to update it.
-		for (i = 0; i < 4; ++i)
+		i = -1;
+		while (++i < 4)
 		{
 			if (!(*chosen_stone).possible_movements[i])
-				break;
-
+				break ;
 			if (!pride_has_chosen)
 			{
 				if (racetrack_index_of_origin_cell
@@ -41,11 +42,10 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 					printf("\nPride seizes the opportunity to get rid of %s, "
 						"and leaves.\n\n",
 						current_player->is_ai ? current_player->name : "you");
-					break;
+					break ;
 				}
 			}
 		}
-
 		// If pride couldn't go out of bounds, we need to find another 
 		// destination.
 		if (!pride_has_chosen)
@@ -56,7 +56,7 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 				== (*chosen_stone).possible_movements[pride_has_chosen])
 			{
 				printf("\nPride refuses to move. The turn passes.\n\n");
-				return 0;
+				return (0);
 			}
 			else
 			{
@@ -69,7 +69,6 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 				number_of_cells_forward
 					= (*chosen_stone).possible_movements[pride_has_chosen];
 			}
-
 			if (!(*chosen_stone).coordinate)
 			{
 				*target_cell
@@ -100,7 +99,6 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 					+ number_of_cells_forward];
 		}
 	}
-
 	if (!(*chosen_stone).coordinate)
 		++(current_player->number_of_stones_on_board);
 	else
@@ -132,9 +130,8 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 				++(current_player->points);
 			}
 		}
-
 		(*(*target_cell))->stone_in_cell = chosen_stone;
 		(*chosen_stone).coordinate = (*(*target_cell))->coordinate;
 	}
-	return 1;
+	return (1);
 }

@@ -27,5 +27,5 @@ void	print_turn_line(int number_of_turns)
 		printf("\n                                    "
 			"TURN %d                                \n", number_of_turns);
 	}
-	return;
+	return ;
 }

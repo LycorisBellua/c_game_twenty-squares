@@ -170,5 +170,5 @@ void	print_column0(int line, int level, int current_player_id,
 				"       Seven   " : "       Greed   ");
 		}
 	}
-	return;
+	return ;
 }

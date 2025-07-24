@@ -35,5 +35,5 @@ void	describe_ability(int ability, int dice)
 		printf("Effect: Pick an enemy stone standing on the board and not "
 			"protected by Earth, and have it die.\n\n");
 	}
-	return;
+	return ;
 }

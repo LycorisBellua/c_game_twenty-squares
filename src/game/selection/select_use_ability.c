@@ -3,19 +3,19 @@
 int	select_use_ability(const Player *current_player, int ability,
 		int ds_decision, Cell ***target_cell)
 {
-	int choice = -1;
+	int	choice;
 
+	choice = -1;
 	if (ability == ABILITY_CLASSIC || ds_decision == DS_DECISION_USE)
 	{
 		choice = 1;
-		return choice;
+		return (choice);
 	}
 	else if (ds_decision == DS_DECISION_DISCARD)
 	{
 		choice = 0;
-		return choice;
+		return (choice);
 	}
-
 	if (current_player->is_ai)
 	{
 		if (ability == ABILITY_EARTH && (*(*target_cell))->coordinate
@@ -35,10 +35,9 @@ int	select_use_ability(const Player *current_player, int ability,
 		if (choice != -1)
 			printf("\n");
 	}
-
 	if (choice == 1)
 		printf("%s uses the ability.\n\n", current_player->name);
 	else if (!choice)
 		printf("%s discards the ability.\n\n", current_player->name);
-	return choice;
+	return (choice);
 }

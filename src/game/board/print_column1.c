@@ -1,9 +1,11 @@
 #include "twenty_squares.h"
 
-void	print_column1(int line, int current_player_id, Cell *all_cells)
+void	print_column1(int line, int current_player_id, Cell *cells)
 {
-	int id, stone_belongs_to_current_player = 0;
+	int	id;
+	int	stone_belongs_to_current_player;
 
+	stone_belongs_to_current_player = 0;
 	if (!line || line == 30)
 	{
 		printf(" _______________");
@@ -30,15 +32,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 3)
 	{
 		/* Cell Coordinate 11 */
-		if (!(all_cells + 0)->stone_in_cell)
+		if (!(cells + 0)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 0)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 0)->stone_in_cell
+			id = (cells + 0)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 0)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		else
@@ -90,15 +91,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 8)
 	{
 		/* Cell Coordinate 12 */
-		if (!(all_cells + 3)->stone_in_cell)
+		if (!(cells + 3)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 3)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 3)->stone_in_cell
+			id = (cells + 3)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 3)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|               ");
 		else
@@ -150,15 +150,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 13)
 	{
 		/* Cell Coordinate 13 */
-		if (!(all_cells + 6)->stone_in_cell)
+		if (!(cells + 6)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 6)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 6)->stone_in_cell
+			id = (cells + 6)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 6)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|               ");
 		else
@@ -210,15 +209,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 18)
 	{
 		/* Cell Coordinate 14 */
-		if (!(all_cells + 9)->stone_in_cell)
+		if (!(cells + 9)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 9)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 9)->stone_in_cell
+			id = (cells + 9)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 9)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|               ");
 		else
@@ -270,15 +268,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 33)
 	{
 		/* Cell Coordinate 17 */
-		if (!(all_cells + 14)->stone_in_cell)
+		if (!(cells + 14)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 14)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 14)->stone_in_cell
+			id = (cells + 14)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 14)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒");
 		else
@@ -331,15 +328,14 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 	else if (line == 38)
 	{
 		/* Cell Coordinate 18 */
-		if (!(all_cells + 17)->stone_in_cell)
+		if (!(cells + 17)->stone_in_cell)
 			id = 0;
 		else
 		{
-			id = (all_cells + 17)->stone_in_cell->id;
-			stone_belongs_to_current_player = (all_cells + 17)->stone_in_cell
+			id = (cells + 17)->stone_in_cell->id;
+			stone_belongs_to_current_player = (cells + 17)->stone_in_cell
 				->player_id == current_player_id ? 1 : 0;
 		}
-
 		if (!id)
 			printf("|               ");
 		else
@@ -388,5 +384,5 @@ void	print_column1(int line, int current_player_id, Cell *all_cells)
 					"|    [Greed]    " : "|     Greed     ");
 		}
 	}
-	return;
+	return ;
 }

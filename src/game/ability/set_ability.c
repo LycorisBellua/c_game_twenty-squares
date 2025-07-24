@@ -3,9 +3,10 @@
 int	set_ability(int level, Cell ***target_cell, const Player *players,
 		const Player *current_player)
 {
-	int i;
-	int ability = ABILITY_NONE;
+	int	i;
+	int	ability;
 
+	ability = ABILITY_NONE;
 	if ((*(*target_cell))->is_cell_special)
 	{
 		ability = level > 2 ? rng_minmax(&rng_seed, 2, 5) : ABILITY_CLASSIC;
@@ -19,13 +20,14 @@ int	set_ability(int level, Cell ***target_cell, const Player *players,
 					ability = ABILITY_WATER;
 				else
 				{
-					for (i = 0; i <= 7; ++i)
+					i = -1;
+					while (++i <= 7)
 					{
 						if (i == 7)
 							ability = ABILITY_WATER;
 						if (PLAYER_TWO->stoneset[i].coordinate > 2
 							&& !PLAYER_TWO->stoneset[i].protected_by_earth)
-							break;
+							break ;
 					}
 				}
 			}
@@ -37,17 +39,18 @@ int	set_ability(int level, Cell ***target_cell, const Player *players,
 					ability = ABILITY_WATER;
 				else
 				{
-					for (i = 0; i <= 7; ++i)
+					i = -1;
+					while (++i <= 7)
 					{
 						if (i == 7)
 							ability = ABILITY_WATER;
 						if (PLAYER_ONE->stoneset[i].coordinate > 2
 							&& !PLAYER_ONE->stoneset[i].protected_by_earth)
-							break;
+							break ;
 					}
 				}
 			}
 		}
 	}
-	return ability;
+	return (ability);
 }

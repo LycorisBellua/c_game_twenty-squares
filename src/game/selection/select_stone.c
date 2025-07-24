@@ -2,18 +2,25 @@
 
 Stone	*select_stone(char *input, Player *current_player)
 {
-	int i, j, random;
-	int is_input_valid = 0;
-	int number_of_moveable_stones = 0;
-	char moveable_stones_names[8][LENGTH_STONE_NAME] = {0};
-	Stone* chosen_stone;
+	int			i;
+	int			j;
+	int			random;
+	int			is_input_valid;
+	int			number_of_moveable_stones;
+	char		moveable_stones_names[8][LENGTH_STONE_NAME];
+	Stone		*chosen_stone;
 	const char	**tokens;
 
+	is_input_valid = 0;
+	number_of_moveable_stones = 0;
+	memset(moveable_stones_names, 0, sizeof(moveable_stones_names));
 	// Print the available choices + set moveable_stones_names and 
 	// number_of_moveable_stones at the same time
 	printf("Stone:\n");
 	memcpy(moveable_stones_names[0], "quit", LENGTH_STONE_NAME);
-	for (i = 0, j = 1; i < 7; ++i)
+	i = -1;
+	j = 1;
+	while (++i < 7)
 	{
 		if (current_player->stoneset[i].can_stone_move)
 		{
@@ -24,11 +31,11 @@ Stone	*select_stone(char *input, Player *current_player)
 	}
 	number_of_moveable_stones = j - 1;
 	printf("-\n\n");
-
 	if (current_player->is_ai)
 	{
 		random = rng_minmax(&rng_seed, 1, number_of_moveable_stones);
-		for (i = 0; i < 7; ++i)
+		i = -1;
+		while (++i < 7)
 		{
 			if (!strcmp(current_player->stoneset[i].name,
 				moveable_stones_names[random]))
@@ -36,16 +43,16 @@ Stone	*select_stone(char *input, Player *current_player)
 				memcpy(input, moveable_stones_names[random], LENGTH_STONE_NAME);
 				chosen_stone = &(current_player->stoneset[i]);
 				printf("Stone: %s.\n\n", input);
-				break;
+				break ;
 			}
 		}
-		return chosen_stone;
+		return (chosen_stone);
 	}
-	for (i = 1; i < 8; ++i)
+	i = 0;
+	while (++i < 8)
 		moveable_stones_names[i][0] = tolower(moveable_stones_names[i][0]);
-
 	// number_of_moveable_stones is incremented to take "quit" into account 
-	// in the for loop
+	// in the inner loop
 	++number_of_moveable_stones;
 	strncpy(input, "quit", INPUT_SIZE);
 	while (!is_input_valid)
@@ -59,7 +66,8 @@ Stone	*select_stone(char *input, Player *current_player)
 				is_input_valid = 1;
 			else
 			{
-				for (i = 0; i < number_of_moveable_stones; ++i)
+				i = -1;
+				while (++i < number_of_moveable_stones)
 				{
 					if (!strcmp(tokens[0], moveable_stones_names[i]))
 					{
@@ -72,18 +80,18 @@ Stone	*select_stone(char *input, Player *current_player)
 		}
 		free_arr((void **)tokens, free);
 	}
-
 	if (strcmp(input, "quit"))
 	{
 		printf("\nStone: %s.\n\n", input);
-		for (i = 0; i < 7; ++i)
+		i = -1;
+		while (++i < 7)
 		{
 			if (!strcmp(current_player->stoneset[i].name, input))
 			{
 				chosen_stone = &(current_player->stoneset[i]);
-				break;
+				break ;
 			}
 		}
 	}
-	return chosen_stone;
+	return (chosen_stone);
 }

@@ -2,7 +2,9 @@
 
 void	determine_winner(char *input, Player *players)
 {
-	int winner = 0;
+	int	winner;
+
+	winner = 0;
 	if (!PLAYER_ONE->number_of_playable_stones
 		|| !PLAYER_TWO->number_of_playable_stones)
 	{
@@ -17,5 +19,5 @@ void	determine_winner(char *input, Player *players)
 			: winner == 2 ? PLAYER_TWO->name : "both of you");
 		memcpy(input, "quit", INPUT_SIZE);
 	}
-	return;
+	return ;
 }

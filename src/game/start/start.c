@@ -23,7 +23,7 @@ int	start(int argc, char **argv)
 	}
 	start_game();
 	clear_window();
-	return EXIT_SUCCESS;
+	return (0);
 }
 
 static void	set_utf8_encoding(void)
@@ -31,7 +31,7 @@ static void	set_utf8_encoding(void)
 	#ifdef _WIN32
 	SetConsoleOutputCP(CP_UTF8);
 	#endif
-	return;
+	return ;
 }
 
 static void	display_intro_page(void)
@@ -49,7 +49,7 @@ static void	display_intro_page(void)
 		"introductory video on the Royal Game of Ur. This video is how I came "
 		"to learn of the game, and I've used the simple rules described in it "
 		"to make the first level.\n\n");
-	return;
+	return ;
 }
 
 static void	display_first_page(void)
@@ -60,7 +60,6 @@ static void	display_first_page(void)
 		"other using, well... A board, and also stones and a dice from 0 to 4. "
 		"The goal is to bring each of our seven stones beyond the finish "
 		"line.\n");
-
 	printf("                                                       \n");
 	printf("             ___ ___ ___               ___ ___ ___     \n");
 	printf("            |▒▒▒|   |▒▒▒|             | 4 | 5 |   |    \n");
@@ -79,7 +78,6 @@ static void	display_first_page(void)
 	printf("            |▒▒▒|___|▒▒▒|             |___|___|___|    \n");
 	printf("            |   |   |   |             |13 |12 |   |    \n");
 	printf("            |___|___|___|             |___|___|___|    \n\n\n");
-
 	printf("Let's take a look at the drawing on the left. The players begin "
 		"and end the race on their own side of the board. Left for Player One, "
 		"right for Player Two. On the drawing above, the stones are placed "
@@ -96,7 +94,7 @@ static void	display_first_page(void)
 	printf("What do these abilities do, and can the stones move less than the "
 		"dice throw? To find out, let's see the different levels!\n\n");
 	press_enter_to_continue();
-	return;
+	return ;
 }
 
 static void	display_second_page(void)
@@ -137,7 +135,7 @@ static void	display_second_page(void)
 	printf("When it comes to the Deadly Sins stones movements, the dice throw "
 		"is a range, not a finality. How does each stone pick their cell?\n\n");
 	press_enter_to_continue();
-	return;
+	return ;
 }
 
 static void	display_third_page(void)
@@ -166,5 +164,5 @@ static void	display_third_page(void)
 		"how to use what it gathered. There's no personal purpose to its "
 		"hoarding, but hopefully it'll help you win.\n\n");
 	press_enter_to_continue();
-	return;
+	return ;
 }

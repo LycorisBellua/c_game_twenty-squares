@@ -3,39 +3,36 @@
 int	can_this_classic_stone_move(const Stone *stone, Player *current_player,
 		int dice)
 {
-	int i;
-	Cell** target_cell;
+	int		i;
+	Cell	**target_cell;
 
 	// target_cell is a double pointer because current_player is a double 
 	// pointer
-
 	if (stone->coordinate == 1 || stone->coordinate == -1)
-		return 0;
-
+		return (0);
 	if (!stone->coordinate)
 	{
 		target_cell = &current_player->racetrack[dice - 1];
 	}
 	else
 	{
-		for (i = 0; i < 14; ++i)
+		i = -1;
+		while (++i < 14)
 		{
 			if (stone->coordinate == current_player->racetrack[i]->coordinate)
 			{
 				if (i + dice >= 14)
-					return 1;
-
+					return (1);
 				target_cell = &current_player->racetrack[i + dice];
-				break;
+				break ;
 			}
 		}
 	}
-
 	if (!(*target_cell)->stone_in_cell)
-		return 1;
+		return (1);
 	else if ((*target_cell)->ability == ABILITY_EARTH)
-		return 0;
+		return (0);
 	else if ((*target_cell)->stone_in_cell->player_id == current_player->id)
-		return 0; // ally
-	return 1; // enemy
+		return (0); // ally
+	return (1); // enemy
 }
