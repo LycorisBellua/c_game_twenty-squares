@@ -1,32 +1,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#ifndef STANDARD_LIBRARY_STDIO
-#define STANDARD_LIBRARY_STDIO
-    #include <stdio.h>
-#endif
-#ifndef STANDARD_LIBRARY_STDLIB
-#define STANDARD_LIBRARY_STDLIB
-    #include <stdlib.h>
-#endif
-#ifndef STANDARD_LIBRARY_UNISTD
-#define STANDARD_LIBRARY_UNISTD
-    #include <unistd.h>
-#endif
-#ifndef STANDARD_LIBRARY_STRING
-#define STANDARD_LIBRARY_STRING
-    #include <string.h>
-#endif
-#ifndef STANDARD_LIBRARY_CTYPE
-#define STANDARD_LIBRARY_CTYPE
-    #include <ctype.h>
-#endif
-#ifndef STANDARD_LIBRARY_WINDOWS
-#define STANDARD_LIBRARY_WINDOWS
-    #ifdef _WIN32
-    #include <windows.h>
-    #endif
-#endif
+#include "twenty_squares.h"
 
 /*
     It's enough to use this function once. Do it at the start of the program, 
@@ -80,14 +55,14 @@
     #endif
 #endif
 
-int get_yes_no_input(const char* question);
-int get_number_input(const int min_number, const int max_number, const char* question);
-int get_number_input_amongst_array(const int number_array[], const int array_count, const char* question);
-void flush_stdin(void);
-void only_one_greaterthan_sign_is_printed(void);
-void press_enter_to_continue(void);
+int		get_yes_no_input(const char *question);
+int		get_number_input(int min_number, int max_number, const char *question);
+int		get_number_input_amongst_array(const int *number_array, int array_count,
+			const char *question);
+void	flush_stdin(void);
+void	only_one_greaterthan_sign_is_printed(void);
+void	press_enter_to_continue(void);
 
-#define INPUT_SIZE    40
+#define INPUT_SIZE 40
 
 #endif
-

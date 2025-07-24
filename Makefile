@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -fPIC -MMD -Iinclude -ansi -pedantic -Wall -Wextra 
+CFLAGS = -fPIC -MMD -Iinclude -pedantic -Wall -Wextra 
 LDFLAGS = -O2 
 DIR_BUILD = build
 DIR_OBJ = $(DIR_BUILD)/unix/objects
