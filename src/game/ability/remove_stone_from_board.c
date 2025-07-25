@@ -72,11 +72,6 @@ void	remove_stone_from_board(Cell *cells, int ability, int level,
 			(cells + i)->stone_in_cell = 0;
 			targeted_stone->coordinate = ability == ABILITY_FIRE
 				&& (level == 2 || level == 4) ? -1 : 0;
-			if (targeted_stone->coordinate == -1)
-			{
-				++(current_player->points);
-				--(targeted_player->points);
-			}
 			break ;
 		}
 	}
