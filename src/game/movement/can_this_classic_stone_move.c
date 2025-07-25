@@ -21,8 +21,10 @@ int	can_this_classic_stone_move(const Stone *stone, Player *current_player,
 		{
 			if (stone->coordinate == current_player->racetrack[i]->coordinate)
 			{
-				if (i + dice >= 14)
+				if (i + dice == 14)
 					return (1);
+				else if (i + dice > 14)
+					return (0);
 				target_cell = &current_player->racetrack[i + dice];
 				break ;
 			}

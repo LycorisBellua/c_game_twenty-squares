@@ -45,6 +45,7 @@ int	select_number_of_cells_forward(const Player *current_player,
 		while (++i < max_index)
 			printf("%d - ", chosen_stone->possible_movements[i]);
 		printf("%d.\n\n", chosen_stone->possible_movements[i]);
+		chosen_number = 0;
 		while (!is_chosen_number_valid)
 		{
 			tokens = get_input();
@@ -53,7 +54,7 @@ int	select_number_of_cells_forward(const Player *current_player,
 			else if (tokens[0] && !tokens[1])
 			{
 				chosen_number = atoi(tokens[0]);
-				if (!chosen_number || !strcmp(tokens[0], "0"))
+				if (chosen_number || !strcmp(tokens[0], "0"))
 				{
 					i = min_index - 1;
 					while (++i <= max_index)
@@ -72,6 +73,6 @@ int	select_number_of_cells_forward(const Player *current_player,
 		printf("\n");
 	}
 	printf("Movement: %d %s forwards.\n",
-		chosen_number, chosen_number == 1 ? "cell" : "cells");
+		chosen_number, chosen_number < 2 ? "cell" : "cells");
 	return (chosen_number);
 }
