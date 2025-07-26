@@ -32,7 +32,7 @@ int	can_this_classic_stone_move(const Stone *stone, Player *current_player,
 	}
 	if (!(*target_cell)->stone_in_cell)
 		return (1);
-	else if ((*target_cell)->ability == ABILITY_EARTH)
+	else if ((*target_cell)->stone_in_cell->is_protected)
 		return (0);
 	else if ((*target_cell)->stone_in_cell->player_id == current_player->id)
 		return (0); // ally

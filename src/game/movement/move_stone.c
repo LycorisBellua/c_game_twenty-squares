@@ -102,12 +102,8 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 	if (!(*chosen_stone).coordinate)
 		++(current_player->number_of_stones_on_board);
 	else
-	{
 		current_player->racetrack[racetrack_index_of_origin_cell]->stone_in_cell
 			= 0;
-		current_player->racetrack[racetrack_index_of_origin_cell]->ability
-			= ABILITY_NONE;
-	}
 	if ((*(*target_cell))->coordinate == 1)
 	{
 		(*chosen_stone).coordinate = 1;

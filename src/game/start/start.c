@@ -84,9 +84,8 @@ static void	display_first_page(void)
 		"can go, for one stone per cell. The turn passes if the dice lands on "
 		"0 or if no stone can move. Stepping onto a cell occupied by an enemy "
 		"stone makes you capture it, unless... See the gray cells on the left "
-		"drawing? They are Special Cells and deliver abilities to the stones "
-		"standing on them. The abilities are named after the four "
-		"elements.\n\n");
+		"drawing? Such a cell is called a rosette, and it delivers abilities "
+		"to the stone sitting upon it.\n\n");
 	printf("What do these abilities do, and can the stones move less than the "
 		"dice throw? To find out, let's see the different levels!\n\n");
 	press_enter_to_continue();
@@ -104,30 +103,16 @@ static void	display_second_page(void)
 	printf("The words 'Infinite' and 'Dispatch' are the first thing to pay "
 		"attention to. In Infinite levels, captured stones return to their "
 		"player's homebase, while in Dispatch ones they get straight up "
-		"killed. This difference changes the way a game is won. While in "
-		"Infinite levels the winner is whoever first runs out of stones, in "
-		"Dispatch levels we experience a system a points. A stone beyond the "
-		"finish line is +1 point, and a stone killed is -1. Once a player gets "
-		"rid of all their stones, the game ends, the points are counted, and "
-		"the winner is determined.\n\n");
+		"killed. This difference doesn't change the way a game is won. It's "
+		"always whoever has the most points at the end of the game. A game "
+		"ends when someone runs out of stones. A stone beyond the finish line "
+		"gives 1 point. If it turns out that both players have the same amount "
+		"of points at the end, it's not a draw: the one with a living stone or "
+		"more wins.\n\n");
 	printf("'Classic' and 'Deadly Sins,' on the other hand, refer to the "
-		"stones' movements and the abilities. In Classic levels, the stones "
-		"can only move up to the dice throw, and the abilities are "
-		"automatically used upon receiving. Classic levels have two abilities, "
-		"always given together: Air and Earth. Air gives the player a free "
-		"turn, while Earth protects the stone as long as it stands still or as "
-		"long as Water is not used against it.\n\n");
-	printf("In Deadly Sins levels, the four abilities are available, but only "
-		"one at a time, and the stone is responsible for whether they are "
-		"used, discarded, or the decision let to the player. Lust, Pride, Envy "
-		"and Greed leave the decision to the player, while Gluttony uses it, "
-		"Sloth discards, and as for Wrath, it discards or uses it depending on "
-		"which ability it is.\n\n");
-	printf("As for the effect of the last two abilities, Water and Fire: from "
-		"1 to the dice throw result, Water lets you select stones to bring "
-		"back to their respective homebases. Fire, however, kills the enemy "
-		"stone of our choice. Of course, in Infinite this means the stone goes "
-		"back to homebase.\n\n");
+		"stones' movements. In Classic levels, the stones can only move up to "
+		"the dice throw. And as for abilities, in both cases, the rosette "
+		"protects the stone and gives the player a free turn.\n\n");
 	printf("When it comes to the Deadly Sins stones movements, the dice throw "
 		"is a range, not a finality. How does each stone pick their cell?\n\n");
 	press_enter_to_continue();
@@ -154,7 +139,7 @@ static void	display_third_page(void)
 		"allies to see the enemy perish. The rest of the time, it moves to the "
 		"closest available cell as to stick around longer: this way, it has "
 		"more chance of meeting the other team.\n\n");
-	printf("Greed follows a set of priorities: the closest Special Cell, then "
+	printf("Greed follows a set of priorities: the closest rosette, then "
 		"the closest enemy, and finally the finish line. The reason it lets "
 		"you decide what to do with the ability, is because it doesn't know "
 		"how to use what it gathered. There's no personal purpose to its "

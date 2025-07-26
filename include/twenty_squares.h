@@ -33,17 +33,6 @@
 # define ID_STONE_WRATH                  13
 # define ID_STONE_GREED                  14
 
-# define ABILITY_NONE                    0
-# define ABILITY_CLASSIC                 1
-# define ABILITY_AIR                     2
-# define ABILITY_EARTH                   3
-# define ABILITY_WATER                   4
-# define ABILITY_FIRE                    5
-
-# define DS_DECISION_PLAYER              0
-# define DS_DECISION_USE                 1
-# define DS_DECISION_DISCARD             2
-
 # define INDEX_1_ON_4_INITIAL_ROAD       0
 # define INDEX_2_ON_4_INITIAL_ROAD       1
 # define INDEX_3_ON_4_INITIAL_ROAD       2
@@ -69,7 +58,7 @@ typedef struct
 	int		id;
 	int		player_id;
 	int		coordinate;
-	int		protected_by_earth;
+	int		is_protected;
 	int		can_stone_move;
 	int		possible_movements[4];
 }	Stone;
@@ -78,8 +67,7 @@ typedef struct
 {
 	int		coordinate;
 	Stone	*stone_in_cell;
-	int		ability;
-	int		is_cell_special;
+	int		is_rosette;
 }	Cell;
 
 typedef struct
@@ -97,21 +85,6 @@ typedef struct
 }	Player;
 
 extern int rng_seed;
-
-/* Abilities ---------------------------------------------------------------- */
-
-int			set_ability(int level, Cell ***target_cell, const Player *players,
-				const Player *current_player);
-void		describe_ability(int ability, int dice);
-int			ds_stones_handle_ability(const Stone *chosen_stone, int ability,
-				int level, const Player *current_player,
-				const Player *other_player);
-void		execute_ability_fire(int level, Player *players,
-				Player *current_player, Cell *cells);
-void		execute_ability_water(int dice, int level, Player *players,
-				Player *current_player, Cell *cells);
-void		remove_stone_from_board(Cell *cells, int ability, int level,
-				Player *targeted_player, Player *current_player);
 
 /* Board -------------------------------------------------------------------- */
 
@@ -160,11 +133,6 @@ void		initialize_players(int level, int human_player, Player *players,
 Stone		*select_stone(char *input, Player *current_player);
 int			select_number_of_cells_forward(const Player *current_player,
 				const Stone *chosen_stone);
-int			select_use_ability(const Player *current_player, int ability,
-				int ds_decision, Cell ***target_cell);
-int			select_number_of_stones_for_water(int max_number,
-				const Player *current_player);
-int			select_player_for_water(const Player *current_player);
 
 /* Turn --------------------------------------------------------------------- */
 

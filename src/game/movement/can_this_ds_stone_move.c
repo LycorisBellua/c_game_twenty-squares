@@ -200,17 +200,17 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			// Wrath tries to get as close to the enemy as possible, until it 
 			// can kill it, ignoring the presence of allies on its path 
 			// (= killing them if needs be).
-			// Disclaimer: Earth protects stones from Wrath.
+			// Disclaimer: The rosette protects stones from Wrath.
 			if ((*target_cells_1)->coordinate == coordinate_of_closest_enemy)
 			{
-				if ((*target_cells_1)->ability != ABILITY_EARTH)
+				if (!(*target_cells_1)->stone_in_cell->is_protected)
 				{
 					stone->possible_movements[0] = 1;
 					return (1);
 				}
 				// The first cell contains the enemy, but it is protected 
-				// by Earth. Wrath remains right behind the stone, waiting 
-				// for it to move.
+				// by the rosette. Wrath remains right behind the stone, 
+				// waiting for it to move.
 				// Therefore, Wrath cannot move this turn.
 				return (0);
 			}
@@ -218,13 +218,13 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			{
 				if ((*target_cells_2)->coordinate == coordinate_of_closest_enemy)
 				{
-					if ((*target_cells_2)->ability != ABILITY_EARTH)
+					if (!(*target_cells_2)->stone_in_cell->is_protected)
 					{
 						stone->possible_movements[0] = 2;
 						return (1);
 					}
 					// The enemy is on this cell, but it is protected by 
-					// Earth, therefore Wrath goes to the cell right 
+					// the rosette, therefore Wrath goes to the cell right 
 					// before this one.
 					stone->possible_movements[0] = 1;
 					return (1);
@@ -234,7 +234,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 					if ((*target_cells_3)->coordinate
 						== coordinate_of_closest_enemy)
 					{
-						if ((*target_cells_3)->ability != ABILITY_EARTH)
+						if (!(*target_cells_3)->stone_in_cell->is_protected)
 						{
 							stone->possible_movements[0] = 3;
 							return (1);
@@ -250,7 +250,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 						if ((*target_cells_4)->coordinate
 							== coordinate_of_closest_enemy)
 						{
-							if ((*target_cells_4)->ability != ABILITY_EARTH)
+							if (!(*target_cells_4)->stone_in_cell->is_protected)
 							{
 								stone->possible_movements[0] = 4;
 								return (1);
@@ -266,26 +266,26 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			}
 			// The enemy is not on the next 4 cells, so it must be from the 5th 
 			// onwards. We need to go the farthest cell we can reach that is 
-			// not protected by Earth.
+			// not protected by the rosette.
 			if (target_cells_4
-				&& (*target_cells_4)->ability != ABILITY_EARTH)
+				&& !(*target_cells_4)->stone_in_cell->is_protected)
 			{
 				stone->possible_movements[0] = 4;
 				return (1);
 			}
 			else if (target_cells_3
-				&& (*target_cells_3)->ability != ABILITY_EARTH)
+				&& !(*target_cells_3)->stone_in_cell->is_protected)
 			{
 				stone->possible_movements[0] = 3;
 				return (1);
 			}
 			else if (target_cells_2
-				&& (*target_cells_2)->ability != ABILITY_EARTH)
+				&& !(*target_cells_2)->stone_in_cell->is_protected)
 			{
 				stone->possible_movements[0] = 2;
 				return (1);
 			}
-			else if ((*target_cells_1)->ability != ABILITY_EARTH)
+			else if (!(*target_cells_1)->stone_in_cell->is_protected)
 			{
 				stone->possible_movements[0] = 1;
 				return (1);
@@ -296,8 +296,8 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 	}
 	else if (stone->id == ID_STONE_GREED)
 	{
-		// Greed's first priority: An empty special cell
-		if ((*target_cells_1)->is_cell_special
+		// Greed's first priority: An empty rosette
+		if ((*target_cells_1)->is_rosette
 			&& !(*target_cells_1)->stone_in_cell)
 		{
 			stone->possible_movements[0] = 1;
@@ -305,7 +305,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 		}
 		else if (target_cells_2)
 		{
-			if ((*target_cells_2)->is_cell_special
+			if ((*target_cells_2)->is_rosette
 				&& !(*target_cells_2)->stone_in_cell)
 			{
 				stone->possible_movements[0] = 2;
@@ -313,14 +313,14 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			}
 			else if (target_cells_3)
 			{
-				if ((*target_cells_3)->is_cell_special
+				if ((*target_cells_3)->is_rosette
 					&& !(*target_cells_3)->stone_in_cell)
 				{
 					stone->possible_movements[0] = 3;
 					return (1);
 				}
 				else if (target_cells_4
-					&& (*target_cells_4)->is_cell_special
+					&& (*target_cells_4)->is_rosette
 					&& !(*target_cells_4)->stone_in_cell)
 				{
 					stone->possible_movements[0] = 4;
@@ -328,10 +328,10 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 				}
 			}
 		}
-		// Greed's second priority: The closest enemy not protected by Earth
+		// Greed's second priority: The closest enemy not protected by the rosette
 		if ((*target_cells_1)->stone_in_cell
 			&& (*target_cells_1)->stone_in_cell->player_id != current_player->id
-			&& (*target_cells_1)->ability != ABILITY_EARTH)
+			&& !(*target_cells_1)->stone_in_cell->is_protected)
 		{
 			stone->possible_movements[0] = 1;
 			return (1);
@@ -341,7 +341,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			if ((*target_cells_2)->stone_in_cell
 				&& (*target_cells_2)->stone_in_cell->player_id
 				!= current_player->id
-				&& (*target_cells_2)->ability != ABILITY_EARTH)
+				&& !(*target_cells_2)->stone_in_cell->is_protected)
 			{
 				stone->possible_movements[0] = 2;
 				return (1);
@@ -351,7 +351,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 				if ((*target_cells_3)->stone_in_cell
 					&& (*target_cells_3)->stone_in_cell->player_id
 					!= current_player->id
-					&& (*target_cells_3)->ability != ABILITY_EARTH)
+					&& !(*target_cells_3)->stone_in_cell->is_protected)
 				{
 					stone->possible_movements[0] = 3;
 					return (1);
@@ -360,7 +360,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 					&& (*target_cells_4)->stone_in_cell
 					&& (*target_cells_4)->stone_in_cell->player_id
 					!= current_player->id 
-					&& (*target_cells_4)->ability != ABILITY_EARTH)
+					&& !(*target_cells_4)->stone_in_cell->is_protected)
 				{
 					stone->possible_movements[0] = 4;
 					return (1);
@@ -405,11 +405,11 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			stone->possible_movements[j++] = 1;
 			can_this_stone_move = 1;
 		}
-		else if ((*target_cells_1)->ability != ABILITY_EARTH
+		else if (!(*target_cells_1)->stone_in_cell->is_protected
 			&& (*target_cells_1)->stone_in_cell->player_id
 			!= current_player->id)
 		{
-			// Stone is not protected by Earth and is an enemy
+			// Stone is not protected by the rosette and is an enemy
 			stone->possible_movements[j++] = 1;
 			can_this_stone_move = 1;
 		}
@@ -426,7 +426,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			stone->possible_movements[j++] = 2;
 			can_this_stone_move = 1;
 		}
-		else if ((*target_cells_2)->ability != ABILITY_EARTH
+		else if (!(*target_cells_2)->stone_in_cell->is_protected
 			&& (*target_cells_2)->stone_in_cell->player_id
 			!= current_player->id)
 		{
@@ -446,7 +446,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			stone->possible_movements[j++] = 3;
 			can_this_stone_move = 1;
 		}
-		else if ((*target_cells_3)->ability != ABILITY_EARTH
+		else if (!(*target_cells_3)->stone_in_cell->is_protected
 			&& (*target_cells_3)->stone_in_cell->player_id
 			!= current_player->id)
 		{
@@ -466,7 +466,7 @@ int	can_this_ds_stone_move(Stone *stone, Player *current_player, int dice)
 			stone->possible_movements[j++] = 4;
 			can_this_stone_move = 1;
 		}
-		else if ((*target_cells_4)->ability != ABILITY_EARTH
+		else if (!(*target_cells_4)->stone_in_cell->is_protected
 			&& (*target_cells_4)->stone_in_cell->player_id
 			!= current_player->id)
 		{
