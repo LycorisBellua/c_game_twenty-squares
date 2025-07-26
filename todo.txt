@@ -1,0 +1,5 @@
+- There's something wrong with Wrath. As if it sometimes cannot move, although 
+technically there's a cell available.
+- Refactor the codebase to be clean.
+- Does everything work properly?
+- Allow two human players, instead of always playing against the computer.

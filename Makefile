@@ -30,14 +30,14 @@ $(DYNAMIC_LIB): $(filter-out main.o, $(OBJ_FILES))
 
 # Package: gcc-mingw-w64
 win64:
-	$(MAKE) -s all \
+	$(MAKE) all \
 	CC=x86_64-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win64/objects \
 	EXECUTABLE=$(DIR_BUILD)/win64/TwentySquares-64bit.exe \
 	STATIC_LIB=$(DIR_BUILD)/win64/libts64.lib \
 	DYNAMIC_LIB=$(DIR_BUILD)/win64/libts64.dll
 win32:
-	$(MAKE) -s all \
+	$(MAKE) all \
 	CC=i686-w64-mingw32-gcc \
 	DIR_OBJ=$(DIR_BUILD)/win32/objects \
 	EXECUTABLE=$(DIR_BUILD)/win32/TwentySquares-32bit.exe \
@@ -45,9 +45,9 @@ win32:
 	DYNAMIC_LIB=$(DIR_BUILD)/win32/libts32.dll
 
 clean:
-	make -s clean-unix
-	make -s clean-win64
-	make -s clean-win32
+	make clean-unix
+	make clean-win64
+	make clean-win32
 clean-unix:
 	rm -rf $(DIR_BUILD)/unix/objects
 clean-win64:
@@ -56,9 +56,9 @@ clean-win32:
 	rm -rf $(DIR_BUILD)/win32/objects
 
 fclean:
-	make -s fclean-unix
-	make -s fclean-win64
-	make -s fclean-win32
+	make fclean-unix
+	make fclean-win64
+	make fclean-win32
 fclean-unix:
 	rm -rf $(DIR_BUILD)/unix
 fclean-win64:

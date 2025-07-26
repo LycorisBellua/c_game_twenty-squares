@@ -62,8 +62,7 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 			}
 			free_arr((void **)tokens, free);
 		}
-		printf("\n");
 	}
-	printf("Movement: %d %s forwards.\n", dist, dist < 2 ? "cell" : "cells");
+	printf("Movement: %d %s forwards.\n\n", dist, dist < 2 ? "cell" : "cells");
 	return (dist);
 }

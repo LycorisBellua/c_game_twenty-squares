@@ -36,14 +36,14 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 		print_board(nbr_turns, lvl, player->id, players, cells);
 		if (!dice)
 		{
-			printf("Dice: 0. The turn passes to the other player.\n");
+			printf("Dice: 0. The turn passes to the other player.\n\n");
 			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}
 		else if (!nbr_moveable)
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
-				"player.\n", dice);
+				"player.\n\n", dice);
 			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}

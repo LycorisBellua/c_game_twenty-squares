@@ -10,7 +10,7 @@ const char	**get_input(void)
 
 	write(STDOUT_FILENO, "> ", 2);
 	line = gnl(STDIN_FILENO);
-	write(STDOUT_FILENO, "\n", 1);
+	clear_prev_line();
 	if (!line)
 		return (0);
 	set_to_lowercase(line);

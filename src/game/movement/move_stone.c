@@ -36,7 +36,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 			if (origin_cell_track_index + stone->moves[i] >= 14)
 			{
 				pride_choice = 1;
-				printf("\nPride seizes the opportunity to get rid of %s, and "
+				printf("Pride seizes the opportunity to get rid of %s, and "
 					"leaves.\n\n", player->is_ai ? player->name : "you");
 				break ;
 			}
@@ -48,12 +48,12 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 			pride_choice = !(i - 1) ? 0 : rng_minmax(0, i - 1);
 			if (dist_to_move == stone->moves[pride_choice])
 			{
-				printf("\nPride refuses to move. The turn passes.\n\n");
+				printf("Pride refuses to move. The turn passes.\n\n");
 				return (0);
 			}
 			else
 			{
-				printf("\n\"%s\", huh? Pride will move somewhere else.\n\n", 
+				printf("\"%s\", huh? Pride will move somewhere else.\n\n", 
 					dist_to_move == 1 ? "One" : dist_to_move == 2 ? "Two" 
 					: dist_to_move == 3 ? "Three" : "Four");
 				dist_to_move = stone->moves[pride_choice];

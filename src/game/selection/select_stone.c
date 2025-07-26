@@ -81,7 +81,7 @@ t_stone	*select_stone(char *input, t_player *player)
 	}
 	if (strcmp(input, "quit"))
 	{
-		printf("\nStone: %s.\n\n", input);
+		printf("Stone: %s.\n\n", input);
 		i = -1;
 		while (++i < 7)
 		{

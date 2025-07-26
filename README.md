@@ -1,5 +1,7 @@
 # Twenty Squares
 
+[Link to the download page (Itch.io)](https://lycorisdev.itch.io/twenty-squares)  
+
 *Twenty Squares* is a CLI video game, that is to say that it runs in a 
 computer's terminal. Besides this very repo, it can also be found as a 
 mini-game in 
@@ -12,8 +14,8 @@ today as the "Royal Game of Ur" or the "Game of Twenty Squares", this board
 game was later on overthrown by Backgammon. This project, *Twenty Squares*, is 
 the opportunity to discover the oldest board game known to mankind. And, on top 
 of a classic way of playing, I've provided my own twist by giving life to the 
-stones in the Deadly Sins modes. The marvel of technology, pawns thinking for 
-themselves...  
+stones in the Deadly Sins modes. Pawns thinking for themselves... 
+Unbelievable.  
 
 The game has indeed four modes:
 1. Classic Infinite.

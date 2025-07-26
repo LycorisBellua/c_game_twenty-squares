@@ -129,6 +129,7 @@ void		free_arr(void **arr, void (*free_fct)(void *));
 void		remove_arr_elems(void **arr, size_t from, size_t to,
 				void (*free_fct)(void *));
 void		clear_window(void);
+void		clear_prev_line(void);
 char		*gnl(int fd);
 int			rng_minmax(int min, int max);
 char		**split(const char *s, char c);

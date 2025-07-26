@@ -6,6 +6,7 @@ void	print_board(int nbr_turns, int lvl, int player_id, t_player *players,
 	int	line;
 
 	clear_window();
+	printf("\n");
 	print_turn_line(nbr_turns);
 	line = -1;
 	while (++line < 42)
