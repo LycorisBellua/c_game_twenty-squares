@@ -1,31 +1,31 @@
 #include "twenty_squares.h"
 
-void	print_turn_line(int number_of_turns)
+void	print_turn_line(int nbr_turns)
 {
-	if (number_of_turns < 10)
+	if (nbr_turns < 10)
 	{
 		printf("\n                                    "
-			"TURN 0%d                                   \n", number_of_turns);
+			"TURN 0%d                                   \n", nbr_turns);
 	}
-	else if (number_of_turns >= 10 && number_of_turns < 100)
+	else if (nbr_turns >= 10 && nbr_turns < 100)
 	{
 		printf("\n                                    "
-			"TURN %d                                   \n", number_of_turns);
+			"TURN %d                                   \n", nbr_turns);
 	}
-	else if (number_of_turns >= 100 && number_of_turns < 1000)
+	else if (nbr_turns >= 100 && nbr_turns < 1000)
 	{
 		printf("\n                                    "
-			"TURN %d                                  \n", number_of_turns);
+			"TURN %d                                  \n", nbr_turns);
 	}
-	else if (number_of_turns >= 1000 && number_of_turns < 10000)
+	else if (nbr_turns >= 1000 && nbr_turns < 10000)
 	{
 		printf("\n                                    "
-			"TURN %d                                 \n", number_of_turns);
+			"TURN %d                                 \n", nbr_turns);
 	}
 	else
 	{
 		printf("\n                                    "
-			"TURN %d                                \n", number_of_turns);
+			"TURN %d                                \n", nbr_turns);
 	}
 	return ;
 }

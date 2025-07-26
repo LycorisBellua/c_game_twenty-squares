@@ -1,21 +1,19 @@
 #include "twenty_squares.h"
 
-void	determine_winner(char *input, Player *players)
+void	determine_winner(char *input, t_player *players)
 {
 	int	winner;
 
-	if (!PLAYER_ONE->number_of_playable_stones
-		|| !PLAYER_TWO->number_of_playable_stones)
+	if (!players[0].nbr_playable || !players[1].nbr_playable)
 	{
-		if (PLAYER_ONE->points > PLAYER_TWO->points)
+		if (players[0].points > players[1].points)
+			winner = 0;
+		else if (players[1].points > players[0].points)
 			winner = 1;
-		else if (PLAYER_TWO->points > PLAYER_ONE->points)
-			winner = 2;
-		else if (PLAYER_ONE->points == PLAYER_TWO->points)
-			winner = !PLAYER_ONE->number_of_playable_stones + 1;
-		printf("The game has ended. The winner is %s!\n",
-			winner == 1 ? PLAYER_ONE->name : PLAYER_TWO->name);
-		memcpy(input, "quit", INPUT_SIZE);
+		else if (players[0].points == players[1].points)
+			winner = !players[0].nbr_playable;
+		printf("The game has ended. The winner is %s!\n", players[winner].name);
+		memcpy(input, "quit", INPUT_LEN);
 	}
 	return ;
 }

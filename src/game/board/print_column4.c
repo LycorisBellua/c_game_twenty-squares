@@ -1,10 +1,9 @@
 #include "twenty_squares.h"
 
-void	print_column4(int line, int level, int current_player_id,
-			Player *players)
+void	print_column4(int line, int lvl, int player_id, t_player *players)
 {
 	if (!line || line == 3 || line == 6 || line == 8 || line == 16
-		|| ((level == 1 || level == 3) && (line >= 17 && line <= 26))
+		|| ((lvl == 1 || lvl == 3) && (line >= 17 && line <= 26))
 		|| (line >= 27 && line <= 41))
 	{
 		printf("               ");
@@ -15,7 +14,7 @@ void	print_column4(int line, int level, int current_player_id,
 	}
 	else if (line == 2)
 	{
-		printf("%s", current_player_id == 1 ?
+		printf("%s", player_id == 1 ?
 			" ............." : "              ");
 	}
 	else if (line == 4)
@@ -24,12 +23,12 @@ void	print_column4(int line, int level, int current_player_id,
 	}
 	else if (line == 5)
 	{
-		if (PLAYER_TWO->points < 0)
+		if (players[1].points < 0)
 			printf("     00      ");
-		else if (PLAYER_TWO->points < 10)
-			printf("     0%d      ", PLAYER_TWO->points);
+		else if (players[1].points < 10)
+			printf("     0%d      ", players[1].points);
 		else
-			printf("     %d      ", PLAYER_TWO->points);
+			printf("     %d      ", players[1].points);
 	}
 	else if (line == 7)
 	{
@@ -37,82 +36,82 @@ void	print_column4(int line, int level, int current_player_id,
 	}
 	else if (line == 9)
 	{
-		if (PLAYER_TWO->stoneset[0].coordinate == -1)
+		if (players[1].stoneset[0].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[0].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[0].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   One       " : "   Lust      ");
 	}
 	else if (line == 10)
 	{
-		if (PLAYER_TWO->stoneset[1].coordinate == -1)
+		if (players[1].stoneset[1].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[1].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[1].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Two       " : "   Pride     ");
 	}
 	else if (line == 11)
 	{
-		if (PLAYER_TWO->stoneset[2].coordinate == -1)
+		if (players[1].stoneset[2].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[2].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[2].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Three     " : "   Gluttony  ");
 	}
 	else if (line == 12)
 	{
-		if (PLAYER_TWO->stoneset[3].coordinate == -1)
+		if (players[1].stoneset[3].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[3].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[3].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Four      " : "   Sloth     ");
 	}
 	else if (line == 13)
 	{
-		if (PLAYER_TWO->stoneset[4].coordinate == -1)
+		if (players[1].stoneset[4].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[4].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[4].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Five      " :  "   Envy     ");
 	}
 	else if (line == 14)
 	{
-		if (PLAYER_TWO->stoneset[5].coordinate == -1)
+		if (players[1].stoneset[5].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[5].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[5].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Six       " : "   Wrath     ");
 	}
 	else if (line == 15)
 	{
-		if (PLAYER_TWO->stoneset[6].coordinate == -1)
+		if (players[1].stoneset[6].coord == -1)
 			printf("   [Dead]    ");
-		else if (PLAYER_TWO->stoneset[6].coordinate == 1)
-			printf("%s", level == 1 || level == 2 ?
+		else if (players[1].stoneset[6].coord == 1)
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   [Won]     " : "   [Saved]   ");
 		else
-			printf("%s", level == 1 || level == 2 ?
+			printf("%s", lvl == 1 || lvl == 2 ?
 				"   Seven     " : "   Greed     ");
 	}
-	else if (level == 2 || level == 4)
+	else if (lvl == 2 || lvl == 4)
 	{
 		if (line == 17)
 		{
@@ -124,49 +123,49 @@ void	print_column4(int line, int level, int current_player_id,
 		}
 		else if (line == 19)
 		{
-			printf("%s", current_player_id == 1 ?
+			printf("%s", player_id == 1 ?
 				" ............." : "              ");
 		}
 		else if (line == 20)
 		{
-			printf("%s", PLAYER_ONE->stoneset[0].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[0].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   One        " : "   Lust       ");
 		}
 		else if (line == 21)
 		{
-			printf("%s", PLAYER_ONE->stoneset[1].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[1].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Two        " : "   Pride      ");
 		}
 		else if (line == 22)
 		{
-			printf("%s", PLAYER_ONE->stoneset[2].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[2].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Three      " : "   Gluttony   ");
 		}
 		else if (line == 23)
 		{
-			printf("%s", PLAYER_ONE->stoneset[3].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[3].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Four       " : "   Sloth      ");
 		}
 		else if (line == 24)
 		{
-			printf("%s", PLAYER_ONE->stoneset[4].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[4].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Five       " : "   Envy       ");
 		}
 		else if (line == 25)
 		{
-			printf("%s", PLAYER_ONE->stoneset[5].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[5].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Six        " : "   Wrath      ");
 		}
 		else if (line == 26)
 		{
-			printf("%s", PLAYER_ONE->stoneset[6].coordinate != -1 ?
-				"   [Empty]    " : level == 2 ?
+			printf("%s", players[0].stoneset[6].coord != -1 ?
+				"   [Empty]    " : lvl == 2 ?
 				"   Seven      " : "   Greed      ");
 		}
 	}

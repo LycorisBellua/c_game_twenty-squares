@@ -1,59 +1,52 @@
 #include "twenty_squares.h"
 
-int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
-		Cell ***target_cell, Player *current_player, Player *other_player)
+int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
+		t_player *player, t_player *other_player)
 {
 	int	i;
-	int	racetrack_index_of_origin_cell;
-	int	pride_has_chosen;
+	int	origin_cell_track_index;
+	int	pride_choice;
 
-	racetrack_index_of_origin_cell = 0;
-	pride_has_chosen = 0;
-	*target_cell = &current_player->racetrack[14];
-	// I don't understand why, but racetrack_index_of_origin_cell needs to be 
-	// set to 0, or after the first time entering the function, the variable 
-	// will take a garbage value
+	origin_cell_track_index = 0;
+	*cell = player->track[14];
+	// I don't understand why, but `origin_cell_track_index` needs to be set to 
+	// 0, or after the first time entering the function, the variable will take 
+	// a garbage value
 	i = -1;
 	while (++i < 14)
 	{
-		if ((*chosen_stone).coordinate
-			== current_player->racetrack[i]->coordinate)
+		if (stone->coord
+			== player->track[i]->coord)
 		{
-			racetrack_index_of_origin_cell = i;
+			origin_cell_track_index = i;
 			break ;
 		}
 	}
-	if ((*chosen_stone).id == ID_STONE_PRIDE)
+	if (stone->id == ID_STONE_PRIDE)
 	{
-		// If possible, Pride wants to go out of bounds. As target_cell is 
-		// already set to racetrack index 14, which means "out of bounds", we 
-		// don't need to update it.
+		// If possible, Pride wants to go out of bounds. As `cell` is already 
+		// set to track index 14, which means "out of bounds", we don't need to 
+		// update it.
+		pride_choice = 0;
 		i = -1;
 		while (++i < 4)
 		{
-			if (!(*chosen_stone).possible_movements[i])
+			if (!stone->moves[i])
 				break ;
-			if (!pride_has_chosen)
+			if (origin_cell_track_index + stone->moves[i] >= 14)
 			{
-				if (racetrack_index_of_origin_cell
-					+ (*chosen_stone).possible_movements[i] >= 14)
-				{
-					pride_has_chosen = 1;
-					printf("\nPride seizes the opportunity to get rid of %s, "
-						"and leaves.\n\n",
-						current_player->is_ai ? current_player->name : "you");
-					break ;
-				}
+				pride_choice = 1;
+				printf("\nPride seizes the opportunity to get rid of %s, and "
+					"leaves.\n\n", player->is_ai ? player->name : "you");
+				break ;
 			}
 		}
-		// If pride couldn't go out of bounds, we need to find another 
-		// destination.
-		if (!pride_has_chosen)
+		// If pride couldn't go out of bounds, we need to find another dest.
+		if (!pride_choice)
 		{
 			// (i - 1) is the last valid index of possible_movements.
-			pride_has_chosen = !(i - 1) ? 0 : rng_minmax(&rng_seed, 0, i - 1);
-			if (number_of_cells_forward
-				== (*chosen_stone).possible_movements[pride_has_chosen])
+			pride_choice = !(i - 1) ? 0 : rng_minmax(0, i - 1);
+			if (dist_to_move == stone->moves[pride_choice])
 			{
 				printf("\nPride refuses to move. The turn passes.\n\n");
 				return (0);
@@ -61,71 +54,56 @@ int	move_stone(int level, int number_of_cells_forward, Stone *chosen_stone,
 			else
 			{
 				printf("\n\"%s\", huh? Pride will move somewhere else.\n\n", 
-						number_of_cells_forward == 1 ? "One" 
-						: number_of_cells_forward == 2 ? "Two" 
-						: number_of_cells_forward == 3 ? "Three" 
-						: "Four");
-
-				number_of_cells_forward
-					= (*chosen_stone).possible_movements[pride_has_chosen];
+					dist_to_move == 1 ? "One" : dist_to_move == 2 ? "Two" 
+					: dist_to_move == 3 ? "Three" : "Four");
+				dist_to_move = stone->moves[pride_choice];
 			}
-			if (!(*chosen_stone).coordinate)
+			if (!stone->coord)
 			{
-				*target_cell
-					= &current_player->racetrack[number_of_cells_forward - 1];
+				*cell = player->track[dist_to_move - 1];
 			}
 			else
 			{
 				// If we are here, it means that the target cannot be out of 
 				// bounds, so there's no need to check if it is.
-				*target_cell
-					= &current_player->racetrack[racetrack_index_of_origin_cell
-					+ number_of_cells_forward];
+				*cell = player->track[origin_cell_track_index + dist_to_move];
 			}
 		}
 	}
 	else
 	{
-		if (!(*chosen_stone).coordinate)
+		if (!stone->coord)
 		{
-			*target_cell
-				= &current_player->racetrack[number_of_cells_forward - 1];
+			*cell = player->track[dist_to_move - 1];
 		}
 		else
 		{
-			if (racetrack_index_of_origin_cell + number_of_cells_forward < 14)
-				*target_cell
-					= &current_player->racetrack[racetrack_index_of_origin_cell
-					+ number_of_cells_forward];
+			if (origin_cell_track_index + dist_to_move < 14)
+				*cell = player->track[origin_cell_track_index + dist_to_move];
 		}
 	}
-	if (!(*chosen_stone).coordinate)
-		++(current_player->number_of_stones_on_board);
-	else
-		current_player->racetrack[racetrack_index_of_origin_cell]->stone_in_cell
-			= 0;
-	if ((*(*target_cell))->coordinate == 1)
+	if (stone->coord)
+		player->track[origin_cell_track_index]->stone = 0;
+	if ((*cell)->coord == 1)
 	{
-		(*chosen_stone).coordinate = 1;
-		--(current_player->number_of_playable_stones);
-		--(current_player->number_of_stones_on_board);
-		++(current_player->points);
+		stone->coord = 1;
+		--player->nbr_playable;
+		++player->points;
 	}
 	else
 	{
-		if ((*(*target_cell))->stone_in_cell)
+		if ((*cell)->stone)
 		{
-			if (level == 1 || level == 3)
-				(*(*target_cell))->stone_in_cell->coordinate = 0;
+			if (lvl == 1 || lvl == 3)
+				(*cell)->stone->coord = 0;
 			else
 			{
-				(*(*target_cell))->stone_in_cell->coordinate = -1;
-				--(other_player->number_of_playable_stones);
-				--(other_player->number_of_stones_on_board);
+				(*cell)->stone->coord = -1;
+				--other_player->nbr_playable;
 			}
 		}
-		(*(*target_cell))->stone_in_cell = chosen_stone;
-		(*chosen_stone).coordinate = (*(*target_cell))->coordinate;
+		(*cell)->stone = stone;
+		stone->coord = (*cell)->coord;
 	}
 	return (1);
 }

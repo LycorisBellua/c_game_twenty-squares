@@ -1,7 +1,5 @@
 #include "twenty_squares.h"
 
-int	rng_seed;
-
 static void	set_utf8_encoding(void);
 static void	display_intro_page(void);
 static void	display_first_page(void);
@@ -13,7 +11,6 @@ int	start(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	set_utf8_encoding();
-	rng_seed = generate_seed();
 	display_intro_page();
 	if (!ask_yes_no("Do you know the rules of the game?"))
 	{
@@ -54,9 +51,9 @@ static void	display_first_page(void)
 	clear_window();
 	printf("GUIDE - PAGE 1/3\n\n");
 	printf("This board game is a race game. Two players, seven stones each, "
-	"and the winner is whoever made all of their stones cross the other side "
-	"first. To aid us, a dice going from 0 to 4. Let's explain the "
-	"rules...\n\n");
+		"and the winner is whoever made all of their stones cross the other "
+		"side first. To aid us, a dice going from 0 to 4. Let's explain the "
+		"rules...\n\n");
 	printf("             ___ ___ ___               ___ ___ ___     \n");
 	printf("            |▒▒▒|   |▒▒▒|             | 4 | 5 |   |    \n");
 	printf("            |▒▒▒|___|▒▒▒|             |___|___|___|    \n");
@@ -135,15 +132,12 @@ static void	display_third_page(void)
 	printf("Envy lacks a personality of its own. It goes all over the place, "
 		"not able to settle for a pattern. The cell is picked at random.\n\n");
 	printf("Wrath is a slave to bloodlust. When it notices an enemy stone on "
-		"the board, it targets it with an unyielding focus, ready to step upon "
+		"the board, it targets it with unyielding focus, ready to step upon "
 		"allies to see the enemy perish. The rest of the time, it moves to the "
 		"closest available cell as to stick around longer: this way, it has "
 		"more chance of meeting the other team.\n\n");
-	printf("Greed follows a set of priorities: the closest rosette, then "
-		"the closest enemy, and finally the finish line. The reason it lets "
-		"you decide what to do with the ability, is because it doesn't know "
-		"how to use what it gathered. There's no personal purpose to its "
-		"hoarding, but hopefully it'll help you win.\n\n");
+	printf("Greed follows a set of priorities: the closest rosette, then the "
+		"closest enemy, and finally the finish line.\n\n");
 	press_enter_to_continue();
 	return ;
 }

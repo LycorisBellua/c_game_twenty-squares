@@ -1,11 +1,7 @@
 #include "twenty_squares.h"
 
-void	print_column3(int line, int current_player_id, Cell *cells)
+void	print_column3(int line, int player_id, t_cell *cells)
 {
-	int	id;
-	int	stone_belongs_to_current_player;
-
-	stone_belongs_to_current_player = 0;
 	if (!line)
 	{
 		printf("________________");
@@ -40,354 +36,306 @@ void	print_column3(int line, int current_player_id, Cell *cells)
 	else if (line == 3)
 	{
 		/* Cell Coordinate 31 */
-		if (!(cells + 2)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 2)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 2)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[2].stone)
 			printf("|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒|");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[2].stone->id == ID_STONE_ONE)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[01]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 01 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_TWO)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[02]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 02 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_THREE)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[03]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 03 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[04]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 04 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[05]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 05 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_SIX)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[06]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 06 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒▒[07]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 07 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_LUST)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Lust]▒▒▒▒▒|" : "|▒▒▒▒ Lust ▒▒▒▒▒|");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Pride]▒▒▒▒|" : "|▒▒▒▒ Pride ▒▒▒▒|");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒[Gluttony]▒▒▒|" : "|▒▒ Gluttony ▒▒▒|");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Sloth]▒▒▒▒|" : "|▒▒▒▒ Sloth ▒▒▒▒|");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Envy]▒▒▒▒▒|" : "|▒▒▒▒ Envy ▒▒▒▒▒|");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Wrath]▒▒▒▒|" : "|▒▒▒▒ Wrath ▒▒▒▒|");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[2].stone->id == ID_STONE_GREED)
+				printf("%s", cells[2].stone->player_id == player_id ?
 					"|▒▒▒▒[Greed]▒▒▒▒|" : "|▒▒▒▒ Greed ▒▒▒▒|");
 		}
 	}
 	else if (line == 8)
 	{
 		/* Cell Coordinate 32 */
-		if (!(cells + 5)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 5)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 5)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[5].stone)
 			printf("|               |");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[5].stone->id == ID_STONE_ONE)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [01]      |" : "|      01       |");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_TWO)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [02]      |" : "|      02       |");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_THREE)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [03]      |" : "|      03       |");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [04]      |" : "|      04       |");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [05]      |" : "|      05       |");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_SIX)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [06]      |" : "|      06       |");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|     [07]      |" : "|      07       |");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_LUST)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Lust]     |" : "|     Lust      |");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Pride]    |" : "|     Pride     |");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|  [Gluttony]   |" : "|   Gluttony    |");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Sloth]    |" : "|     Sloth     |");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Envy]     |" : "|     Envy      |");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Wrath]    |" : "|     Wrath     |");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[5].stone->id == ID_STONE_GREED)
+				printf("%s", cells[5].stone->player_id == player_id ?
 					"|    [Greed]    |" : "|     Greed     |");
 		}
 	}
 	else if (line == 13)
 	{
 		/* Cell Coordinate 33 */
-		if (!(cells + 8)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 8)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 8)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[8].stone)
 			printf("|               |");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[8].stone->id == ID_STONE_ONE)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [01]      |" : "|      01       |");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_TWO)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [02]      |" : "|      02       |");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_THREE)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [03]      |" : "|      03       |");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [04]      |" : "|      04       |");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [05]      |" : "|      05       |");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_SIX)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [06]      |" : "|      06       |");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|     [07]      |" : "|      07       |");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_LUST)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Lust]     |" : "|     Lust      |");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Pride]    |" : "|     Pride     |");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|  [Gluttony]   |" : "|   Gluttony    |");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Sloth]    |" : "|     Sloth     |");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Envy]     |" : "|     Envy      |");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Wrath]    |" : "|     Wrath     |");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[8].stone->id == ID_STONE_GREED)
+				printf("%s", cells[8].stone->player_id == player_id ?
 					"|    [Greed]    |" : "|     Greed     |");
 		}
 	}
 	else if (line == 18)
 	{
 		/* Cell Coordinate 34 */
-		if (!(cells + 11)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 11)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 11)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[11].stone)
 			printf("|               |");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[11].stone->id == ID_STONE_ONE)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [01]      |" : "|      01       |");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_TWO)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [02]      |" : "|      02       |");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_THREE)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [03]      |" : "|      03       |");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [04]      |" : "|      04       |");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [05]      |" : "|      05       |");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_SIX)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [06]      |" : "|      06       |");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|     [07]      |" : "|      07       |");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_LUST)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Lust]     |" : "|     Lust      |");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Pride]    |" : "|     Pride     |");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|  [Gluttony]   |" : "|   Gluttony    |");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Sloth]    |" : "|     Sloth     |");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Envy]     |" : "|     Envy      |");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Wrath]    |" : "|     Wrath     |");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[11].stone->id == ID_STONE_GREED)
+				printf("%s", cells[11].stone->player_id == player_id ?
 					"|    [Greed]    |" : "|     Greed     |");
 		}
 	}
 	else if (line == 33)
 	{
 		/* Cell Coordinate 37 */
-		if (!(cells + 16)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 16)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 16)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[16].stone)
 			printf("|▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒|");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[16].stone->id == ID_STONE_ONE)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[01]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 01 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_TWO)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[02]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 02 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_THREE)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[03]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 03 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[04]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 04 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[05]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 05 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_SIX)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[06]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 06 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒▒[07]▒▒▒▒▒▒|" : "|▒▒▒▒▒ 07 ▒▒▒▒▒▒|");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_LUST)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Lust]▒▒▒▒▒|" : "|▒▒▒▒ Lust ▒▒▒▒▒|");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Pride]▒▒▒▒|" : "|▒▒▒▒ Pride ▒▒▒▒|");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒[Gluttony]▒▒▒|" : "|▒▒ Gluttony ▒▒▒|");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Sloth]▒▒▒▒|" : "|▒▒▒▒ Sloth ▒▒▒▒|");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Envy]▒▒▒▒▒|" : "|▒▒▒▒ Envy ▒▒▒▒▒|");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Wrath]▒▒▒▒|" : "|▒▒▒▒ Wrath ▒▒▒▒|");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[16].stone->id == ID_STONE_GREED)
+				printf("%s", cells[16].stone->player_id == player_id ?
 					"|▒▒▒▒[Greed]▒▒▒▒|" : "|▒▒▒▒ Greed ▒▒▒▒|");
 		}
 	}
 	else if (line == 38)
 	{
 		/* Cell Coordinate 38 */
-		if (!(cells + 19)->stone_in_cell)
-			id = 0;
-		else
-		{
-			id = (cells + 19)->stone_in_cell->id;
-			stone_belongs_to_current_player = (cells + 19)->stone_in_cell
-				->player_id == current_player_id ? 1 : 0;
-		}
-		if (!id)
+		if (!cells[19].stone)
 			printf("|               |");
 		else
 		{
-			if (id == ID_STONE_ONE)
-				printf("%s", stone_belongs_to_current_player ?
+			if (cells[19].stone->id == ID_STONE_ONE)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [01]      |" : "|      01       |");
-			else if (id == ID_STONE_TWO)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_TWO)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [02]      |" : "|      02       |");
-			else if (id == ID_STONE_THREE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_THREE)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [03]      |" : "|      03       |");
-			else if (id == ID_STONE_FOUR)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_FOUR)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [04]      |" : "|      04       |");
-			else if (id == ID_STONE_FIVE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_FIVE)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [05]      |" : "|      05       |");
-			else if (id == ID_STONE_SIX)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_SIX)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [06]      |" : "|      06       |");
-			else if (id == ID_STONE_SEVEN)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_SEVEN)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|     [07]      |" : "|      07       |");
-			else if (id == ID_STONE_LUST)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_LUST)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Lust]     |" : "|     Lust      |");
-			else if (id == ID_STONE_PRIDE)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_PRIDE)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Pride]    |" : "|     Pride     |");
-			else if (id == ID_STONE_GLUTTONY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_GLUTTONY)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|  [Gluttony]   |" : "|   Gluttony    |");
-			else if (id == ID_STONE_SLOTH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_SLOTH)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Sloth]    |" : "|     Sloth     |");
-			else if (id == ID_STONE_ENVY)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_ENVY)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Envy]     |" : "|     Envy      |");
-			else if (id == ID_STONE_WRATH)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_WRATH)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Wrath]    |" : "|     Wrath     |");
-			else if (id == ID_STONE_GREED)
-				printf("%s", stone_belongs_to_current_player ?
+			else if (cells[19].stone->id == ID_STONE_GREED)
+				printf("%s", cells[19].stone->player_id == player_id ?
 					"|    [Greed]    |" : "|     Greed     |");
 		}
 	}

@@ -1,93 +1,82 @@
 #include "twenty_squares.h"
 
-void	game_loop(int level, Player *players, Cell *cells)
+void	game_loop(int lvl, t_player *players, t_cell *cells)
 {
-	char	input[INPUT_SIZE];
-	int		number_of_turns;
-	int		dice;
-	int		number_of_cells_forward;
-	int		number_of_moveable_stones;
-	int		has_stone_moved;
-	int		is_turn_played_twice;
-	Stone	*chosen_stone;
-	Cell	**target_cell;
-	Player	*current_player;
-	Player	*other_player;
+	char		input[INPUT_LEN];
+	int			nbr_turns;
+	int			dice;
+	int			dist_to_move;
+	int			nbr_moveable;
+	int			has_stone_moved;
+	int			is_turn_played_twice;
+	t_stone		*stone;
+	t_cell		*cell;
+	t_player	*player;
+	t_player	*other_player;
 
 	memset(input, 0, sizeof(input));
-	number_of_turns = 1;
-	target_cell = 0;
-	// target_cell is a double pointer here, and a triple pointer in fonctions, 
-	// so it can take a cell's address through current_player. It wouldn't 
-	// work otherwise. Am I missing something?
+	nbr_turns = 1;
+	cell = 0;
 	while (strcmp(input, "quit"))
 	{
-		// (number_of_turns % 2) --> 1 --> 1 is true --> number_of_turns is an 
-		// odd number.
-		// (number_of_turns & 1) only works on twos-complement machines. If 
-		// it's a 1-complement, use "1U" instead of "1"
-		if (number_of_turns & 1)
+		if (nbr_turns % 2)
 		{
-			current_player = players + 0;
-			other_player = players + 1;
+			player = &players[0];
+			other_player = &players[1];
 		}
 		else
 		{
-			current_player = players + 1;
-			other_player = players + 0;
+			player = &players[1];
+			other_player = &players[0];
 		}
 		is_turn_played_twice = 0;
-		dice = rng_minmax(&rng_seed, 0, 4);
-		number_of_moveable_stones = !dice ? 0
-			: set_number_of_moveable_stones_and_every_can_stone_move
-			(current_player, level, dice);
-		print_board(number_of_turns, level, current_player->id, players,
-			cells);
+		dice = rng_minmax(0, 4);
+		nbr_moveable = !dice ? 0
+			: set_nbr_moveable_and_can_move(player, lvl, dice);
+		print_board(nbr_turns, lvl, player->id, players, cells);
 		if (!dice)
 		{
 			printf("Dice: 0. The turn passes to the other player.\n");
-			memcpy(input, "", LENGTH_STONE_NAME);
+			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}
-		else if (!number_of_moveable_stones)
+		else if (!nbr_moveable)
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
 				"player.\n", dice);
-			memcpy(input, "", LENGTH_STONE_NAME);
+			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}
 		else
 		{
 			printf("Enter 'Quit' to leave.\n\n");
 			printf("Dice: %d.\n", dice);
-			chosen_stone = select_stone(input, current_player);
+			stone = select_stone(input, player);
 			if (!strcmp(input, "quit"))
 				printf("\nYou're quitting the game...\n\n");
 			else
 			{
-				number_of_cells_forward = level > 2 ?
-					select_number_of_cells_forward(current_player, chosen_stone)
+				dist_to_move = lvl > 2 ? select_dist_to_move(player, stone)
 					: dice;
-				has_stone_moved = move_stone(level, number_of_cells_forward,
-					chosen_stone, &target_cell, current_player, other_player);
+				has_stone_moved = move_stone(lvl, dist_to_move, stone, &cell,
+					player, other_player);
 				if (has_stone_moved)
-					chosen_stone->is_protected = 0;
+					stone->is_protected = 0;
 				press_enter_to_continue();
 				if (has_stone_moved)
 				{
-					print_board(number_of_turns, level, current_player->id,
-						players, cells);
+					print_board(nbr_turns, lvl, player->id, players, cells);
 					determine_winner(input, players);
 					if (strcmp(input, "quit"))
 					{
-						if ((*target_cell)->is_rosette)
+						if (cell->is_rosette)
 						{
 							printf("This cell is a rosette.\n");
 							printf("Effects: The current player gets a free "
 								"turn and the stone is untouchable while "
 								"standing on the cell.\n\n");
 							is_turn_played_twice = 1;
-							chosen_stone->is_protected = 1;
+							stone->is_protected = 1;
 							press_enter_to_continue();
 						}
 					}
@@ -95,7 +84,7 @@ void	game_loop(int level, Player *players, Cell *cells)
 			}
 		}
 		if (!is_turn_played_twice)
-			++number_of_turns;
+			++nbr_turns;
 	}
 	press_enter_to_continue();
 	return ;
