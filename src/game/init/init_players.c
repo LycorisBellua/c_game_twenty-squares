@@ -18,67 +18,67 @@ static void	init_player_one(int lvl, int human_player, t_player *players,
 				t_cell *cells)
 {
 	players[0].id = 0;
-	memcpy(players[0].name, "Player One", PLAYER_NAME_LEN);
+	strncpy(players[0].name, "Player One", PLAYER_NAME_LEN);
 	players[0].is_ai = human_player == players[0].id ? 0 : 1;
 	players[0].nbr_playable = 7;
 	if (lvl > 2)
 	{
-		memcpy(players[0].stoneset[0].name, "Lust", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[0].name, "Lust", STONE_NAME_LEN);
 		players[0].stoneset[0].id = ID_STONE_LUST;
 		players[0].stoneset[0].player_id = 0;
 		players[0].stoneset[0].can_move = 1;
-		memcpy(players[0].stoneset[1].name, "Pride", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[1].name, "Pride", STONE_NAME_LEN);
 		players[0].stoneset[1].id = ID_STONE_PRIDE;
 		players[0].stoneset[1].player_id = 0;
 		players[0].stoneset[1].can_move = 1;
-		memcpy(players[0].stoneset[2].name, "Gluttony", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[2].name, "Gluttony", STONE_NAME_LEN);
 		players[0].stoneset[2].id = ID_STONE_GLUTTONY;
 		players[0].stoneset[2].player_id = 0;
 		players[0].stoneset[2].can_move = 1;
-		memcpy(players[0].stoneset[3].name, "Sloth", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[3].name, "Sloth", STONE_NAME_LEN);
 		players[0].stoneset[3].id = ID_STONE_SLOTH;
 		players[0].stoneset[3].player_id = 0;
 		players[0].stoneset[3].can_move = 1;
-		memcpy(players[0].stoneset[4].name, "Envy", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[4].name, "Envy", STONE_NAME_LEN);
 		players[0].stoneset[4].id = ID_STONE_ENVY;
 		players[0].stoneset[4].player_id = 0;
 		players[0].stoneset[4].can_move = 1;
-		memcpy(players[0].stoneset[5].name,"Wrath", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[5].name,"Wrath", STONE_NAME_LEN);
 		players[0].stoneset[5].id = ID_STONE_WRATH;
 		players[0].stoneset[5].player_id = 0;
 		players[0].stoneset[5].can_move = 1;
-		memcpy(players[0].stoneset[6].name, "Greed", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[6].name, "Greed", STONE_NAME_LEN);
 		players[0].stoneset[6].id = ID_STONE_GREED;
 		players[0].stoneset[6].player_id = 0;
 		players[0].stoneset[6].can_move = 1;
 	}
 	else
 	{
-		memcpy(players[0].stoneset[0].name, "One", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[0].name, "One", STONE_NAME_LEN);
 		players[0].stoneset[0].id = ID_STONE_ONE;
 		players[0].stoneset[0].player_id = 0;
 		players[0].stoneset[0].can_move = 1;
-		memcpy(players[0].stoneset[1].name, "Two", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[1].name, "Two", STONE_NAME_LEN);
 		players[0].stoneset[1].id = ID_STONE_TWO;
 		players[0].stoneset[1].player_id = 0;
 		players[0].stoneset[1].can_move = 1;
-		memcpy(players[0].stoneset[2].name, "Three", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[2].name, "Three", STONE_NAME_LEN);
 		players[0].stoneset[2].id = ID_STONE_THREE;
 		players[0].stoneset[2].player_id = 0;
 		players[0].stoneset[2].can_move = 1;
-		memcpy(players[0].stoneset[3].name, "Four", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[3].name, "Four", STONE_NAME_LEN);
 		players[0].stoneset[3].id = ID_STONE_FOUR;
 		players[0].stoneset[3].player_id = 0;
 		players[0].stoneset[3].can_move = 1;
-		memcpy(players[0].stoneset[4].name, "Five", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[4].name, "Five", STONE_NAME_LEN);
 		players[0].stoneset[4].id = ID_STONE_FIVE;
 		players[0].stoneset[4].player_id = 0;
 		players[0].stoneset[4].can_move = 1;
-		memcpy(players[0].stoneset[5].name, "Six", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[5].name, "Six", STONE_NAME_LEN);
 		players[0].stoneset[5].id = ID_STONE_SIX;
 		players[0].stoneset[5].player_id = 0;
 		players[0].stoneset[5].can_move = 1;
-		memcpy(players[0].stoneset[6].name, "Seven", STONE_NAME_LEN);
+		strncpy(players[0].stoneset[6].name, "Seven", STONE_NAME_LEN);
 		players[0].stoneset[6].id = ID_STONE_SEVEN;
 		players[0].stoneset[6].player_id = 0;
 		players[0].stoneset[6].can_move = 1;
@@ -105,67 +105,67 @@ static void	init_player_two(int lvl, int human_player, t_player *players,
 				t_cell *cells)
 {
 	players[1].id = 1;
-	memcpy(players[1].name, "Player Two", PLAYER_NAME_LEN);
+	strncpy(players[1].name, "Player Two", PLAYER_NAME_LEN);
 	players[1].is_ai = human_player == players[1].id ? 0 : 1;
 	players[1].nbr_playable = 7;
 	if (lvl > 2)
 	{
-		memcpy(players[1].stoneset[0].name, "Lust", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[0].name, "Lust", STONE_NAME_LEN);
 		players[1].stoneset[0].id = ID_STONE_LUST;
 		players[1].stoneset[0].player_id = 1;
 		players[1].stoneset[0].can_move = 1;
-		memcpy(players[1].stoneset[1].name, "Pride", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[1].name, "Pride", STONE_NAME_LEN);
 		players[1].stoneset[1].id = ID_STONE_PRIDE;
 		players[1].stoneset[1].player_id = 1;
 		players[1].stoneset[1].can_move = 1;
-		memcpy(players[1].stoneset[2].name, "Gluttony", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[2].name, "Gluttony", STONE_NAME_LEN);
 		players[1].stoneset[2].id = ID_STONE_GLUTTONY;
 		players[1].stoneset[2].player_id = 1;
 		players[1].stoneset[2].can_move = 1;
-		memcpy(players[1].stoneset[3].name, "Sloth", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[3].name, "Sloth", STONE_NAME_LEN);
 		players[1].stoneset[3].id = ID_STONE_SLOTH;
 		players[1].stoneset[3].player_id = 1;
 		players[1].stoneset[3].can_move = 1;
-		memcpy(players[1].stoneset[4].name, "Envy", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[4].name, "Envy", STONE_NAME_LEN);
 		players[1].stoneset[4].id = ID_STONE_ENVY;
 		players[1].stoneset[4].player_id = 1;
 		players[1].stoneset[4].can_move = 1;
-		memcpy(players[1].stoneset[5].name,"Wrath", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[5].name,"Wrath", STONE_NAME_LEN);
 		players[1].stoneset[5].id = ID_STONE_WRATH;
 		players[1].stoneset[5].player_id = 1;
 		players[1].stoneset[5].can_move = 1;
-		memcpy(players[1].stoneset[6].name, "Greed", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[6].name, "Greed", STONE_NAME_LEN);
 		players[1].stoneset[6].id = ID_STONE_GREED;
 		players[1].stoneset[6].player_id = 1;
 		players[1].stoneset[6].can_move = 1;
 	}
 	else
 	{
-		memcpy(players[1].stoneset[0].name, "One", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[0].name, "One", STONE_NAME_LEN);
 		players[1].stoneset[0].id = ID_STONE_ONE;
 		players[1].stoneset[0].player_id = 1;
 		players[1].stoneset[0].can_move = 1;
-		memcpy(players[1].stoneset[1].name, "Two", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[1].name, "Two", STONE_NAME_LEN);
 		players[1].stoneset[1].id = ID_STONE_TWO;
 		players[1].stoneset[1].player_id = 1;
 		players[1].stoneset[1].can_move = 1;
-		memcpy(players[1].stoneset[2].name, "Three", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[2].name, "Three", STONE_NAME_LEN);
 		players[1].stoneset[2].id = ID_STONE_THREE;
 		players[1].stoneset[2].player_id = 1;
 		players[1].stoneset[2].can_move = 1;
-		memcpy(players[1].stoneset[3].name, "Four", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[3].name, "Four", STONE_NAME_LEN);
 		players[1].stoneset[3].id = ID_STONE_FOUR;
 		players[1].stoneset[3].player_id = 1;
 		players[1].stoneset[3].can_move = 1;
-		memcpy(players[1].stoneset[4].name, "Five", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[4].name, "Five", STONE_NAME_LEN);
 		players[1].stoneset[4].id = ID_STONE_FIVE;
 		players[1].stoneset[4].player_id = 1;
 		players[1].stoneset[4].can_move = 1;
-		memcpy(players[1].stoneset[5].name, "Six", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[5].name, "Six", STONE_NAME_LEN);
 		players[1].stoneset[5].id = ID_STONE_SIX;
 		players[1].stoneset[5].player_id = 1;
 		players[1].stoneset[5].can_move = 1;
-		memcpy(players[1].stoneset[6].name, "Seven", STONE_NAME_LEN);
+		strncpy(players[1].stoneset[6].name, "Seven", STONE_NAME_LEN);
 		players[1].stoneset[6].id = ID_STONE_SEVEN;
 		players[1].stoneset[6].player_id = 1;
 		players[1].stoneset[6].can_move = 1;

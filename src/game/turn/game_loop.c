@@ -2,7 +2,7 @@
 
 void	game_loop(int lvl, t_player *players, t_cell *cells)
 {
-	char		input[INPUT_LEN];
+	int			quit;
 	int			nbr_turns;
 	int			dice;
 	int			dist_to_move;
@@ -14,10 +14,10 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 	t_player	*player;
 	t_player	*other_player;
 
-	memset(input, 0, sizeof(input));
+	quit = 0;
 	nbr_turns = 1;
 	cell = 0;
-	while (strcmp(input, "quit"))
+	while (!quit)
 	{
 		if (nbr_turns % 2)
 		{
@@ -37,22 +37,21 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 		if (!dice)
 		{
 			printf("Dice: 0. The turn passes to the other player.\n\n");
-			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}
 		else if (!nbr_moveable)
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
 				"player.\n\n", dice);
-			memcpy(input, "", STONE_NAME_LEN);
 			press_enter_to_continue();
 		}
 		else
 		{
 			printf("Enter 'Quit' to leave.\n\n");
 			printf("Dice: %d.\n", dice);
-			stone = select_stone(input, player);
-			if (!strcmp(input, "quit"))
+			stone = select_stone(player);
+			quit = !stone;
+			if (quit)
 				printf("\nYou're quitting the game...\n\n");
 			else
 			{
@@ -66,8 +65,8 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 				if (has_stone_moved)
 				{
 					print_board(nbr_turns, lvl, player->id, players, cells);
-					determine_winner(input, players);
-					if (strcmp(input, "quit"))
+					quit = determine_winner(players);
+					if (!quit)
 					{
 						if (cell->is_rosette)
 						{

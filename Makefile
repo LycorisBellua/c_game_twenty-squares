@@ -1,28 +1,27 @@
 CC = gcc
-CFLAGS = -fPIC -MMD -Iinclude -pedantic -Wall -Wextra -g
-LDFLAGS = -O2 
+CFLAGS = -O2 -fPIC -MMD -Iinclude -Wall -Wextra -pedantic -g
 DIR_BUILD = build
 DIR_OBJ = $(DIR_BUILD)/unix/objects
 EXE = $(DIR_BUILD)/unix/twenty_squares
 STATIC_LIB = $(DIR_BUILD)/unix/lib20SQ.a
 DYNAMIC_LIB = $(DIR_BUILD)/unix/lib20SQ.so
-SRC_FILES = $(shell find src -name '*.c')
-OBJ_FILES = $(patsubst src/%.c, $(DIR_OBJ)/%.o, $(SRC_FILES))
+SRC = $(shell find src -name '*.c')
+OBJ = $(patsubst %.c, $(DIR_OBJ)/%.o, $(SRC))
 
 all: $(EXE) $(STATIC_LIB) $(DYNAMIC_LIB)
 
-$(EXE): $(OBJ_FILES)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+$(EXE): $(OBJ)
+	$(CC) $(CFLAGS) $^ -o $@
 
-$(DIR_OBJ)/%.o: src/%.c
+$(DIR_OBJ)/%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 -include $(DIR_OBJ)/%.d
 
-$(STATIC_LIB): $(filter-out main.o, $(OBJ_FILES))
+$(STATIC_LIB): $(filter-out main.o, $(OBJ))
 	ar rcs $@ $^
 
-$(DYNAMIC_LIB): $(filter-out main.o, $(OBJ_FILES))
+$(DYNAMIC_LIB): $(filter-out main.o, $(OBJ))
 	$(CC) -shared -o $@ $^
 
 .PHONY: all win64 win32 clean clean-unix clean-win64 clean-win32 fclean 

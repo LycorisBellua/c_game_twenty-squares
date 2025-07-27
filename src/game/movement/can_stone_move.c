@@ -5,6 +5,7 @@ int	can_stone_move(const t_stone *stone, t_player *player, int dice)
 	int		i;
 	t_cell	*cell;
 
+	cell = 0;
 	if (stone->coord == 1 || stone->coord == -1)
 		return (0);
 	if (!stone->coord)
@@ -25,7 +26,9 @@ int	can_stone_move(const t_stone *stone, t_player *player, int dice)
 			}
 		}
 	}
-	if (!cell->stone)
+	if (!cell)
+		return (0);
+	else if (!cell->stone)
 		return (1);
 	else if (cell->stone->is_protected)
 		return (0);

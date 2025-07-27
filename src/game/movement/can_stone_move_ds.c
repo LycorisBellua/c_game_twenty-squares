@@ -11,7 +11,6 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 
 	j = 0;
 	can_move = 0;
-	is_wrath_on_no_killing_road = 0;
 	coord_closest_enemy = 0;
 	memset(stone->moves, 0, sizeof(stone->moves));
 	memset(cell, 0, sizeof(cell));
@@ -84,10 +83,10 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	if (stone->id == ID_STONE_WRATH)
 	{
 		// If Wrath is on the "no killing" road, we don't care for enemies.
-		if (stone->coord == player->track[INDEX_8_ON_8_COMMON_ROAD]->coord 
+		is_wrath_on_no_killing_road = 
+			stone->coord == player->track[INDEX_8_ON_8_COMMON_ROAD]->coord 
 			|| stone->coord == player->track[INDEX_1_ON_2_END_ROAD]->coord 
-			|| stone->coord == player->track[INDEX_2_ON_2_END_ROAD]->coord)
-			is_wrath_on_no_killing_road = 1;
+			|| stone->coord == player->track[INDEX_2_ON_2_END_ROAD]->coord;
 		// Wrath is not on "no killing" road
 		if (!is_wrath_on_no_killing_road)
 		{
@@ -192,6 +191,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				// The first cell contains the enemy, but it is protected by 
 				// the rosette. Wrath remains right behind the stone, waiting 
 				// for it to move. Therefore, Wrath cannot move this turn.
+				printf("DEBUG 0\n");
 				return (0);
 			}
 			if (cell[1])
@@ -267,6 +267,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			}
 			// Else: We simply wait to reach the "return 0" down below
 		}
+		printf("DEBUG 1\n");
 		return (0);
 	}
 	else if (stone->id == ID_STONE_GREED)

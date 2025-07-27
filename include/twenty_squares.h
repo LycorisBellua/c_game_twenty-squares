@@ -12,7 +12,6 @@
 
 # define FS '\x1C'
 
-# define INPUT_LEN                    40
 # define STONE_NAME_LEN               9
 # define PLAYER_NAME_LEN              11
 
@@ -113,14 +112,14 @@ int			move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 
 /* Selection ---------------------------------------------------------------- */
 
-t_stone		*select_stone(char *input, t_player *player);
+t_stone		*select_stone(t_player *player);
 int			select_dist_to_move(const t_player *player, const t_stone *stone);
 
 /* Turn --------------------------------------------------------------------- */
 
 void		start_game(void);
 void		game_loop(int lvl, t_player *players, t_cell *cells);
-void		determine_winner(char *input, t_player *players);
+int			determine_winner(t_player *players);
 
 /* Utils -------------------------------------------------------------------- */
 

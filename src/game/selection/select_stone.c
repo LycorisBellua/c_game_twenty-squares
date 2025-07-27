@@ -1,6 +1,6 @@
 #include "twenty_squares.h"
 
-t_stone	*select_stone(char *input, t_player *player)
+t_stone	*select_stone(t_player *player)
 {
 	int			i;
 	int			j;
@@ -11,13 +11,13 @@ t_stone	*select_stone(char *input, t_player *player)
 	t_stone		*stone;
 	const char	**tokens;
 
-	is_input_valid = 0;
 	nbr_moveable = 0;
+	stone = 0;
 	memset(name_moveable, 0, sizeof(name_moveable));
 	// Print the available choices + set `name_moveable` and `nbr_moveable` at 
 	// the same time
 	printf("Stone:\n");
-	memcpy(name_moveable[0], "quit", STONE_NAME_LEN);
+	strncpy(name_moveable[0], "quit", STONE_NAME_LEN);
 	i = -1;
 	j = 1;
 	while (++i < 7)
@@ -25,7 +25,7 @@ t_stone	*select_stone(char *input, t_player *player)
 		if (player->stoneset[i].can_move)
 		{
 			printf("- %s ", player->stoneset[i].name);
-			memcpy(name_moveable[j++], player->stoneset[i].name,
+			strncpy(name_moveable[j++], player->stoneset[i].name,
 				STONE_NAME_LEN);
 		}
 	}
@@ -39,9 +39,8 @@ t_stone	*select_stone(char *input, t_player *player)
 		{
 			if (!strcmp(player->stoneset[i].name, name_moveable[random]))
 			{
-				memcpy(input, name_moveable[random], STONE_NAME_LEN);
 				stone = &player->stoneset[i];
-				printf("Stone: %s.\n\n", input);
+				printf("Stone: %s.\n\n", stone->name);
 				break ;
 			}
 		}
@@ -53,7 +52,7 @@ t_stone	*select_stone(char *input, t_player *player)
 	// `nbr_moveable` is incremented to take "quit" into account in the inner 
 	// loop
 	++nbr_moveable;
-	strncpy(input, "quit", INPUT_LEN);
+	is_input_valid = 0;
 	while (!is_input_valid)
 	{
 		tokens = get_input();
@@ -71,26 +70,23 @@ t_stone	*select_stone(char *input, t_player *player)
 					if (!strcmp(tokens[0], name_moveable[i]))
 					{
 						is_input_valid = 1;
-						strncpy(input, name_moveable[i], INPUT_LEN);
-						input[0] = toupper(input[0]);
+						name_moveable[i][0] = toupper(name_moveable[i][0]);
+						j = -1;
+						while (++j < 7)
+						{
+							if (!strcmp(player->stoneset[j].name, name_moveable[i]))
+							{
+								stone = &player->stoneset[j];
+								printf("Stone: %s.\n\n", stone->name);
+								break ;
+							}
+						}
+						break ;
 					}
 				}
 			}
 		}
 		free_arr((void **)tokens, free);
-	}
-	if (strcmp(input, "quit"))
-	{
-		printf("Stone: %s.\n\n", input);
-		i = -1;
-		while (++i < 7)
-		{
-			if (!strcmp(player->stoneset[i].name, input))
-			{
-				stone = &player->stoneset[i];
-				break ;
-			}
-		}
 	}
 	return (stone);
 }

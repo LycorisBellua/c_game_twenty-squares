@@ -10,6 +10,7 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 	const char	**tokens;
 
 	i_min = -1;
+	i_max = 0;
 	is_dist_valid = 0;
 	i = -1;
 	while (++i < 4)

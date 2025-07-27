@@ -3,7 +3,7 @@
 void	clear_window(void)
 {
 	#ifndef _WIN32
-	write(STDOUT_FILENO, "\033c", 2);
+	(void)!write(STDOUT_FILENO, "\033c", 2);
 	#else
 	system("cls");
 	#endif
@@ -13,8 +13,8 @@ void	clear_window(void)
 void	clear_prev_line(void)
 {
 	#ifndef _WIN32
-	write(STDOUT_FILENO, "\033[1F", 4);
-	write(STDOUT_FILENO, "\033[2K", 4);
+	(void)!write(STDOUT_FILENO, "\033[1F", 4);
+	(void)!write(STDOUT_FILENO, "\033[2K", 4);
 	#else
 	HANDLE						h_console;
 	CONSOLE_SCREEN_BUFFER_INFO	csbi;

@@ -8,7 +8,7 @@ const char	**get_input(void)
 	char		*line;
 	const char	**tokens;
 
-	write(STDOUT_FILENO, "> ", 2);
+	(void)!write(STDOUT_FILENO, "> ", 2);
 	line = gnl(STDIN_FILENO);
 	clear_prev_line();
 	if (!line)
