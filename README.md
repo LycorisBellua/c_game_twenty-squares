@@ -9,7 +9,7 @@ mini-game in
 
 ---
 
-It's based upon a mesopotamian game which is at least 4.5 millenia old. Known 
+It's based upon a mesopotamian game which is at least 4.5 millennia old. Known 
 today as the "Royal Game of Ur" or the "Game of Twenty Squares", this board 
 game was later on overthrown by Backgammon. This project, *Twenty Squares*, is 
 the opportunity to discover the oldest board game known to mankind. And, on top 

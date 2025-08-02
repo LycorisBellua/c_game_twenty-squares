@@ -36,7 +36,7 @@ static void	display_intro_page(void)
 	clear_window();
 	printf("TWENTY SQUARES\n\n");
 	printf("This game is based upon a mesopotamian game which is at least 4.5 "
-		"millenia old.\nKnown today as the \"Royal Game of Ur\" or the \"Game "
+		"millennia old.\nKnown today as the \"Royal Game of Ur\" or the \"Game "
 		"of Twenty Squares\", this \nboard game was later on overthrown by "
 		"Backgammon. This project, Twenty Squares, \nis the opportunity to "
 		"discover the oldest board game known to mankind. And, on \ntop of a "
