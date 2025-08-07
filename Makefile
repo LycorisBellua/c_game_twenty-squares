@@ -1,10 +1,11 @@
 CC = gcc
-CFLAGS = -O2 -fPIC -MMD -Iinclude -Wall -Wextra -pedantic -g
+CFLAGS = -fvisibility=hidden -O2 -fPIC -MMD -Iinclude -Wall -Wextra -pedantic -g
 DIR_BUILD = build
 DIR_OBJ = $(DIR_BUILD)/linux/objects
 EXE_NAME = twenty_squares
 EXE_NAME_WIN = TwentySquares.exe
 EXE = $(DIR_BUILD)/linux/$(EXE_NAME)
+LDFLAGS = 
 STATIC_LIB = $(DIR_BUILD)/linux/lib20SQ.a
 DYNAMIC_LIB = $(DIR_BUILD)/linux/lib20SQ.so
 SRC = $(shell find src -name '*.c')
@@ -24,7 +25,7 @@ $(STATIC_LIB): $(filter-out main.o, $(OBJ))
 	ar rcs $@ $^
 
 $(DYNAMIC_LIB): $(filter-out main.o, $(OBJ))
-	$(CC) -shared -o $@ $^
+	$(CC) -shared -o $@ $^ $(LDFLAGS)
 
 .PHONY: all win64 win32 clean clean-linux clean-win64 clean-win32 fclean 
 .PHONY: fclean-linux fclean-win64 fclean-win32 re re-win64 re-win32
@@ -33,6 +34,7 @@ $(DYNAMIC_LIB): $(filter-out main.o, $(OBJ))
 win64:
 	@$(MAKE) --no-print-directory all \
 	CC=x86_64-w64-mingw32-gcc \
+	LDFLAGS="-Wl,--exclude-all-symbols" \
 	DIR_OBJ=$(DIR_BUILD)/win64/objects \
 	EXE=$(DIR_BUILD)/win64/$(EXE_NAME_WIN) \
 	STATIC_LIB=$(DIR_BUILD)/win64/lib20SQ64.lib \
@@ -40,6 +42,7 @@ win64:
 win32:
 	@$(MAKE) --no-print-directory all \
 	CC=i686-w64-mingw32-gcc \
+	LDFLAGS="-Wl,--exclude-all-symbols -static-libgcc" \
 	DIR_OBJ=$(DIR_BUILD)/win32/objects \
 	EXE=$(DIR_BUILD)/win32/$(EXE_NAME_WIN) \
 	STATIC_LIB=$(DIR_BUILD)/win32/lib20SQ32.lib \

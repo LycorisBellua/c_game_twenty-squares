@@ -6,6 +6,11 @@ static void	display_first_page(void);
 static void	display_second_page(void);
 static void	display_third_page(void);
 
+#ifdef _WIN32
+__declspec(dllexport) 
+#else
+__attribute__((visibility("default")))
+#endif
 int	start(int argc, char **argv)
 {
 	(void)argc;
