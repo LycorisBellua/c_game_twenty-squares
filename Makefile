@@ -64,11 +64,17 @@ fclean:
 	@$(MAKE) --no-print-directory fclean-win64
 	@$(MAKE) --no-print-directory fclean-win32
 fclean-linux: clean-linux
-	rm -rf $(DIR_BUILD)/linux/$(EXE_NAME)
+	rm -f $(DIR_BUILD)/linux/$(EXE_NAME)
+	rm -f $(DIR_BUILD)/linux/*.a
+	rm -f $(DIR_BUILD)/linux/*.so
 fclean-win64: clean-win64
-	rm -rf $(DIR_BUILD)/win64/$(EXE_NAME_WIN)
+	rm -f $(DIR_BUILD)/win64/$(EXE_NAME_WIN)
+	rm -f $(DIR_BUILD)/win64/*.lib
+	rm -f $(DIR_BUILD)/win64/*.dll
 fclean-win32: clean-win32
-	rm -rf $(DIR_BUILD)/win32/$(EXE_NAME_WIN)
+	rm -f $(DIR_BUILD)/win32/$(EXE_NAME_WIN)
+	rm -f $(DIR_BUILD)/win32/*.lib
+	rm -f $(DIR_BUILD)/win32/*.dll
 
 re: fclean-linux all
 
