@@ -4,12 +4,10 @@ void	start_game(void)
 {
 	int			lvl;
 	int			human_player;
-	t_cell		*cells; // 21st is of coordinate "1"
-	t_player	*players;
+	t_cell		cells[21]; // 21st is of coordinate "1"
+	t_player	players[2];
 
-	cells = calloc(21, sizeof(t_cell));
-	players = calloc(2, sizeof(t_player));
-	while (1)
+	do
 	{
 		clear_window();
 		printf("TWENTY SQUARES\n\n");
@@ -32,10 +30,6 @@ void	start_game(void)
 		init_players(lvl, human_player, players, cells);
 		sleep(1);
 		game_loop(lvl, players, cells);
-		if (ask_yes_no("\nPlay again?") <= 0)
-			break ;
-	}
-	free(players);
-	free(cells);
+	} while (ask_yes_no("\nPlay again?") > 0);
 	return ;
 }

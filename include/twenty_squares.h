@@ -12,39 +12,39 @@
 
 # define FS '\x1C'
 
-# define STONE_NAME_LEN               9
-# define PLAYER_NAME_LEN              11
+# define STONE_NAME_LEN            9
+# define PLAYER_NAME_LEN           11
 
-# define ID_STONE_ONE                 1
-# define ID_STONE_TWO                 2
-# define ID_STONE_THREE               3
-# define ID_STONE_FOUR                4
-# define ID_STONE_FIVE                5
-# define ID_STONE_SIX                 6
-# define ID_STONE_SEVEN               7
-# define ID_STONE_LUST                8
-# define ID_STONE_PRIDE               9
-# define ID_STONE_GLUTTONY            10
-# define ID_STONE_SLOTH               11
-# define ID_STONE_ENVY                12
-# define ID_STONE_WRATH               13
-# define ID_STONE_GREED               14
+# define ID_STONE_ONE              1
+# define ID_STONE_TWO              2
+# define ID_STONE_THREE            3
+# define ID_STONE_FOUR             4
+# define ID_STONE_FIVE             5
+# define ID_STONE_SIX              6
+# define ID_STONE_SEVEN            7
+# define ID_STONE_LUST             8
+# define ID_STONE_PRIDE            9
+# define ID_STONE_GLUTTONY         10
+# define ID_STONE_SLOTH            11
+# define ID_STONE_ENVY             12
+# define ID_STONE_WRATH            13
+# define ID_STONE_GREED            14
 
-# define INDEX_1_ON_4_INITIAL_ROAD    0
-# define INDEX_2_ON_4_INITIAL_ROAD    1
-# define INDEX_3_ON_4_INITIAL_ROAD    2
-# define INDEX_4_ON_4_INITIAL_ROAD    3
-# define INDEX_1_ON_8_COMMON_ROAD     4
-# define INDEX_2_ON_8_COMMON_ROAD     5
-# define INDEX_3_ON_8_COMMON_ROAD     6
-# define INDEX_4_ON_8_COMMON_ROAD     7
-# define INDEX_5_ON_8_COMMON_ROAD     8
-# define INDEX_6_ON_8_COMMON_ROAD     9
-# define INDEX_7_ON_8_COMMON_ROAD     10
-# define INDEX_8_ON_8_COMMON_ROAD     11
-# define INDEX_1_ON_2_END_ROAD        12
-# define INDEX_2_ON_2_END_ROAD        13
-# define INDEX_OUT_OF_BOUND           14
+# define INDEX_1_ON_4_INITIAL_ROAD 0
+# define INDEX_2_ON_4_INITIAL_ROAD 1
+# define INDEX_3_ON_4_INITIAL_ROAD 2
+# define INDEX_4_ON_4_INITIAL_ROAD 3
+# define INDEX_1_ON_8_COMMON_ROAD  4
+# define INDEX_2_ON_8_COMMON_ROAD  5
+# define INDEX_3_ON_8_COMMON_ROAD  6
+# define INDEX_4_ON_8_COMMON_ROAD  7
+# define INDEX_5_ON_8_COMMON_ROAD  8
+# define INDEX_6_ON_8_COMMON_ROAD  9
+# define INDEX_7_ON_8_COMMON_ROAD  10
+# define INDEX_8_ON_8_COMMON_ROAD  11
+# define INDEX_1_ON_2_END_ROAD     12
+# define INDEX_2_ON_2_END_ROAD     13
+# define INDEX_OUT_OF_BOUND        14
 
 typedef struct s_stone
 {
@@ -81,7 +81,6 @@ typedef struct s_player
 
 void		print_board(int nbr_turns, int lvl, int player_id,
 				t_player *players, t_cell *cells);
-void		print_turn_line(int nbr_turns);
 void		print_column0(int line, int lvl, int player_id, t_player *players);
 void		print_column1(int line, int player_id, t_cell *cells);
 void		print_column2(int line, int player_id, t_cell *cells);

@@ -1,5 +1,7 @@
 #include "twenty_squares.h"
 
+static void	print_turn_line(int nbr_turns);
+
 void	print_board(int nbr_turns, int lvl, int player_id, t_player *players,
 			t_cell *cells)
 {
@@ -18,5 +20,14 @@ void	print_board(int nbr_turns, int lvl, int player_id, t_player *players,
 		print_column4(line, lvl, player_id, players);
 		printf("\n");
 	}
+	return ;
+}
+
+static void	print_turn_line(int nbr_turns)
+{
+	int	curr_len;
+
+	curr_len = printf("                                    TURN %d", nbr_turns);
+	printf("%*s\n", 79 - curr_len, "");
 	return ;
 }

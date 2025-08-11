@@ -94,25 +94,18 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			// common road, we start checking for an enemy from the beginning 
 			// of the common road. If it's after this beginning, we start to 
 			// check from the first cell after Wrath's position.
-			i = -1;
-			while (++i < 14)
+			if (stone->coord < player->track[INDEX_1_ON_8_COMMON_ROAD]->coord)
+				i = player->track[INDEX_1_ON_8_COMMON_ROAD]->coord;
+			else
+				i = stone->coord + 1;
+			while (i <= INDEX_8_ON_8_COMMON_ROAD)
 			{
-				if (!stone->coord || stone->coord == player->track[i]->coord)
+				if (player->track[i]->stone && player->track[i]->stone->player_id != player->id)
 				{
-					i = !stone->coord || ++i <= INDEX_1_ON_8_COMMON_ROAD ?
-						INDEX_1_ON_8_COMMON_ROAD : i;
-					while (i <= INDEX_8_ON_8_COMMON_ROAD)
-					{
-						if (player->track[i]->stone
-							&& player->track[i]->stone->player_id != player->id)
-						{
-							coord_closest_enemy = player->track[i]->coord;
-							break ;
-						}
-						++i;
-					}
+					coord_closest_enemy = player->track[i]->coord;
 					break ;
 				}
+				++i;
 			}
 		}
 		// Wrath is on no killing road OR there is no enemy on the common road 
@@ -191,7 +184,6 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				// The first cell contains the enemy, but it is protected by 
 				// the rosette. Wrath remains right behind the stone, waiting 
 				// for it to move. Therefore, Wrath cannot move this turn.
-				printf("DEBUG 0\n");
 				return (0);
 			}
 			if (cell[1])
@@ -267,7 +259,6 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			}
 			// Else: We simply wait to reach the "return 0" down below
 		}
-		printf("DEBUG 1\n");
 		return (0);
 	}
 	else if (stone->id == ID_STONE_GREED)

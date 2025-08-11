@@ -9,6 +9,7 @@ static char	*add_to_line(char *line, char *added, int free_added);
 static char	*get_line(char *src, char *newline_in_src);
 static void	shift_buffer(char *buffer, char *newline);
 
+/* Get Next Line */
 char	*gnl(int fd)
 {
 	static char	buffer[GNL_BUFFER_SIZE + 1];
