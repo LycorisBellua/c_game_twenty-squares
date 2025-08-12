@@ -1,5 +1,7 @@
 #include "twenty_squares.h"
 
+static int	determine_winner(t_player *players);
+
 void	game_loop(int lvl, t_player *players, t_cell *cells)
 {
 	int			quit;
@@ -52,7 +54,7 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 			stone = select_stone(player);
 			quit = !stone;
 			if (quit)
-				printf("\nYou're quitting the game...\n\n");
+				printf("You're quitting the game...\n");
 			else
 			{
 				dist_to_move = lvl > 2 ? select_dist_to_move(player, stone)
@@ -85,6 +87,23 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 		if (!is_turn_played_twice)
 			++nbr_turns;
 	}
-	press_enter_to_continue();
 	return ;
+}
+
+static int	determine_winner(t_player *players)
+{
+	int	winner;
+
+	if (!players[0].nbr_playable || !players[1].nbr_playable)
+	{
+		if (players[0].points == players[1].points)
+			winner = !players[0].nbr_playable;
+		else if (players[0].points > players[1].points)
+			winner = 0;
+		else
+			winner = 1;
+		printf("The game has ended. The winner is %s!\n", players[winner].name);
+		return (1);
+	}
+	return (0);
 }

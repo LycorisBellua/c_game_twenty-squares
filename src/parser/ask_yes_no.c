@@ -14,11 +14,11 @@ int	ask_yes_no(const char *question)
 			break ;
 		else if (tokens[0] && !tokens[1])
 		{
-			if (!strcmp(tokens[0], "yes") || !strcmp(tokens[0], "y"))
+			if (!strcmp(tokens[0], "YES") || !strcmp(tokens[0], "Y"))
 				res = 1;
-			else if (!strcmp(tokens[0], "no") || !strcmp(tokens[0], "n"))
+			else if (!strcmp(tokens[0], "NO") || !strcmp(tokens[0], "N"))
 				res = 0;
-			else if (!strcmp(tokens[0], "quit"))
+			else if (!strcmp(tokens[0], "QUIT"))
 				break ;
 		}
 		free_arr((void **)tokens, free);

@@ -12,7 +12,6 @@
 
 # define FS '\x1C'
 
-# define STONE_NAME_LEN            9
 # define PLAYER_NAME_LEN           11
 
 # define ID_STONE_ONE              1
@@ -48,13 +47,14 @@
 
 typedef struct s_stone
 {
-	char	name[STONE_NAME_LEN];
-	int		id;
-	int		player_id;
-	int		coord;
-	int		is_protected;
-	int		can_move;
-	int		moves[4];
+	const char	*name;
+	const char	*name_long;
+	int			id;
+	int			player_id;
+	int			coord;
+	int			is_protected;
+	int			can_move;
+	int			moves[4];
 }	t_stone;
 
 typedef struct s_cell
@@ -89,6 +89,7 @@ void		print_column4(int line, int lvl, int player_id, t_player *players);
 
 /* Init --------------------------------------------------------------------- */
 
+void		start_game(void);
 void		init_cells(t_cell *cells);
 void		init_players(int lvl, int human_player, t_player *players,
 				t_cell *cells);
@@ -116,9 +117,7 @@ int			select_dist_to_move(const t_player *player, const t_stone *stone);
 
 /* Turn --------------------------------------------------------------------- */
 
-void		start_game(void);
 void		game_loop(int lvl, t_player *players, t_cell *cells);
-int			determine_winner(t_player *players);
 
 /* Utils -------------------------------------------------------------------- */
 

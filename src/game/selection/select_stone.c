@@ -7,7 +7,7 @@ t_stone	*select_stone(t_player *player)
 	int			random;
 	int			is_input_valid;
 	int			nbr_moveable;
-	char		name_moveable[8][STONE_NAME_LEN];
+	const char	*name_moveable[8];
 	t_stone		*stone;
 	const char	**tokens;
 
@@ -17,7 +17,7 @@ t_stone	*select_stone(t_player *player)
 	// Print the available choices + set `name_moveable` and `nbr_moveable` at 
 	// the same time
 	printf("Stone:\n");
-	strncpy(name_moveable[0], "quit", STONE_NAME_LEN);
+	name_moveable[0] = "QUIT";
 	i = -1;
 	j = 1;
 	while (++i < 7)
@@ -25,8 +25,7 @@ t_stone	*select_stone(t_player *player)
 		if (player->stoneset[i].can_move)
 		{
 			printf("- %s ", player->stoneset[i].name);
-			strncpy(name_moveable[j++], player->stoneset[i].name,
-				STONE_NAME_LEN);
+			name_moveable[j++] = player->stoneset[i].name;
 		}
 	}
 	nbr_moveable = j - 1;
@@ -40,16 +39,13 @@ t_stone	*select_stone(t_player *player)
 			if (!strcmp(player->stoneset[i].name, name_moveable[random]))
 			{
 				stone = &player->stoneset[i];
-				printf("Stone: %s.\n\n", stone->name);
+				printf("Stone: %s.\n\n", stone->name_long);
 				break ;
 			}
 		}
 		return (stone);
 	}
-	i = 0;
-	while (++i < 8)
-		name_moveable[i][0] = tolower(name_moveable[i][0]);
-	// `nbr_moveable` is incremented to take "quit" into account in the inner 
+	// `nbr_moveable` is incremented to take "QUIT" into account in the inner 
 	// loop
 	++nbr_moveable;
 	is_input_valid = 0;
@@ -60,7 +56,7 @@ t_stone	*select_stone(t_player *player)
 			break ;
 		else if (tokens[0] && !tokens[1])
 		{
-			if (!strcmp(tokens[0], "quit"))
+			if (!strcmp(tokens[0], "QUIT"))
 				is_input_valid = 1;
 			else
 			{
@@ -70,14 +66,13 @@ t_stone	*select_stone(t_player *player)
 					if (!strcmp(tokens[0], name_moveable[i]))
 					{
 						is_input_valid = 1;
-						name_moveable[i][0] = toupper(name_moveable[i][0]);
 						j = -1;
 						while (++j < 7)
 						{
 							if (!strcmp(player->stoneset[j].name, name_moveable[i]))
 							{
 								stone = &player->stoneset[j];
-								printf("Stone: %s.\n\n", stone->name);
+								printf("Stone: %s.\n\n", stone->name_long);
 								break ;
 							}
 						}

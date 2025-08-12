@@ -1,41 +1,27 @@
 REFACTORING
 
 [ ] src/game/turn/start_game.c
-	-> Everything starts from `void	start_game(void)` in this file.
+[ ] src/game/init/init_cells.c
+[ ] src/game/init/init_players.c
+
+[ ] src/game/turn/game_loop.c
+[ ] src/game/movement/set_nbr_moveable_and_can_move.c
+[ ] src/game/movement/can_stone_move.c
+[ ] src/game/movement/can_stone_move_ds.c
+[ ] src/game/selection/select_stone.c
+[ ] src/game/selection/select_dist_to_move.c
+[ ] src/game/movement/move_stone.c
+
 [ ] src/game/board/print_board.c
 [ ] src/game/board/print_column0.c
 [ ] src/game/board/print_column1.c
 [ ] src/game/board/print_column2.c
 [ ] src/game/board/print_column3.c
 [ ] src/game/board/print_column4.c
-[ ] src/game/movement/can_stone_move.c
-[ ] src/game/movement/move_stone.c
-[ ] src/game/movement/set_nbr_moveable_and_can_move.c
-[ ] src/game/movement/can_stone_move_ds.c
-[ ] src/game/selection/select_dist_to_move.c
-[ ] src/game/selection/select_stone.c
-[ ] src/game/turn/determine_winner.c
-[ ] src/game/turn/game_loop.c
-[ ] src/game/init/init_cells.c
-[ ] src/game/init/init_players.c
 
 --------------------------------------------------------------------------------
 
 - There's something wrong with Wrath. As if it sometimes cannot move, although 
-technically there's a cell available. But after a thorough exploration of the 
-codebase, it's too chaotic for me to fix the issue. It requires a refactoring 
-now, not later.
-
-- Make the board cells smaller and maybe more square instead of rectangular.
-
-- Query Classic stones with a number input instead of a word: `1` vs `one`.
-- Query for Deadly Sins stones with the following letters:
-	- Lust (L)
-	- Pride (P)
-	- Gluttony (GL)
-	- Sloth (S)
-	- Envy (E)
-	- Wrath (W)
-	- Greed (GR)
+technically there's a cell available.
 
 - Allow two human players, instead of always playing against the computer.
