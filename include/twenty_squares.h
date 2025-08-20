@@ -121,6 +121,7 @@ void		game_loop(int lvl, t_player *players, t_cell *cells);
 
 /* Utils -------------------------------------------------------------------- */
 
+void		printl(const char *line);
 size_t		count_arr(void **arr);
 void		free_arr(void **arr, void (*free_fct)(void *));
 void		remove_arr_elems(void **arr, size_t from, size_t to,
