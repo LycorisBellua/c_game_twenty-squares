@@ -12,12 +12,8 @@ REFACTORING
 [ ] src/game/selection/select_dist_to_move.c
 [ ] src/game/movement/move_stone.c
 
-[ ] src/game/board/print_board.c
-[ ] src/game/board/print_column0.c
-[ ] src/game/board/print_column1.c
-[ ] src/game/board/print_column2.c
-[ ] src/game/board/print_column3.c
-[ ] src/game/board/print_column4.c
+[x] src/game/board/print_board.c
+[x] src/game/board/print_stone.c
 
 --------------------------------------------------------------------------------
 

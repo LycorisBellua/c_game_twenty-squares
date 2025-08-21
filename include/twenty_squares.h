@@ -79,13 +79,11 @@ typedef struct s_player
 
 /* Board -------------------------------------------------------------------- */
 
-void		print_board(int nbr_turns, int lvl, int player_id,
-				t_player *players, t_cell *cells);
-void		print_column0(int line, int lvl, int player_id, t_player *players);
-void		print_column1(int line, int player_id, t_cell *cells);
-void		print_column2(int line, int player_id, t_cell *cells);
-void		print_column3(int line, int player_id, t_cell *cells);
-void		print_column4(int line, int lvl, int player_id, t_player *players);
+void		print_board(int nbr_turns, int player_id, t_player *players,
+				t_cell *cells);
+void		print_stone(const t_stone* s, int player_id, int col_num);
+void		print_stone_rosette(const t_stone* s, int player_id, int col_num);
+void		print_stone_p(const t_stone* s, int player_id);
 
 /* Init --------------------------------------------------------------------- */
 

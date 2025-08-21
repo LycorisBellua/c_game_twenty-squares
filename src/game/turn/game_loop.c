@@ -35,7 +35,7 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 		dice = rng_minmax(0, 4);
 		nbr_moveable = !dice ? 0
 			: set_nbr_moveable_and_can_move(player, lvl, dice);
-		print_board(nbr_turns, lvl, player->id, players, cells);
+		print_board(nbr_turns, player->id, players, cells);
 		if (!dice)
 		{
 			printf("Dice: 0. The turn passes to the other player.\n\n");
@@ -66,7 +66,7 @@ void	game_loop(int lvl, t_player *players, t_cell *cells)
 				press_enter_to_continue();
 				if (has_stone_moved)
 				{
-					print_board(nbr_turns, lvl, player->id, players, cells);
+					print_board(nbr_turns, player->id, players, cells);
 					quit = determine_winner(players);
 					if (!quit)
 					{
