@@ -87,9 +87,9 @@ void		print_stone_p(const t_stone* s, int player_id);
 
 /* Init --------------------------------------------------------------------- */
 
-void		start_game(void);
+void		start_game(const char *arg);
 void		init_cells(t_cell *cells);
-void		init_players(int lvl, int human_player, t_player *players,
+void		init_players(int lvl, int ai_player, t_player *players,
 				t_cell *cells);
 
 /* Input -------------------------------------------------------------------- */

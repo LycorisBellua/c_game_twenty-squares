@@ -19,5 +19,3 @@ REFACTORING
 
 - There's something wrong with Wrath. As if it sometimes cannot move, although 
 technically there's a cell available.
-
-- Allow two human players, instead of always playing against the computer.

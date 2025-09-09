@@ -13,8 +13,19 @@ __attribute__((visibility("default")))
 #endif
 int	start(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
+	if (argc > 2)
+	{
+		fprintf(stderr, "Error: Too many arguments "
+			"- Usage: No arg | \"opponent_ai\" | \"opponent_human\"\n");
+		return (1);
+	}
+	else if (argc == 2 && strcmp(argv[1], "opponent_ai")
+		&& strcmp(argv[1], "opponent_human"))
+	{
+		fprintf(stderr, "Error: Invalid argument "
+			"- Usage: No arg | \"opponent_ai\" | \"opponent_human\"\n");
+		return (1);
+	}
 	set_utf8_encoding();
 	display_intro_page();
 	if (!ask_yes_no("Do you know the rules of the game?"))
@@ -23,7 +34,7 @@ int	start(int argc, char **argv)
 		display_second_page();
 		display_third_page();
 	}
-	start_game();
+	start_game(argv[1]);
 	clear_window();
 	return (0);
 }

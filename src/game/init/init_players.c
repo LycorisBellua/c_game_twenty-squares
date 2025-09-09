@@ -1,25 +1,25 @@
 #include "twenty_squares.h"
 
-static void	init_player_one(int lvl, int human_player, t_player *players,
+static void	init_player_one(int lvl, int ai_player, t_player *players,
 				t_cell *cells);
-static void	init_player_two(int lvl, int human_player, t_player *players,
+static void	init_player_two(int lvl, int ai_player, t_player *players,
 				t_cell *cells);
 
-void	init_players(int lvl, int human_player, t_player *players,
+void	init_players(int lvl, int ai_player, t_player *players,
 			t_cell *cells)
 {
 	memset(players, 0, 2 * sizeof(t_player));
-	init_player_one(lvl, human_player, players, cells);
-	init_player_two(lvl, human_player, players, cells);
+	init_player_one(lvl, ai_player, players, cells);
+	init_player_two(lvl, ai_player, players, cells);
 	return ;
 }
 
-static void	init_player_one(int lvl, int human_player, t_player *players,
+static void	init_player_one(int lvl, int ai_player, t_player *players,
 				t_cell *cells)
 {
 	players[0].id = 0;
 	strncpy(players[0].name, "Player One", PLAYER_NAME_LEN);
-	players[0].is_ai = human_player == players[0].id ? 0 : 1;
+	players[0].is_ai = ai_player == players[0].id ? 1 : 0;
 	players[0].nbr_playable = 7;
 	if (lvl > 2)
 	{
@@ -115,12 +115,12 @@ static void	init_player_one(int lvl, int human_player, t_player *players,
 	return ;
 }
 
-static void	init_player_two(int lvl, int human_player, t_player *players,
+static void	init_player_two(int lvl, int ai_player, t_player *players,
 				t_cell *cells)
 {
 	players[1].id = 1;
 	strncpy(players[1].name, "Player Two", PLAYER_NAME_LEN);
-	players[1].is_ai = human_player == players[1].id ? 0 : 1;
+	players[1].is_ai = ai_player == players[1].id ? 1 : 0;
 	players[1].nbr_playable = 7;
 	if (lvl > 2)
 	{
