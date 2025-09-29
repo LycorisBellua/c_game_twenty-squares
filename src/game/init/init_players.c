@@ -48,7 +48,7 @@ static void	init_player_one(int lvl, int ai_player, t_player *players,
 		players[0].stoneset[4].id = ID_STONE_ENVY;
 		players[0].stoneset[4].player_id = 0;
 		players[0].stoneset[4].can_move = 1;
-		players[0].stoneset[5].name_long ="Wrath";
+		players[0].stoneset[5].name_long = "Wrath";
 		players[0].stoneset[5].name ="W";
 		players[0].stoneset[5].id = ID_STONE_WRATH;
 		players[0].stoneset[5].player_id = 0;
@@ -149,7 +149,7 @@ static void	init_player_two(int lvl, int ai_player, t_player *players,
 		players[1].stoneset[4].id = ID_STONE_ENVY;
 		players[1].stoneset[4].player_id = 1;
 		players[1].stoneset[4].can_move = 1;
-		players[1].stoneset[5].name_long ="Wrath";
+		players[1].stoneset[5].name_long = "Wrath";
 		players[1].stoneset[5].name ="W";
 		players[1].stoneset[5].id = ID_STONE_WRATH;
 		players[1].stoneset[5].player_id = 1;
