@@ -6,17 +6,17 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	int		j;
 	int		can_move;
 	int		is_wrath_on_no_killing_road;
-	int		coord_closest_enemy;
+	t_cell	*cell_closest_enemy;
 	t_cell	*cell[4];
 
 	j = 0;
 	can_move = 0;
-	coord_closest_enemy = 0;
+	cell_closest_enemy = 0;
 	memset(stone->moves, 0, sizeof(stone->moves));
 	memset(cell, 0, sizeof(cell));
-	if (stone->coord == 1 || stone->coord == -1)
+	if (!stone->cell || stone->cell == player->track[INDEX_VICTORY])
 		return (can_move);
-	if (!stone->coord)
+	if (stone->cell == player->track[INDEX_HOME])
 	{
 		if (dice >= 1)
 			cell[0] = player->track[0];
@@ -29,18 +29,18 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	}
 	else
 	{
-		i = -1;
-		while (++i < 14)
+		i = 0;
+		while (++i < 15)
 		{
-			if (stone->coord == player->track[i]->coord)
+			if (stone->cell == player->track[i])
 			{
 				if (dice >= 1)
 				{
-					if (i + 1 >= 14)
+					if (i + 1 >= 15)
 					{
-						// We break after an out of bounds coordinate is found, 
+						// We break after an out of bounds cell is found, 
 						// because we don't need more than one
-						cell[0] = player->track[14];
+						cell[0] = player->track[15];
 						break ;
 					}
 					else
@@ -48,9 +48,9 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				}
 				if (dice >= 2)
 				{
-					if (i + 2 >= 14)
+					if (i + 2 >= 15)
 					{
-						cell[1] = player->track[14];
+						cell[1] = player->track[15];
 						break ;
 					}
 					else
@@ -58,9 +58,9 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				}
 				if (dice >= 3)
 				{
-					if (i + 3 >= 14)
+					if (i + 3 >= 15)
 					{
-						cell[2] = player->track[14];
+						cell[2] = player->track[15];
 						break ;
 					}
 					else
@@ -68,9 +68,9 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				}
 				if (dice == 4)
 				{
-					if (i + 4 >= 14)
+					if (i + 4 >= 15)
 					{
-						cell[3] = player->track[14];
+						cell[3] = player->track[15];
 						break ;
 					}
 					else
@@ -84,9 +84,9 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	{
 		// If Wrath is on the "no killing" road, we don't care for enemies.
 		is_wrath_on_no_killing_road = 
-			stone->coord == player->track[INDEX_8_ON_8_COMMON_ROAD]->coord 
-			|| stone->coord == player->track[INDEX_1_ON_2_END_ROAD]->coord 
-			|| stone->coord == player->track[INDEX_2_ON_2_END_ROAD]->coord;
+			stone->cell == player->track[INDEX_8_ON_8_COMMON_ROAD] 
+			|| stone->cell == player->track[INDEX_1_ON_2_END_ROAD] 
+			|| stone->cell == player->track[INDEX_2_ON_2_END_ROAD];
 		// Wrath is not on "no killing" road
 		if (!is_wrath_on_no_killing_road)
 		{
@@ -94,15 +94,17 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			// common road, we start checking for an enemy from the beginning 
 			// of the common road. If it's after this beginning, we start to 
 			// check from the first cell after Wrath's position.
-			if (stone->coord < player->track[INDEX_1_ON_8_COMMON_ROAD]->coord)
-				i = player->track[INDEX_1_ON_8_COMMON_ROAD]->coord;
+			i = INDEX_HOME - 1;
+			while (stone->cell != player->track[++i]);
+			if (i < INDEX_1_ON_8_COMMON_ROAD)
+				i = INDEX_1_ON_8_COMMON_ROAD;
 			else
-				i = stone->coord + 1;
+				++i;
 			while (i <= INDEX_8_ON_8_COMMON_ROAD)
 			{
 				if (player->track[i]->stone && player->track[i]->stone->player_id != player->id)
 				{
-					coord_closest_enemy = player->track[i]->coord;
+					cell_closest_enemy = player->track[i];
 					break ;
 				}
 				++i;
@@ -111,9 +113,9 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 		// Wrath is on no killing road OR there is no enemy on the common road 
 		// in front of Wrath: It goes to the closest empty cell (this closest 
 		// "cell" may be out of bounds).
-		if (is_wrath_on_no_killing_road || !coord_closest_enemy)
+		if (is_wrath_on_no_killing_road || !cell_closest_enemy)
 		{
-			if (cell[0]->coord == 1)
+			if (cell[0] == player->track[INDEX_VICTORY])
 			{
 				// This cell is out of bounds
 				stone->moves[0] = 1;
@@ -129,7 +131,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			// the next one, and so on
 			if (cell[1])
 			{
-				if (cell[1]->coord == 1)
+				if (cell[1] == player->track[INDEX_VICTORY])
 				{
 					stone->moves[0] = 2;
 					return (1);
@@ -141,7 +143,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				}
 				if (cell[2])
 				{
-					if (cell[2]->coord == 1)
+					if (cell[2] == player->track[INDEX_VICTORY])
 					{
 						stone->moves[0] = 3;
 						return (1);
@@ -153,7 +155,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 					}
 					if (cell[3])
 					{
-						if (cell[3]->coord == 1)
+						if (cell[3] == player->track[INDEX_VICTORY])
 						{
 							stone->moves[0] = 4;
 							return (1);
@@ -174,7 +176,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			// can kill it, ignoring the presence of allies on its path 
 			// (= killing them if needs be). Disclaimer: The rosette protects 
 			// stones from Wrath.
-			if (cell[0]->coord == coord_closest_enemy)
+			if (cell[0] == cell_closest_enemy)
 			{
 				if (!cell[0]->stone->is_protected)
 				{
@@ -188,7 +190,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			}
 			if (cell[1])
 			{
-				if (cell[1]->coord == coord_closest_enemy)
+				if (cell[1] == cell_closest_enemy)
 				{
 					if (!cell[1]->stone->is_protected)
 					{
@@ -203,7 +205,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 				}
 				if (cell[2])
 				{
-					if (cell[2]->coord == coord_closest_enemy)
+					if (cell[2] == cell_closest_enemy)
 					{
 						if (!cell[2]->stone->is_protected)
 						{
@@ -218,7 +220,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 					}
 					if (cell[3])
 					{
-						if (cell[3]->coord == coord_closest_enemy)
+						if (cell[3] == cell_closest_enemy)
 						{
 							if (!cell[3]->stone->is_protected)
 							{
@@ -349,7 +351,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	}
 	if (cell[0])
 	{
-		if (cell[0]->coord == 1)
+		if (cell[0] == player->track[INDEX_VICTORY])
 		{
 			// It goes out of bounds
 			stone->moves[j++] = 1;
@@ -372,7 +374,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	}
 	if (cell[1])
 	{
-		if (cell[1]->coord == 1)
+		if (cell[1] == player->track[INDEX_VICTORY])
 		{
 			stone->moves[j++] = 2;
 			can_move = 1;
@@ -391,7 +393,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	}
 	if (cell[2])
 	{
-		if (cell[2]->coord == 1)
+		if (cell[2] == player->track[INDEX_VICTORY])
 		{
 			stone->moves[j++] = 3;
 			can_move = 1;
@@ -410,7 +412,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	}
 	if (cell[3])
 	{
-		if (cell[3]->coord == 1)
+		if (cell[3] == player->track[INDEX_VICTORY])
 		{
 			stone->moves[j++] = 4;
 			can_move = 1;

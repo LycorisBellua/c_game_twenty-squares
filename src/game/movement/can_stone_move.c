@@ -6,20 +6,20 @@ int	can_stone_move(const t_stone *stone, t_player *player, int dice)
 	t_cell	*cell;
 
 	cell = 0;
-	if (stone->coord == 1 || stone->coord == -1)
+	if (!stone->cell || stone->cell == player->track[INDEX_VICTORY])
 		return (0);
-	if (!stone->coord)
+	if (stone->cell == player->track[INDEX_HOME])
 		cell = player->track[dice - 1];
 	else
 	{
-		i = -1;
-		while (++i < 14)
+		i = 0;
+		while (++i < 15)
 		{
-			if (stone->coord == player->track[i]->coord)
+			if (stone->cell == player->track[i])
 			{
-				if (i + dice == 14)
+				if (i + dice == 15)
 					return (1);
-				else if (i + dice > 14)
+				else if (i + dice > 15)
 					return (0);
 				cell = player->track[i + dice];
 				break ;

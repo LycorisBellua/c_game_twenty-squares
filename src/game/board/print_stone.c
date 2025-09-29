@@ -26,17 +26,17 @@ void	print_stone_rosette(const t_stone* s, int player_id, int col_num)
 	return ;
 }
 
-void	print_stone_p(const t_stone* s, int player_id)
+void	print_stone_p(const t_stone* s, t_cell** track)
 {
 	const char	*name;
 
-	if (s->coord == -1)
+	if (!s->cell)
 		name = "[Dead]";
-	else if (s->coord == 1)
+	else if (s->cell == track[INDEX_VICTORY])
 		name = "[Saved]";
 	else
 		name = s->name_long;
-	if (player_id == 0)
+	if (s->player_id == 0)
 		printf("%*s%s   ", 12 - (int)strlen(name), "", name);
 	else
 		printf("   %s%*s", name, 12 - (int)strlen(name), "");

@@ -2,13 +2,13 @@
 
 static void	print_turn_line(int nbr_turns);
 static void	print_col_p1(int line, int player_id, t_player *players);
-static void	print_col_1(int line, int player_id, t_cell *cells);
-static void	print_col_2(int line, int player_id, t_cell *cells);
-static void	print_col_3(int line, int player_id, t_cell *cells);
+static void	print_col_1(int line, int player_id, t_cell cells[8][3]);
+static void	print_col_2(int line, int player_id, t_cell cells[8][3]);
+static void	print_col_3(int line, int player_id, t_cell cells[8][3]);
 static void	print_col_p2(int line, int player_id, t_player *players);
 
 void	print_board(int nbr_turns, int player_id, t_player *players,
-			t_cell *cells)
+			t_cell cells[8][3])
 {
 	int	line;
 
@@ -52,25 +52,25 @@ static void	print_col_p1(int line, int player_id, t_player *players)
 	else if (line == 5)
 		printf("         %d     ", players[0].points);
 	else if (line == 7)
-		print_stone_p(players[0].stoneset + 0, 0);
+		print_stone_p(players[0].stoneset + 0, players[0].track);
 	else if (line == 8)
-		print_stone_p(players[0].stoneset + 1, 0);
+		print_stone_p(players[0].stoneset + 1, players[0].track);
 	else if (line == 9)
-		print_stone_p(players[0].stoneset + 2, 0);
+		print_stone_p(players[0].stoneset + 2, players[0].track);
 	else if (line == 10)
-		print_stone_p(players[0].stoneset + 3, 0);
+		print_stone_p(players[0].stoneset + 3, players[0].track);
 	else if (line == 11)
-		print_stone_p(players[0].stoneset + 4, 0);
+		print_stone_p(players[0].stoneset + 4, players[0].track);
 	else if (line == 12)
-		print_stone_p(players[0].stoneset + 5, 0);
+		print_stone_p(players[0].stoneset + 5, players[0].track);
 	else if (line == 13)
-		print_stone_p(players[0].stoneset + 6, 0);
+		print_stone_p(players[0].stoneset + 6, players[0].track);
 	else
 		printf("               ");
 	return ;
 }
 
-static void	print_col_1(int line, int player_id, t_cell *cells)
+static void	print_col_1(int line, int player_id, t_cell cells[8][3])
 {
 	if (line == 0)
 		printf(" _______");
@@ -85,21 +85,21 @@ static void	print_col_1(int line, int player_id, t_cell *cells)
 	else if (line == 18)
 		printf(" _______");
 	else if (line == 2)
-		print_stone_rosette(cells[0].stone, player_id, 1);  /* Cell Coord 11 */
+		print_stone_rosette(cells[0][0].stone, player_id, 1);
 	else if (line == 5)
-		print_stone(cells[3].stone, player_id, 1);          /* Cell Coord 12 */
+		print_stone(cells[1][0].stone, player_id, 1);
 	else if (line == 8)
-		print_stone(cells[6].stone, player_id, 1);          /* Cell Coord 13 */
+		print_stone(cells[2][0].stone, player_id, 1);
 	else if (line == 11)
-		print_stone(cells[9].stone, player_id, 1);          /* Cell Coord 14 */
+		print_stone(cells[3][0].stone, player_id, 1);
 	else if (line == 20)
-		print_stone_rosette(cells[14].stone, player_id, 1); /* Cell Coord 17 */
+		print_stone_rosette(cells[6][0].stone, player_id, 1);
 	else if (line == 23)
-		print_stone(cells[17].stone, player_id, 1);         /* Cell Coord 18 */
+		print_stone(cells[7][0].stone, player_id, 1);
 	return ;
 }
 
-static void	print_col_2(int line, int player_id, t_cell *cells)
+static void	print_col_2(int line, int player_id, t_cell cells[8][3])
 {
 	if (line == 0)
 		printf("________");
@@ -112,25 +112,25 @@ static void	print_col_2(int line, int player_id, t_cell *cells)
 	else if (line == 10 || line == 12)
 		printf("|▒▒▒▒▒▒▒");
 	else if (line == 2)
-		print_stone(cells[1].stone, player_id, 2);          /* Cell Coord 21 */
+		print_stone(cells[0][1].stone, player_id, 2);
 	else if (line == 5)
-		print_stone(cells[4].stone, player_id, 2);          /* Cell Coord 22 */
+		print_stone(cells[1][1].stone, player_id, 2);
 	else if (line == 8)
-		print_stone(cells[7].stone, player_id, 2);          /* Cell Coord 23 */
+		print_stone(cells[2][1].stone, player_id, 2);
 	else if (line == 11)
-		print_stone_rosette(cells[10].stone, player_id, 2); /* Cell Coord 24 */
+		print_stone_rosette(cells[3][1].stone, player_id, 2);
 	else if (line == 14)
-		print_stone(cells[12].stone, player_id, 2);         /* Cell Coord 25 */
+		print_stone(cells[4][1].stone, player_id, 2);
 	else if (line == 17)
-		print_stone(cells[13].stone, player_id, 2);         /* Cell Coord 26 */
+		print_stone(cells[5][1].stone, player_id, 2);
 	else if (line == 20)
-		print_stone(cells[15].stone, player_id, 2);         /* Cell Coord 27 */
+		print_stone(cells[6][1].stone, player_id, 2);
 	else if (line == 23)
-		print_stone(cells[18].stone, player_id, 2);         /* Cell Coord 28 */
+		print_stone(cells[7][1].stone, player_id, 2);
 	return ;
 }
 
-static void	print_col_3(int line, int player_id, t_cell *cells)
+static void	print_col_3(int line, int player_id, t_cell cells[8][3])
 {
 	if (line == 0)
 		printf("________");
@@ -145,17 +145,17 @@ static void	print_col_3(int line, int player_id, t_cell *cells)
 	else if (line == 18)
 		printf("|_______ ");
 	else if (line == 2)
-		print_stone_rosette(cells[2].stone, player_id, 3);  /* Cell Coord 31 */
+		print_stone_rosette(cells[0][2].stone, player_id, 3);
 	else if (line == 5)
-		print_stone(cells[5].stone, player_id, 3);          /* Cell Coord 32 */
+		print_stone(cells[1][2].stone, player_id, 3);
 	else if (line == 8)
-		print_stone(cells[8].stone, player_id, 3);          /* Cell Coord 33 */
+		print_stone(cells[2][2].stone, player_id, 3);
 	else if (line == 11)
-		print_stone(cells[11].stone, player_id, 3);         /* Cell Coord 34 */
+		print_stone(cells[3][2].stone, player_id, 3);
 	else if (line == 20)
-		print_stone_rosette(cells[16].stone, player_id, 3); /* Cell Coord 37 */
+		print_stone_rosette(cells[6][2].stone, player_id, 3);
 	else if (line == 23)
-		print_stone(cells[19].stone, player_id, 3);         /* Cell Coord 38 */
+		print_stone(cells[7][2].stone, player_id, 3);
 	return ;
 }
 
@@ -170,19 +170,19 @@ static void	print_col_p2(int line, int player_id, t_player *players)
 	else if (line == 5)
 		printf("     %d        ", players[1].points);
 	else if (line == 7)
-		print_stone_p(players[1].stoneset + 0, 1);
+		print_stone_p(players[1].stoneset + 0, players[1].track);
 	else if (line == 8)
-		print_stone_p(players[1].stoneset + 1, 1);
+		print_stone_p(players[1].stoneset + 1, players[1].track);
 	else if (line == 9)
-		print_stone_p(players[1].stoneset + 2, 1);
+		print_stone_p(players[1].stoneset + 2, players[1].track);
 	else if (line == 10)
-		print_stone_p(players[1].stoneset + 3, 1);
+		print_stone_p(players[1].stoneset + 3, players[1].track);
 	else if (line == 11)
-		print_stone_p(players[1].stoneset + 4, 1);
+		print_stone_p(players[1].stoneset + 4, players[1].track);
 	else if (line == 12)
-		print_stone_p(players[1].stoneset + 5, 1);
+		print_stone_p(players[1].stoneset + 5, players[1].track);
 	else if (line == 13)
-		print_stone_p(players[1].stoneset + 6, 1);
+		print_stone_p(players[1].stoneset + 6, players[1].track);
 	else
 		printf("               ");
 	return ;

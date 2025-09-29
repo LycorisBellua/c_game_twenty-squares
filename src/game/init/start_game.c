@@ -6,7 +6,7 @@ void	start_game(const char *arg)
 {
 	int			lvl;
 	int			ai_player;
-	t_cell		cells[21]; // 21st is of coordinate "1"
+	t_cell		cells[8][3];
 	t_player	players[2];
 
 	do

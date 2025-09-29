@@ -8,15 +8,14 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 	int	pride_choice;
 
 	origin_cell_track_index = 0;
-	*cell = player->track[14];
+	*cell = player->track[15];
 	// I don't understand why, but `origin_cell_track_index` needs to be set to 
 	// 0, or after the first time entering the function, the variable will take 
 	// a garbage value
-	i = -1;
-	while (++i < 14)
+	i = 0;
+	while (++i < 15)
 	{
-		if (stone->coord
-			== player->track[i]->coord)
+		if (stone->cell == player->track[i])
 		{
 			origin_cell_track_index = i;
 			break ;
@@ -25,7 +24,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 	if (stone->id == ID_STONE_PRIDE)
 	{
 		// If possible, Pride wants to go out of bounds. As `cell` is already 
-		// set to track index 14, which means "out of bounds", we don't need to 
+		// set to track index 15, which means "out of bounds", we don't need to 
 		// update it.
 		pride_choice = 0;
 		i = -1;
@@ -33,7 +32,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 		{
 			if (!stone->moves[i])
 				break ;
-			if (origin_cell_track_index + stone->moves[i] >= 14)
+			if (origin_cell_track_index + stone->moves[i] >= 15)
 			{
 				pride_choice = 1;
 				printf("Pride seizes the opportunity to get rid of %s, and "
@@ -58,7 +57,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 					: dist_to_move == 3 ? "Three" : "Four");
 				dist_to_move = stone->moves[pride_choice];
 			}
-			if (!stone->coord)
+			if (stone->cell == player->track[INDEX_HOME])
 			{
 				*cell = player->track[dist_to_move - 1];
 			}
@@ -72,21 +71,16 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 	}
 	else
 	{
-		if (!stone->coord)
-		{
+		if (stone->cell == player->track[INDEX_HOME])
 			*cell = player->track[dist_to_move - 1];
-		}
-		else
-		{
-			if (origin_cell_track_index + dist_to_move < 14)
-				*cell = player->track[origin_cell_track_index + dist_to_move];
-		}
+		else if (origin_cell_track_index + dist_to_move < 15)
+			*cell = player->track[origin_cell_track_index + dist_to_move];
 	}
-	if (stone->coord)
+	if (stone->cell != player->track[INDEX_HOME])
 		player->track[origin_cell_track_index]->stone = 0;
-	if ((*cell)->coord == 1)
+	if (*cell == player->track[INDEX_VICTORY])
 	{
-		stone->coord = 1;
+		stone->cell = player->track[INDEX_VICTORY];
 		--player->nbr_playable;
 		++player->points;
 	}
@@ -95,15 +89,15 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 		if ((*cell)->stone)
 		{
 			if (lvl == 1 || lvl == 3)
-				(*cell)->stone->coord = 0;
+				(*cell)->stone->cell = player->track[INDEX_HOME];
 			else
 			{
-				(*cell)->stone->coord = -1;
+				(*cell)->stone->cell = 0;
 				--other_player->nbr_playable;
 			}
 		}
 		(*cell)->stone = stone;
-		stone->coord = (*cell)->coord;
+		stone->cell = *cell;
 	}
 	return (1);
 }

@@ -17,5 +17,10 @@ REFACTORING
 
 --------------------------------------------------------------------------------
 
+- Stones all virtually start one cell before the first one. The issue though is 
+that now the first movement of a stone is `dice - 1`. Make it so that the first 
+cell (aka the one before the actual first one) is not considered. It's not part 
+of the board, it represents the homebase.
+
 - There's something wrong with Wrath. As if it sometimes cannot move, although 
 technically there's a cell available.

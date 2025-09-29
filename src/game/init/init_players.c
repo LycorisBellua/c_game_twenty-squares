@@ -1,12 +1,12 @@
 #include "twenty_squares.h"
 
 static void	init_player_one(int lvl, int ai_player, t_player *players,
-				t_cell *cells);
+				t_cell cells[8][3]);
 static void	init_player_two(int lvl, int ai_player, t_player *players,
-				t_cell *cells);
+				t_cell cells[8][3]);
 
 void	init_players(int lvl, int ai_player, t_player *players,
-			t_cell *cells)
+			t_cell cells[8][3])
 {
 	memset(players, 0, 2 * sizeof(t_player));
 	init_player_one(lvl, ai_player, players, cells);
@@ -15,7 +15,7 @@ void	init_players(int lvl, int ai_player, t_player *players,
 }
 
 static void	init_player_one(int lvl, int ai_player, t_player *players,
-				t_cell *cells)
+				t_cell cells[8][3])
 {
 	players[0].id = 0;
 	strncpy(players[0].name, "Player One", PLAYER_NAME_LEN);
@@ -97,26 +97,30 @@ static void	init_player_one(int lvl, int ai_player, t_player *players,
 		players[0].stoneset[6].player_id = 0;
 		players[0].stoneset[6].can_move = 1;
 	}
-	players[0].track[0]  = &cells[9];  /* Coordinate 14 */
-	players[0].track[1]  = &cells[6];  /* Coordinate 13 */
-	players[0].track[2]  = &cells[3];  /* Coordinate 12 */
-	players[0].track[3]  = &cells[0];  /* Coordinate 11 */
-	players[0].track[4]  = &cells[1];  /* Coordinate 21 */
-	players[0].track[5]  = &cells[4];  /* Coordinate 22 */
-	players[0].track[6]  = &cells[7];  /* Coordinate 23 */
-	players[0].track[7]  = &cells[10]; /* Coordinate 24 */
-	players[0].track[8]  = &cells[12]; /* Coordinate 25 */
-	players[0].track[9]  = &cells[13]; /* Coordinate 26 */
-	players[0].track[10] = &cells[15]; /* Coordinate 27 */
-	players[0].track[11] = &cells[18]; /* Coordinate 28 */
-	players[0].track[12] = &cells[17]; /* Coordinate 18 */
-	players[0].track[13] = &cells[14]; /* Coordinate 17 */
-	players[0].track[14] = &cells[20]; /* Coordinate 1  */
+	players[0].track[0]  = &cells[4][0];
+	players[0].track[1]  = &cells[3][0];
+	players[0].track[2]  = &cells[2][0];
+	players[0].track[3]  = &cells[1][0];
+	players[0].track[4]  = &cells[0][0];
+	players[0].track[5]  = &cells[0][1];
+	players[0].track[6]  = &cells[1][1];
+	players[0].track[7]  = &cells[2][1];
+	players[0].track[8]  = &cells[3][1];
+	players[0].track[9]  = &cells[4][1];
+	players[0].track[10]  = &cells[5][1];
+	players[0].track[11] = &cells[6][1];
+	players[0].track[12] = &cells[7][1];
+	players[0].track[13] = &cells[7][0];
+	players[0].track[14] = &cells[6][0];
+	players[0].track[15] = &cells[5][0];
+	int i = -1;
+	while (++i < 7)
+		players[0].stoneset[i].cell = players[0].track[0];
 	return ;
 }
 
 static void	init_player_two(int lvl, int ai_player, t_player *players,
-				t_cell *cells)
+				t_cell cells[8][3])
 {
 	players[1].id = 1;
 	strncpy(players[1].name, "Player Two", PLAYER_NAME_LEN);
@@ -198,20 +202,24 @@ static void	init_player_two(int lvl, int ai_player, t_player *players,
 		players[1].stoneset[6].player_id = 1;
 		players[1].stoneset[6].can_move = 1;
 	}
-	players[1].track[0]  = &cells[11]; /* Coordinate 34 */
-	players[1].track[1]  = &cells[8];  /* Coordinate 33 */
-	players[1].track[2]  = &cells[5];  /* Coordinate 32 */
-	players[1].track[3]  = &cells[2];  /* Coordinate 31 */
-	players[1].track[4]  = &cells[1];  /* Coordinate 21 */
-	players[1].track[5]  = &cells[4];  /* Coordinate 22 */
-	players[1].track[6]  = &cells[7];  /* Coordinate 23 */
-	players[1].track[7]  = &cells[10]; /* Coordinate 24 */
-	players[1].track[8]  = &cells[12]; /* Coordinate 25 */
-	players[1].track[9]  = &cells[13]; /* Coordinate 26 */
-	players[1].track[10] = &cells[15]; /* Coordinate 27 */
-	players[1].track[11] = &cells[18]; /* Coordinate 28 */
-	players[1].track[12] = &cells[19]; /* Coordinate 38 */
-	players[1].track[13] = &cells[16]; /* Coordinate 37 */
-	players[1].track[14] = &cells[20]; /* Coordinate 1  */
+	players[1].track[0]  = &cells[4][2];
+	players[1].track[1]  = &cells[3][2];
+	players[1].track[2]  = &cells[2][2];
+	players[1].track[3]  = &cells[1][2];
+	players[1].track[4]  = &cells[0][2];
+	players[1].track[5]  = &cells[0][1];
+	players[1].track[6]  = &cells[1][1];
+	players[1].track[7]  = &cells[2][1];
+	players[1].track[8]  = &cells[3][1];
+	players[1].track[9]  = &cells[4][1];
+	players[1].track[10]  = &cells[5][1];
+	players[1].track[11] = &cells[6][1];
+	players[1].track[12] = &cells[7][1];
+	players[1].track[13] = &cells[7][2];
+	players[1].track[14] = &cells[6][2];
+	players[1].track[15] = &cells[5][2];
+	int i = -1;
+	while (++i < 7)
+		players[1].stoneset[i].cell = players[1].track[0];
 	return ;
 }

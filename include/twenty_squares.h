@@ -29,40 +29,42 @@
 # define ID_STONE_WRATH            13
 # define ID_STONE_GREED            14
 
-# define INDEX_1_ON_4_INITIAL_ROAD 0
-# define INDEX_2_ON_4_INITIAL_ROAD 1
-# define INDEX_3_ON_4_INITIAL_ROAD 2
-# define INDEX_4_ON_4_INITIAL_ROAD 3
-# define INDEX_1_ON_8_COMMON_ROAD  4
-# define INDEX_2_ON_8_COMMON_ROAD  5
-# define INDEX_3_ON_8_COMMON_ROAD  6
-# define INDEX_4_ON_8_COMMON_ROAD  7
-# define INDEX_5_ON_8_COMMON_ROAD  8
-# define INDEX_6_ON_8_COMMON_ROAD  9
-# define INDEX_7_ON_8_COMMON_ROAD  10
-# define INDEX_8_ON_8_COMMON_ROAD  11
-# define INDEX_1_ON_2_END_ROAD     12
-# define INDEX_2_ON_2_END_ROAD     13
-# define INDEX_OUT_OF_BOUND        14
+# define INDEX_HOME                0
+# define INDEX_1_ON_4_INITIAL_ROAD 1
+# define INDEX_2_ON_4_INITIAL_ROAD 2
+# define INDEX_3_ON_4_INITIAL_ROAD 3
+# define INDEX_4_ON_4_INITIAL_ROAD 4
+# define INDEX_1_ON_8_COMMON_ROAD  5
+# define INDEX_2_ON_8_COMMON_ROAD  6
+# define INDEX_3_ON_8_COMMON_ROAD  7
+# define INDEX_4_ON_8_COMMON_ROAD  8
+# define INDEX_5_ON_8_COMMON_ROAD  9
+# define INDEX_6_ON_8_COMMON_ROAD  10
+# define INDEX_7_ON_8_COMMON_ROAD  11
+# define INDEX_8_ON_8_COMMON_ROAD  12
+# define INDEX_1_ON_2_END_ROAD     13
+# define INDEX_2_ON_2_END_ROAD     14
+# define INDEX_VICTORY             15
 
-typedef struct s_stone
+typedef struct s_stone t_stone;
+
+typedef struct s_cell
+{
+	t_stone	*stone;
+	int		is_rosette;
+}	t_cell;
+
+struct s_stone
 {
 	const char	*name;
 	const char	*name_long;
 	int			id;
 	int			player_id;
-	int			coord;
+	t_cell		*cell;
 	int			is_protected;
 	int			can_move;
 	int			moves[4];
-}	t_stone;
-
-typedef struct s_cell
-{
-	int		coord;
-	t_stone	*stone;
-	int		is_rosette;
-}	t_cell;
+};
 
 typedef struct s_player
 {
@@ -70,27 +72,25 @@ typedef struct s_player
 	char	name[PLAYER_NAME_LEN];
 	int		is_ai;
 	int		points;
-	// Stones which aren't dead or won/saved, even if they can't move:
 	int		nbr_playable;
 	t_stone	stoneset[7];
-	// The 15th element is INDEX_OUT_OF_BOUND and has a coordinate of "1":
-	t_cell	*track[15];
+	t_cell	*track[16];
 }	t_player;
 
 /* Board -------------------------------------------------------------------- */
 
 void		print_board(int nbr_turns, int player_id, t_player *players,
-				t_cell *cells);
+				t_cell cells[8][3]);
 void		print_stone(const t_stone* s, int player_id, int col_num);
 void		print_stone_rosette(const t_stone* s, int player_id, int col_num);
-void		print_stone_p(const t_stone* s, int player_id);
+void		print_stone_p(const t_stone* s, t_cell** track);
 
 /* Init --------------------------------------------------------------------- */
 
 void		start_game(const char *arg);
-void		init_cells(t_cell *cells);
+void		init_cells(t_cell cells[8][3]);
 void		init_players(int lvl, int ai_player, t_player *players,
-				t_cell *cells);
+				t_cell cells[8][3]);
 
 /* Input -------------------------------------------------------------------- */
 
@@ -115,7 +115,7 @@ int			select_dist_to_move(const t_player *player, const t_stone *stone);
 
 /* Turn --------------------------------------------------------------------- */
 
-void		game_loop(int lvl, t_player *players, t_cell *cells);
+void		game_loop(int lvl, t_player *players, t_cell cells[8][3]);
 
 /* Utils -------------------------------------------------------------------- */
 

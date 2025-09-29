@@ -2,7 +2,7 @@
 
 static int	determine_winner(t_player *players);
 
-void	game_loop(int lvl, t_player *players, t_cell *cells)
+void	game_loop(int lvl, t_player *players, t_cell cells[8][3])
 {
 	int			quit;
 	int			nbr_turns;
