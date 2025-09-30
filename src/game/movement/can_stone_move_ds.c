@@ -19,13 +19,13 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 	if (stone->cell == player->track[INDEX_HOME])
 	{
 		if (dice >= 1)
-			cell[0] = player->track[0];
+			cell[0] = player->track[INDEX_1_ON_4_INITIAL_ROAD];
 		if (dice >= 2)
-			cell[1] = player->track[1];
+			cell[1] = player->track[INDEX_2_ON_4_INITIAL_ROAD];
 		if (dice >= 3)
-			cell[2] = player->track[2];
+			cell[2] = player->track[INDEX_3_ON_4_INITIAL_ROAD];
 		if (dice == 4)
-			cell[3] = player->track[3];
+			cell[3] = player->track[INDEX_4_ON_4_INITIAL_ROAD];
 	}
 	else
 	{

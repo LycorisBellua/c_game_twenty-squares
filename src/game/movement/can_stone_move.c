@@ -8,8 +8,8 @@ int	can_stone_move(const t_stone *stone, t_player *player, int dice)
 	cell = 0;
 	if (!stone->cell || stone->cell == player->track[INDEX_VICTORY])
 		return (0);
-	if (stone->cell == player->track[INDEX_HOME])
-		cell = player->track[dice - 1];
+	else if (stone->cell == player->track[INDEX_HOME])
+		cell = player->track[dice];
 	else
 	{
 		i = 0;

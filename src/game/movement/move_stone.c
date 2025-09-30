@@ -58,9 +58,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 				dist_to_move = stone->moves[pride_choice];
 			}
 			if (stone->cell == player->track[INDEX_HOME])
-			{
-				*cell = player->track[dist_to_move - 1];
-			}
+				*cell = player->track[dist_to_move];
 			else
 			{
 				// If we are here, it means that the target cannot be out of 
@@ -72,7 +70,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 	else
 	{
 		if (stone->cell == player->track[INDEX_HOME])
-			*cell = player->track[dist_to_move - 1];
+			*cell = player->track[dist_to_move];
 		else if (origin_cell_track_index + dist_to_move < 15)
 			*cell = player->track[origin_cell_track_index + dist_to_move];
 	}
