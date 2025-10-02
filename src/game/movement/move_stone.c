@@ -21,7 +21,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 			break ;
 		}
 	}
-	if (stone->id == ID_STONE_PRIDE)
+	if (!strcmp(stone->name_long, "Pride"))
 	{
 		// If possible, Pride wants to go out of bounds. As `cell` is already 
 		// set to track index 15, which means "out of bounds", we don't need to 
@@ -36,7 +36,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 			{
 				pride_choice = 1;
 				printf("Pride seizes the opportunity to get rid of %s, and "
-					"leaves.\n\n", player->is_ai ? player->name : "you");
+					"leaves.\n\n", player->is_ai ? get_player_name(player->id) : "you");
 				break ;
 			}
 		}

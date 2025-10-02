@@ -80,7 +80,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 			}
 		}
 	}
-	if (stone->id == ID_STONE_WRATH)
+	if (!strcmp(stone->name_long, "Wrath"))
 	{
 		// If Wrath is on the "no killing" road, we don't care for enemies.
 		is_wrath_on_no_killing_road = 
@@ -263,7 +263,7 @@ int	can_stone_move_ds(t_stone *stone, t_player *player, int dice)
 		}
 		return (0);
 	}
-	else if (stone->id == ID_STONE_GREED)
+	else if (!strcmp(stone->name_long, "Greed"))
 	{
 		// Greed's first priority: An empty rosette
 		if (cell[0]->is_rosette && !cell[0]->stone)

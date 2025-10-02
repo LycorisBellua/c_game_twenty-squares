@@ -25,11 +25,11 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 	// Lust doesn't have a special move.
 	// Pride is handled in `move_stone`.
 	// Wrath and Greed are handled in `can_stone_move_ds`.
-	if (i_min == i_max || stone->id == ID_STONE_GLUTTONY)
+	if (i_min == i_max || !strcmp(stone->name_long, "Gluttony"))
 		dist = stone->moves[i_max];
-	else if (stone->id == ID_STONE_SLOTH)
+	else if (!strcmp(stone->name_long, "Sloth"))
 		dist = stone->moves[i_min];
-	else if (player->is_ai || stone->id == ID_STONE_ENVY)
+	else if (player->is_ai || !strcmp(stone->name_long, "Envy"))
 		dist = stone->moves[rng_minmax(i_min, i_max)];
 	else
 	{

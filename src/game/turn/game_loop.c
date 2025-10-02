@@ -102,7 +102,8 @@ static int	determine_winner(t_player *players)
 			winner = 0;
 		else
 			winner = 1;
-		printf("The game has ended. The winner is %s!\n", players[winner].name);
+		printf("The game has ended. The winner is %s!\n",
+			get_player_name(winner));
 		return (1);
 	}
 	return (0);

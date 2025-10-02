@@ -1,25 +1,19 @@
 REFACTORING
 
-[ ] src/game/turn/start_game.c
-[ ] src/game/init/init_cells.c
-[ ] src/game/init/init_players.c
-
-[ ] src/game/turn/game_loop.c
-[ ] src/game/movement/set_nbr_moveable_and_can_move.c
-[ ] src/game/movement/can_stone_move.c
-[ ] src/game/movement/can_stone_move_ds.c
-[ ] src/game/selection/select_stone.c
-[ ] src/game/selection/select_dist_to_move.c
-[ ] src/game/movement/move_stone.c
-
-[x] src/game/board/print_board.c
-[x] src/game/board/print_stone.c
+src/game/turn/game_loop.c
+src/game/movement/set_nbr_moveable_and_can_move.c
+src/game/movement/can_stone_move.c
+src/game/movement/can_stone_move_ds.c
+src/game/selection/select_stone.c
+src/game/selection/select_dist_to_move.c
+src/game/movement/move_stone.c
 
 --------------------------------------------------------------------------------
 
 - New bug: In Classic levels, captured stones disappear. It's probably because 
 they are indicated as being dead, aka their cell being null instead of the 
 first cell of the track (the homebase).
+- New bug: Stones sometimes cannot move? Or they cannot capture an enemy?
 
 - Old bug: There's something wrong with Wrath. As if it sometimes cannot move, 
 although technically there's a cell available.

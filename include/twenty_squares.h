@@ -12,23 +12,6 @@
 
 # define FS '\x1C'
 
-# define PLAYER_NAME_LEN           11
-
-# define ID_STONE_ONE              1
-# define ID_STONE_TWO              2
-# define ID_STONE_THREE            3
-# define ID_STONE_FOUR             4
-# define ID_STONE_FIVE             5
-# define ID_STONE_SIX              6
-# define ID_STONE_SEVEN            7
-# define ID_STONE_LUST             8
-# define ID_STONE_PRIDE            9
-# define ID_STONE_GLUTTONY         10
-# define ID_STONE_SLOTH            11
-# define ID_STONE_ENVY             12
-# define ID_STONE_WRATH            13
-# define ID_STONE_GREED            14
-
 # define INDEX_HOME                0
 # define INDEX_1_ON_4_INITIAL_ROAD 1
 # define INDEX_2_ON_4_INITIAL_ROAD 2
@@ -50,15 +33,14 @@ typedef struct s_stone t_stone;
 
 typedef struct s_cell
 {
-	t_stone	*stone;
 	int		is_rosette;
+	t_stone	*stone;
 }	t_cell;
 
 struct s_stone
 {
 	const char	*name;
 	const char	*name_long;
-	int			id;
 	int			player_id;
 	t_cell		*cell;
 	int			is_protected;
@@ -68,13 +50,12 @@ struct s_stone
 
 typedef struct s_player
 {
-	int		id;
-	char	name[PLAYER_NAME_LEN];
-	int		is_ai;
-	int		points;
-	int		nbr_playable;
-	t_stone	stoneset[7];
-	t_cell	*track[16];
+	int			id;
+	int			is_ai;
+	int			points;
+	int			nbr_playable;
+	t_cell		*track[16];
+	t_stone		stoneset[7];
 }	t_player;
 
 /* Board -------------------------------------------------------------------- */
@@ -85,12 +66,23 @@ void		print_stone(const t_stone* s, int player_id, int col_num);
 void		print_stone_rosette(const t_stone* s, int player_id, int col_num);
 void		print_stone_p(const t_stone* s, t_cell** track);
 
+/* Guide -------------------------------------------------------------------- */
+
+void		display_guide_intro(void);
+void		display_guide_page1(void);
+void		display_guide_page2(void);
+void		display_guide_page3(void);
+const char	*get_player_name(int index);
+const char	*get_level_name(int level);
+const char	*get_stone_name(int level, int index, int full);
+
 /* Init --------------------------------------------------------------------- */
 
 void		start_game(const char *arg);
 void		init_cells(t_cell cells[8][3]);
-void		init_players(int lvl, int ai_player, t_player *players,
-				t_cell cells[8][3]);
+void		init_players(t_player *players, t_cell cells[8][3]);
+void		reset_cells(t_cell cells[8][3]);
+void		reset_players(t_player *players, int ai_player, int lvl);
 
 /* Input -------------------------------------------------------------------- */
 
