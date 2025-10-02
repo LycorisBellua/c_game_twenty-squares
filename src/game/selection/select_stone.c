@@ -22,10 +22,10 @@ t_stone	*select_stone(t_player *player)
 	j = 1;
 	while (++i < 7)
 	{
-		if (player->stoneset[i].can_move)
+		if (player->stones[i].can_move)
 		{
-			printf("- %s ", player->stoneset[i].name);
-			name_moveable[j++] = player->stoneset[i].name;
+			printf("- %s ", player->stones[i].name);
+			name_moveable[j++] = player->stones[i].name;
 		}
 	}
 	nbr_moveable = j - 1;
@@ -36,9 +36,9 @@ t_stone	*select_stone(t_player *player)
 		i = -1;
 		while (++i < 7)
 		{
-			if (!strcmp(player->stoneset[i].name, name_moveable[random]))
+			if (!strcmp(player->stones[i].name, name_moveable[random]))
 			{
-				stone = &player->stoneset[i];
+				stone = &player->stones[i];
 				printf("Stone: %s.\n\n", stone->name_long);
 				break ;
 			}
@@ -69,9 +69,9 @@ t_stone	*select_stone(t_player *player)
 						j = -1;
 						while (++j < 7)
 						{
-							if (!strcmp(player->stoneset[j].name, name_moveable[i]))
+							if (!strcmp(player->stones[j].name, name_moveable[i]))
 							{
-								stone = &player->stoneset[j];
+								stone = &player->stones[j];
 								printf("Stone: %s.\n\n", stone->name_long);
 								break ;
 							}

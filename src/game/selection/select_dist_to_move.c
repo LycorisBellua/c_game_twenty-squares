@@ -1,6 +1,6 @@
 #include "twenty_squares.h"
 
-int	select_dist_to_move(const t_player *player, const t_stone *stone)
+int	select_dist_to_move(t_game *game)
 {
 	int			i;
 	int			i_min;
@@ -15,7 +15,7 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 	i = -1;
 	while (++i < 4)
 	{
-		if (stone->moves[i])
+		if (game->stone->moves[i])
 		{
 			if (i_min < 0)
 				i_min = i;
@@ -23,21 +23,21 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 		}
 	}
 	// Lust doesn't have a special move.
-	// Pride is handled in `move_stone`.
-	// Wrath and Greed are handled in `can_stone_move_ds`.
-	if (i_min == i_max || !strcmp(stone->name_long, "Gluttony"))
-		dist = stone->moves[i_max];
-	else if (!strcmp(stone->name_long, "Sloth"))
-		dist = stone->moves[i_min];
-	else if (player->is_ai || !strcmp(stone->name_long, "Envy"))
-		dist = stone->moves[rng_minmax(i_min, i_max)];
+	// Pride is handled in `move_game->stone`.
+	// Wrath and Greed are handled in `can_game->stone_move_ds`.
+	if (i_min == i_max || !strcmp(game->stone->name_long, "Gluttony"))
+		dist = game->stone->moves[i_max];
+	else if (!strcmp(game->stone->name_long, "Sloth"))
+		dist = game->stone->moves[i_min];
+	else if (game->player->is_ai || !strcmp(game->stone->name_long, "Envy"))
+		dist = game->stone->moves[rng_minmax(i_min, i_max)];
 	else
 	{
-		printf("How many cells forwards should the stone move? ");
+		printf("How many cells forwards should the game->stone move? ");
 		i = i_min - 1;
 		while (++i < i_max)
-			printf("%d - ", stone->moves[i]);
-		printf("%d.\n\n", stone->moves[i]);
+			printf("%d - ", game->stone->moves[i]);
+		printf("%d.\n\n", game->stone->moves[i]);
 		dist = 0;
 		while (!is_dist_valid)
 		{
@@ -53,7 +53,7 @@ int	select_dist_to_move(const t_player *player, const t_stone *stone)
 					while (++i <= i_max)
 					{
 						if (dist
-							== stone->moves[i])
+							== game->stone->moves[i])
 						{
 							is_dist_valid = 1;
 							break ;

@@ -1,27 +1,26 @@
 #include "twenty_squares.h"
 
-int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
-		t_player *player, t_player *other_player)
+int	move_stone(t_game *game)
 {
 	int	i;
 	int	origin_cell_track_index;
 	int	pride_choice;
 
 	origin_cell_track_index = 0;
-	*cell = player->track[15];
+	game->cell = game->player->track[15];
 	// I don't understand why, but `origin_cell_track_index` needs to be set to 
 	// 0, or after the first time entering the function, the variable will take 
 	// a garbage value
 	i = 0;
 	while (++i < 15)
 	{
-		if (stone->cell == player->track[i])
+		if (game->stone->cell == game->player->track[i])
 		{
 			origin_cell_track_index = i;
 			break ;
 		}
 	}
-	if (!strcmp(stone->name_long, "Pride"))
+	if (!strcmp(game->stone->name_long, "Pride"))
 	{
 		// If possible, Pride wants to go out of bounds. As `cell` is already 
 		// set to track index 15, which means "out of bounds", we don't need to 
@@ -30,13 +29,13 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 		i = -1;
 		while (++i < 4)
 		{
-			if (!stone->moves[i])
+			if (!game->stone->moves[i])
 				break ;
-			if (origin_cell_track_index + stone->moves[i] >= 15)
+			if (origin_cell_track_index + game->stone->moves[i] >= 15)
 			{
 				pride_choice = 1;
 				printf("Pride seizes the opportunity to get rid of %s, and "
-					"leaves.\n\n", player->is_ai ? get_player_name(player->id) : "you");
+					"leaves.\n\n", game->player->is_ai ? get_player_name(game->player->id) : "you");
 				break ;
 			}
 		}
@@ -45,7 +44,7 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 		{
 			// (i - 1) is the last valid index of possible_movements.
 			pride_choice = !(i - 1) ? 0 : rng_minmax(0, i - 1);
-			if (dist_to_move == stone->moves[pride_choice])
+			if (game->dist_to_move == game->stone->moves[pride_choice])
 			{
 				printf("Pride refuses to move. The turn passes.\n\n");
 				return (0);
@@ -53,49 +52,49 @@ int	move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
 			else
 			{
 				printf("\"%s\", huh? Pride will move somewhere else.\n\n", 
-					dist_to_move == 1 ? "One" : dist_to_move == 2 ? "Two" 
-					: dist_to_move == 3 ? "Three" : "Four");
-				dist_to_move = stone->moves[pride_choice];
+					game->dist_to_move == 1 ? "One" : game->dist_to_move == 2 ? "Two" 
+					: game->dist_to_move == 3 ? "Three" : "Four");
+				game->dist_to_move = game->stone->moves[pride_choice];
 			}
-			if (stone->cell == player->track[INDEX_HOME])
-				*cell = player->track[dist_to_move];
+			if (game->stone->cell == game->player->track[INDEX_HOME])
+				game->cell = game->player->track[game->dist_to_move];
 			else
 			{
 				// If we are here, it means that the target cannot be out of 
 				// bounds, so there's no need to check if it is.
-				*cell = player->track[origin_cell_track_index + dist_to_move];
+				game->cell = game->player->track[origin_cell_track_index + game->dist_to_move];
 			}
 		}
 	}
 	else
 	{
-		if (stone->cell == player->track[INDEX_HOME])
-			*cell = player->track[dist_to_move];
-		else if (origin_cell_track_index + dist_to_move < 15)
-			*cell = player->track[origin_cell_track_index + dist_to_move];
+		if (game->stone->cell == game->player->track[INDEX_HOME])
+			game->cell = game->player->track[game->dist_to_move];
+		else if (origin_cell_track_index + game->dist_to_move < 15)
+			game->cell = game->player->track[origin_cell_track_index + game->dist_to_move];
 	}
-	if (stone->cell != player->track[INDEX_HOME])
-		player->track[origin_cell_track_index]->stone = 0;
-	if (*cell == player->track[INDEX_VICTORY])
+	if (game->stone->cell != game->player->track[INDEX_HOME])
+		game->player->track[origin_cell_track_index]->stone = 0;
+	if (game->cell == game->player->track[INDEX_VICTORY])
 	{
-		stone->cell = player->track[INDEX_VICTORY];
-		--player->nbr_playable;
-		++player->points;
+		game->stone->cell = game->player->track[INDEX_VICTORY];
+		--game->player->nbr_playable;
+		++game->player->points;
 	}
 	else
 	{
-		if ((*cell)->stone)
+		if (game->cell->stone)
 		{
-			if (lvl == 1 || lvl == 3)
-				(*cell)->stone->cell = player->track[INDEX_HOME];
+			if (game->lvl == 1 || game->lvl == 3)
+				game->cell->stone->cell = game->player->track[INDEX_HOME];
 			else
 			{
-				(*cell)->stone->cell = 0;
-				--other_player->nbr_playable;
+				game->cell->stone->cell = 0;
+				--game->other_player->nbr_playable;
 			}
 		}
-		(*cell)->stone = stone;
-		stone->cell = *cell;
+		game->cell->stone = game->stone;
+		game->stone->cell = game->cell;
 	}
 	return (1);
 }

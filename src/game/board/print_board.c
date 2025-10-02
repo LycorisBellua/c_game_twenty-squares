@@ -1,42 +1,41 @@
 #include "twenty_squares.h"
 
-static void	print_turn_line(int nbr_turns);
+static void	print_turn_line(int turn_nbr);
 static void	print_col_p1(int line, int player_id, t_player *players);
 static void	print_col_1(int line, int player_id, t_cell cells[8][3]);
 static void	print_col_2(int line, int player_id, t_cell cells[8][3]);
 static void	print_col_3(int line, int player_id, t_cell cells[8][3]);
 static void	print_col_p2(int line, int player_id, t_player *players);
 
-void	print_board(int nbr_turns, int player_id, t_player *players,
-			t_cell cells[8][3])
+void	print_board(t_game *game)
 {
 	int	line;
 
 	clear_window();
 	printf("\n");
-	print_turn_line(nbr_turns);
+	print_turn_line(game->turn_nbr);
 	line = -1;
 	while (++line < 25)
 	{
-		print_col_p1(line, player_id, players);
-		print_col_1(line, player_id, cells);
-		print_col_2(line, player_id, cells);
-		print_col_3(line, player_id, cells);
-		print_col_p2(line, player_id, players);
+		print_col_p1(line, game->player->id, game->players);
+		print_col_1(line, game->player->id, game->cells);
+		print_col_2(line, game->player->id, game->cells);
+		print_col_3(line, game->player->id, game->cells);
+		print_col_p2(line, game->player->id, game->players);
 		printf("\n");
 	}
 	printf("\n");
 	return ;
 }
 
-static void	print_turn_line(int nbr_turns)
+static void	print_turn_line(int turn_nbr)
 {
 	const int	len_total = 55;
 	const int	len_space_first = 24;
 	int			len_turn;
 
 	printf("%*s", len_space_first, "");
-	len_turn = printf("TURN %d", nbr_turns);
+	len_turn = printf("TURN %d", turn_nbr);
 	printf("%*s\n", len_total - len_space_first - len_turn, "");
 	return ;
 }
@@ -52,19 +51,19 @@ static void	print_col_p1(int line, int player_id, t_player *players)
 	else if (line == 5)
 		printf("         %d     ", players[0].points);
 	else if (line == 7)
-		print_stone_p(players[0].stoneset + 0, players[0].track);
+		print_stone_p(players[0].stones + 0, players[0].track);
 	else if (line == 8)
-		print_stone_p(players[0].stoneset + 1, players[0].track);
+		print_stone_p(players[0].stones + 1, players[0].track);
 	else if (line == 9)
-		print_stone_p(players[0].stoneset + 2, players[0].track);
+		print_stone_p(players[0].stones + 2, players[0].track);
 	else if (line == 10)
-		print_stone_p(players[0].stoneset + 3, players[0].track);
+		print_stone_p(players[0].stones + 3, players[0].track);
 	else if (line == 11)
-		print_stone_p(players[0].stoneset + 4, players[0].track);
+		print_stone_p(players[0].stones + 4, players[0].track);
 	else if (line == 12)
-		print_stone_p(players[0].stoneset + 5, players[0].track);
+		print_stone_p(players[0].stones + 5, players[0].track);
 	else if (line == 13)
-		print_stone_p(players[0].stoneset + 6, players[0].track);
+		print_stone_p(players[0].stones + 6, players[0].track);
 	else
 		printf("               ");
 	return ;
@@ -170,19 +169,19 @@ static void	print_col_p2(int line, int player_id, t_player *players)
 	else if (line == 5)
 		printf("     %d        ", players[1].points);
 	else if (line == 7)
-		print_stone_p(players[1].stoneset + 0, players[1].track);
+		print_stone_p(players[1].stones + 0, players[1].track);
 	else if (line == 8)
-		print_stone_p(players[1].stoneset + 1, players[1].track);
+		print_stone_p(players[1].stones + 1, players[1].track);
 	else if (line == 9)
-		print_stone_p(players[1].stoneset + 2, players[1].track);
+		print_stone_p(players[1].stones + 2, players[1].track);
 	else if (line == 10)
-		print_stone_p(players[1].stoneset + 3, players[1].track);
+		print_stone_p(players[1].stones + 3, players[1].track);
 	else if (line == 11)
-		print_stone_p(players[1].stoneset + 4, players[1].track);
+		print_stone_p(players[1].stones + 4, players[1].track);
 	else if (line == 12)
-		print_stone_p(players[1].stoneset + 5, players[1].track);
+		print_stone_p(players[1].stones + 5, players[1].track);
 	else if (line == 13)
-		print_stone_p(players[1].stoneset + 6, players[1].track);
+		print_stone_p(players[1].stones + 6, players[1].track);
 	else
 		printf("               ");
 	return ;

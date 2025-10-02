@@ -55,13 +55,29 @@ typedef struct s_player
 	int			points;
 	int			nbr_playable;
 	t_cell		*track[16];
-	t_stone		stoneset[7];
+	t_stone		stones[7];
 }	t_player;
+
+typedef struct s_game
+{
+	t_cell		cells[8][3];
+	t_player	players[2];
+	int			lvl;
+	int			turn_nbr;
+	int			dice;
+	int			dist_to_move;
+	int			nbr_moveable;
+	int			has_stone_moved;
+	int			is_turn_played_twice;
+	t_stone		*stone;
+	t_cell		*cell;
+	t_player	*player;
+	t_player	*other_player;
+}	t_game;
 
 /* Board -------------------------------------------------------------------- */
 
-void		print_board(int nbr_turns, int player_id, t_player *players,
-				t_cell cells[8][3]);
+void		print_board(t_game *game);
 void		print_stone(const t_stone* s, int player_id, int col_num);
 void		print_stone_rosette(const t_stone* s, int player_id, int col_num);
 void		print_stone_p(const t_stone* s, t_cell** track);
@@ -79,10 +95,10 @@ const char	*get_stone_name(int level, int index, int full);
 /* Init --------------------------------------------------------------------- */
 
 void		start_game(const char *arg);
-void		init_cells(t_cell cells[8][3]);
-void		init_players(t_player *players, t_cell cells[8][3]);
-void		reset_cells(t_cell cells[8][3]);
-void		reset_players(t_player *players, int ai_player, int lvl);
+void		init_cells(t_game *game);
+void		init_players(t_game *game);
+void		reset_cells(t_game *game);
+void		reset_players(t_game *game);
 
 /* Input -------------------------------------------------------------------- */
 
@@ -97,17 +113,16 @@ void		press_enter_to_continue(void);
 int			set_nbr_moveable_and_can_move(t_player *player, int lvl, int dice);
 int			can_stone_move(const t_stone *stone, t_player *player, int dice);
 int			can_stone_move_ds(t_stone *stone, t_player *player, int dice);
-int			move_stone(int lvl, int dist_to_move, t_stone *stone, t_cell **cell,
-				t_player *player, t_player *other_player);
+int			move_stone(t_game *game);
 
 /* Selection ---------------------------------------------------------------- */
 
 t_stone		*select_stone(t_player *player);
-int			select_dist_to_move(const t_player *player, const t_stone *stone);
+int			select_dist_to_move(t_game *game);
 
 /* Turn --------------------------------------------------------------------- */
 
-void		game_loop(int lvl, t_player *players, t_cell cells[8][3]);
+void		game_loop(t_game *game);
 
 /* Utils -------------------------------------------------------------------- */
 

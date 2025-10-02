@@ -1,104 +1,84 @@
 #include "twenty_squares.h"
 
-static int	determine_winner(t_player *players);
+static void	increment_turn(t_game *game);
+static int	determine_winner(t_game *game);
 
-void	game_loop(int lvl, t_player *players, t_cell cells[8][3])
+void	game_loop(t_game *game)
 {
-	int			quit;
-	int			nbr_turns;
-	int			dice;
-	int			dist_to_move;
-	int			nbr_moveable;
-	int			has_stone_moved;
-	int			is_turn_played_twice;
-	t_stone		*stone;
-	t_cell		*cell;
-	t_player	*player;
-	t_player	*other_player;
-
-	quit = 0;
-	nbr_turns = 1;
-	cell = 0;
-	while (!quit)
+	while (1)
 	{
-		if (nbr_turns % 2)
-		{
-			player = &players[0];
-			other_player = &players[1];
-		}
-		else
-		{
-			player = &players[1];
-			other_player = &players[0];
-		}
-		is_turn_played_twice = 0;
-		dice = rng_minmax(0, 4);
-		nbr_moveable = !dice ? 0
-			: set_nbr_moveable_and_can_move(player, lvl, dice);
-		print_board(nbr_turns, player->id, players, cells);
-		if (!dice)
-		{
-			printf("Dice: 0. The turn passes to the other player.\n\n");
-			press_enter_to_continue();
-		}
-		else if (!nbr_moveable)
+		increment_turn(game);
+		print_board(game);
+		game->dice = rng_minmax(0, 4);
+		/**/
+		game->nbr_moveable = set_nbr_moveable_and_can_move(game->player, game->lvl, game->dice);
+		if (!game->nbr_moveable)
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
-				"player.\n\n", dice);
+				"player.\n\n", game->dice);
 			press_enter_to_continue();
+			continue ;
 		}
-		else
+		printf("Enter 'Quit' to leave.\n\nDice: %d.\n", game->dice);
+		game->stone = select_stone(game->player);
+		if (!game->stone)
 		{
-			printf("Enter 'Quit' to leave.\n\n");
-			printf("Dice: %d.\n", dice);
-			stone = select_stone(player);
-			quit = !stone;
-			if (quit)
-				printf("You're quitting the game...\n");
-			else
+			printf("You're quitting the game->..\n");
+			break ;
+		}
+		game->dist_to_move = game->lvl < 3 ? game->dice : select_dist_to_move(game);
+		game->has_stone_moved = move_stone(game);
+		if (game->has_stone_moved)
+			game->stone->is_protected = 0;
+		press_enter_to_continue();
+		if (game->has_stone_moved)
+		{
+			print_board(game);
+			if (determine_winner(game))
+				break ;
+			else if (game->cell->is_rosette)
 			{
-				dist_to_move = lvl > 2 ? select_dist_to_move(player, stone)
-					: dice;
-				has_stone_moved = move_stone(lvl, dist_to_move, stone, &cell,
-					player, other_player);
-				if (has_stone_moved)
-					stone->is_protected = 0;
+				printf("This cell is a rosette.\nEffects: The current player "
+					"gets a free turn and the stone is untouchable while "
+					"standing on the cell.\n\n");
+				game->is_turn_played_twice = 1;
+				game->stone->is_protected = 1;
 				press_enter_to_continue();
-				if (has_stone_moved)
-				{
-					print_board(nbr_turns, player->id, players, cells);
-					quit = determine_winner(players);
-					if (!quit)
-					{
-						if (cell->is_rosette)
-						{
-							printf("This cell is a rosette.\n");
-							printf("Effects: The current player gets a free "
-								"turn and the stone is untouchable while "
-								"standing on the cell.\n\n");
-							is_turn_played_twice = 1;
-							stone->is_protected = 1;
-							press_enter_to_continue();
-						}
-					}
-				}
 			}
 		}
-		if (!is_turn_played_twice)
-			++nbr_turns;
 	}
 	return ;
 }
 
-static int	determine_winner(t_player *players)
+static void	increment_turn(t_game *game)
+{
+	t_player	*tmp;
+
+	if (!game->turn_nbr)
+	{
+		game->player = &game->players[0];
+		game->other_player = &game->players[1];
+	}
+	else if (!game->is_turn_played_twice)
+	{
+		tmp = game->player;
+		game->player = game->other_player;
+		game->other_player = tmp;
+	}
+	game->is_turn_played_twice = 0;
+	++game->turn_nbr;
+	return ;
+}
+
+static int	determine_winner(t_game *game)
 {
 	int	winner;
 
-	if (!players[0].nbr_playable || !players[1].nbr_playable)
+	if (!game->players[0].nbr_playable || !game->players[1].nbr_playable)
 	{
-		if (players[0].points == players[1].points)
-			winner = !players[0].nbr_playable;
-		else if (players[0].points > players[1].points)
+		if (game->players[0].points == game->players[1].points)
+			winner = !game->players[0].nbr_playable;
+		else if (game->players[0].points > game->players[1].points)
 			winner = 0;
 		else
 			winner = 1;
