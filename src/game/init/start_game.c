@@ -35,11 +35,8 @@ static void	set_game(t_game *game)
 	game->turn_nbr = 0;
 	game->dice = 0;
 	game->dist_to_move = 0;
-	game->nbr_moveable = 0;
-	game->has_stone_moved = 0;
 	game->is_turn_played_twice = 0;
 	game->stone = 0;
-	game->cell = 0;
 	game->player = 0;
 	game->other_player = 0;
 	reset_cells(game);

@@ -43,7 +43,6 @@ struct s_stone
 	const char	*name_long;
 	int			player_id;
 	t_cell		*cell;
-	int			is_protected;
 	int			can_move;
 	int			moves[4];
 };
@@ -66,11 +65,8 @@ typedef struct s_game
 	int			turn_nbr;
 	int			dice;
 	int			dist_to_move;
-	int			nbr_moveable;
-	int			has_stone_moved;
 	int			is_turn_played_twice;
 	t_stone		*stone;
-	t_cell		*cell;
 	t_player	*player;
 	t_player	*other_player;
 }	t_game;
@@ -110,10 +106,10 @@ void		press_enter_to_continue(void);
 
 /* Movement ----------------------------------------------------------------- */
 
-int			set_nbr_moveable_and_can_move(t_player *player, int lvl, int dice);
-int			can_stone_move(const t_stone *stone, t_player *player, int dice);
-int			can_stone_move_ds(t_stone *stone, t_player *player, int dice);
-int			move_stone(t_game *game);
+int			get_cell_index(t_player *player, t_stone *stone);
+int			can_any_stone_move(t_game *game);
+int			set_stone_can_move(t_game *game, t_stone *stone);
+void		move_stone(t_game *game);
 
 /* Selection ---------------------------------------------------------------- */
 

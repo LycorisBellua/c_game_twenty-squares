@@ -11,8 +11,7 @@ void	game_loop(t_game *game)
 		print_board(game);
 		game->dice = rng_minmax(0, 4);
 		/**/
-		game->nbr_moveable = set_nbr_moveable_and_can_move(game->player, game->lvl, game->dice);
-		if (!game->nbr_moveable)
+		if (!can_any_stone_move(game))
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
 				"player.\n\n", game->dice);
@@ -23,28 +22,22 @@ void	game_loop(t_game *game)
 		game->stone = select_stone(game->player);
 		if (!game->stone)
 		{
-			printf("You're quitting the game->..\n");
+			printf("You're quitting the game...\n");
 			break ;
 		}
 		game->dist_to_move = game->lvl < 3 ? game->dice : select_dist_to_move(game);
-		game->has_stone_moved = move_stone(game);
-		if (game->has_stone_moved)
-			game->stone->is_protected = 0;
+		move_stone(game);
 		press_enter_to_continue();
-		if (game->has_stone_moved)
+		print_board(game);
+		if (determine_winner(game))
+			break ;
+		if (game->stone->cell->is_rosette)
 		{
-			print_board(game);
-			if (determine_winner(game))
-				break ;
-			else if (game->cell->is_rosette)
-			{
-				printf("This cell is a rosette.\nEffects: The current player "
-					"gets a free turn and the stone is untouchable while "
-					"standing on the cell.\n\n");
-				game->is_turn_played_twice = 1;
-				game->stone->is_protected = 1;
-				press_enter_to_continue();
-			}
+			printf("This cell is a rosette.\nEffects: The current player gets "
+				"a free turn and the stone is untouchable while standing on "
+				"the cell.\n\n");
+			game->is_turn_played_twice = 1;
+			press_enter_to_continue();
 		}
 	}
 	return ;

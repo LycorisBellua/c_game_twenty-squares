@@ -1,5 +1,7 @@
 #include "twenty_squares.h"
 
+static int	pride_movement(t_game *game, int dist);
+
 int	select_dist_to_move(t_game *game)
 {
 	int			i;
@@ -23,8 +25,7 @@ int	select_dist_to_move(t_game *game)
 		}
 	}
 	// Lust doesn't have a special move.
-	// Pride is handled in `move_game->stone`.
-	// Wrath and Greed are handled in `can_game->stone_move_ds`.
+	// Wrath and Greed are handled in `can_move->stone_move_deadlysins`.
 	if (i_min == i_max || !strcmp(game->stone->name_long, "Gluttony"))
 		dist = game->stone->moves[i_max];
 	else if (!strcmp(game->stone->name_long, "Sloth"))
@@ -65,5 +66,35 @@ int	select_dist_to_move(t_game *game)
 		}
 	}
 	printf("Movement: %d %s forwards.\n\n", dist, dist < 2 ? "cell" : "cells");
+	if (!strcmp(game->stone->name_long, "Pride"))
+		dist = pride_movement(game, dist);
+	return (dist);
+}
+
+static int	pride_movement(t_game *game, int dist)
+{
+	int	i;
+	int pride_choice;
+
+	i = -1;
+	while (++i < 4)
+	{
+		if (!game->stone->moves[i])
+			break ;
+	}
+	// (i - 1) is the last valid index of possible_movements.
+	pride_choice = rng_minmax(0, i - 1);
+	if (dist == game->stone->moves[pride_choice])
+	{
+		printf("Pride refuses to move. The turn passes.\n\n");
+		dist = 0;
+	}
+	else
+	{
+		printf("\"%s\", huh? Pride will move somewhere else.\n\n",
+			dist == 1 ? "One" : dist == 2 ? "Two" : dist == 3 ? "Three"
+				: "Four");
+		dist = game->stone->moves[pride_choice];
+	}
 	return (dist);
 }
