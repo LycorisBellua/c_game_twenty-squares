@@ -1,6 +1,6 @@
 REFACTORING
 - src/game/turn/game_loop.c
-- src/game/movement/set_stone_can_move.c > can_stone_move_deadlysins()
+- src/game/movement/set_stone_can_move.c > can_stone_move_greed()
 - src/game/selection/select_stone.c
 - src/game/selection/select_dist_to_move.c
 

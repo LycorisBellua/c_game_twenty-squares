@@ -107,6 +107,7 @@ void		press_enter_to_continue(void);
 /* Movement ----------------------------------------------------------------- */
 
 int			get_cell_index(t_player *player, t_stone *stone);
+int			get_cell_index_closest_enemy(t_player *player, int start_index);
 int			can_any_stone_move(t_game *game);
 int			set_stone_can_move(t_game *game, t_stone *stone);
 void		move_stone(t_game *game);
