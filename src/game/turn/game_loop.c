@@ -26,11 +26,10 @@ void	game_loop(t_game *game)
 			break ;
 		}
 		game->dist_to_move = select_dist_to_move(game);
+		/**/
 		move_stone(game);
 		press_enter_to_continue();
 		print_board(game);
-		if (determine_winner(game))
-			break ;
 		if (game->stone->cell->is_rosette)
 		{
 			printf("This cell is a rosette.\nEffects: The current player gets "
@@ -39,6 +38,8 @@ void	game_loop(t_game *game)
 			game->is_turn_played_twice = 1;
 			press_enter_to_continue();
 		}
+		if (determine_winner(game))
+			break ;
 	}
 	return ;
 }

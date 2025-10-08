@@ -1,8 +1,7 @@
 REFACTORING
 - src/game/turn/game_loop.c
-- src/game/selection/select_stone.c
-- src/game/selection/select_dist_to_move.c
+- src/game/selection/select_stone.c -> Has printf, extract pls
+- src/game/selection/select_dist_to_move.c -> Has printf, extract pls
 
 BUG
-- There's something wrong with Wrath. As if it sometimes cannot move, although 
-technically there's a cell available.
+- Check that all stones in all levels do work, especially Wrath.

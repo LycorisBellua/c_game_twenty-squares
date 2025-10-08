@@ -1,7 +1,7 @@
 #include "twenty_squares.h"
 
-static void	set_game(t_game *game);
 static int	set_ai_player(const char *arg, t_player *players);
+static void	set_game(t_game *game);
 
 void	start_game(const char *arg)
 {
@@ -30,20 +30,6 @@ void	start_game(const char *arg)
 	return ;
 }
 
-static void	set_game(t_game *game)
-{
-	game->turn_nbr = 0;
-	game->dice = 0;
-	game->dist_to_move = 0;
-	game->is_turn_played_twice = 0;
-	game->stone = 0;
-	game->player = 0;
-	game->other_player = 0;
-	reset_cells(game);
-	reset_players(game);
-	return ;
-}
-
 static int	set_ai_player(const char *arg, t_player *players)
 {
 	int	ai_player;
@@ -62,4 +48,18 @@ static int	set_ai_player(const char *arg, t_player *players)
 		players[1].is_ai = ai_player == players[1].id ? 1 : 0;
 	}
 	return (1);
+}
+
+static void	set_game(t_game *game)
+{
+	game->turn_nbr = 0;
+	game->dice = 0;
+	game->dist_to_move = 0;
+	game->is_turn_played_twice = 0;
+	game->stone = 0;
+	game->player = 0;
+	game->other_player = 0;
+	reset_cells(game);
+	reset_players(game);
+	return ;
 }
