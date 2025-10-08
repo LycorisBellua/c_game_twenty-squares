@@ -10,7 +10,6 @@ void	game_loop(t_game *game)
 		increment_turn(game);
 		print_board(game);
 		game->dice = rng_minmax(0, 4);
-		/**/
 		if (!can_any_stone_move(game))
 		{
 			printf("Dice: %d. No stone can move. The turn passes to the other "
@@ -18,6 +17,7 @@ void	game_loop(t_game *game)
 			press_enter_to_continue();
 			continue ;
 		}
+		/**/
 		printf("Enter 'Quit' to leave.\n\nDice: %d.\n", game->dice);
 		game->stone = select_stone(game->player);
 		if (!game->stone)
@@ -25,7 +25,7 @@ void	game_loop(t_game *game)
 			printf("You're quitting the game...\n");
 			break ;
 		}
-		game->dist_to_move = game->lvl < 3 ? game->dice : select_dist_to_move(game);
+		game->dist_to_move = select_dist_to_move(game);
 		move_stone(game);
 		press_enter_to_continue();
 		print_board(game);

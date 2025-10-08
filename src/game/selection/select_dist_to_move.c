@@ -11,6 +11,8 @@ int	select_dist_to_move(t_game *game)
 	int			is_dist_valid;
 	const char	**tokens;
 
+	if (game->lvl < 3)
+		return (game->dice);
 	i_min = -1;
 	i_max = 0;
 	is_dist_valid = 0;
