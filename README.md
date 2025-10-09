@@ -1,11 +1,11 @@
 # Twenty Squares
 
-[Link to the download page (Itch.io)](https://lycorisdev.itch.io/twenty-squares)  
+[Link to the download page (Itch.io)](https://lycorisbellua.itch.io/twenty-squares)  
 
 *Twenty Squares* is a CLI video game, that is to say that it runs in a 
 computer's terminal. Besides this very repo, it can also be found as a 
 mini-game in 
-[Treasure Venture](https://github.com/LycorisDev/c_game_treasure-venture).  
+[Treasure Venture](https://github.com/LycorisBellua/c_game_treasure-venture).  
 
 ---
 
