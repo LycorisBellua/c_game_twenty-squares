@@ -36,7 +36,7 @@ int	select_dist_to_move(t_game *game)
 		dist = game->stone->moves[rng_minmax(i_min, i_max)];
 	else
 	{
-		printf("How many cells forwards should the game->stone move? ");
+		printf("How many cells forwards should the stone move? ");
 		i = i_min - 1;
 		while (++i < i_max)
 			printf("%d - ", game->stone->moves[i]);

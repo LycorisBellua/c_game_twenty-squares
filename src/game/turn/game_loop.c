@@ -1,6 +1,7 @@
 #include "twenty_squares.h"
 
 static void	increment_turn(t_game *game);
+static void	print_moveable_stones(t_player *player);
 static int	determine_winner(t_game *game);
 
 void	game_loop(t_game *game)
@@ -19,8 +20,11 @@ void	game_loop(t_game *game)
 		}
 		/**/
 		printf("Enter 'Quit' to leave.\n\nDice: %d.\n", game->dice);
+		print_moveable_stones(game->player);
 		game->stone = select_stone(game->player);
-		if (!game->stone)
+		if (game->stone)
+			printf("Stone: %s.\n\n", game->stone->name_long);
+		else
 		{
 			printf("You're quitting the game...\n");
 			break ;
@@ -61,6 +65,21 @@ static void	increment_turn(t_game *game)
 	}
 	game->is_turn_played_twice = 0;
 	++game->turn_nbr;
+	return ;
+}
+
+static void	print_moveable_stones(t_player *player)
+{
+	int	i;
+
+	printf("Stone:\n");
+	i = -1;
+	while (++i < 7)
+	{
+		if (player->stones[i].can_move)
+			printf("- %s ", player->stones[i].name);
+	}
+	printf("-\n\n");
 	return ;
 }
 

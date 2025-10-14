@@ -16,20 +16,15 @@ t_stone	*select_stone(t_player *player)
 	memset(name_moveable, 0, sizeof(name_moveable));
 	// Print the available choices + set `name_moveable` and `nbr_moveable` at 
 	// the same time
-	printf("Stone:\n");
 	name_moveable[0] = "QUIT";
 	i = -1;
 	j = 1;
 	while (++i < 7)
 	{
 		if (player->stones[i].can_move)
-		{
-			printf("- %s ", player->stones[i].name);
 			name_moveable[j++] = player->stones[i].name;
-		}
 	}
 	nbr_moveable = j - 1;
-	printf("-\n\n");
 	if (player->is_ai)
 	{
 		random = rng_minmax(1, nbr_moveable);
@@ -39,7 +34,6 @@ t_stone	*select_stone(t_player *player)
 			if (!strcmp(player->stones[i].name, name_moveable[random]))
 			{
 				stone = &player->stones[i];
-				printf("Stone: %s.\n\n", stone->name_long);
 				break ;
 			}
 		}
@@ -72,7 +66,6 @@ t_stone	*select_stone(t_player *player)
 							if (!strcmp(player->stones[j].name, name_moveable[i]))
 							{
 								stone = &player->stones[j];
-								printf("Stone: %s.\n\n", stone->name_long);
 								break ;
 							}
 						}
