@@ -9,6 +9,19 @@ const char	*get_player_name(int index)
 	return ("UNKNOWN_PLAYER");
 }
 
+const char	*get_dist_name(int dist)
+{
+	if (dist == 1)
+		return ("One");
+	else if (dist == 2)
+		return ("Two");
+	else if (dist == 3)
+		return ("Three");
+	else if (dist == 4)
+		return ("Four");
+	return ("UNKNOWN_DIST");
+}
+
 const char	*get_level_name(int level)
 {
 	if (level == 1)

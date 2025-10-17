@@ -12,9 +12,9 @@ void	game_loop(t_game *game)
 		increment_turn(game);
 		if (!throw_dice(game))
 			continue ;
-		if (!select_and_move_stone(game))
+		else if (!select_and_move_stone(game))
 			break ;
-		if (game->stone->cell->is_rosette)
+		else if (game->stone->cell->is_rosette)
 		{
 			printf("This cell is a rosette.\nEffects: The current player gets "
 				"a free turn and the stone is untouchable while standing on "
@@ -22,7 +22,7 @@ void	game_loop(t_game *game)
 			game->is_turn_played_twice = 1;
 			press_enter_to_continue();
 		}
-		if (determine_winner(game))
+		else if (determine_winner(game))
 			break ;
 	}
 	return ;

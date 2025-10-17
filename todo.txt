@@ -1,6 +1,2 @@
-REFACTORING
-- src/game/selection/select_dist_to_move.c
-	-> Refactor without caring to extract printf. Then extract it.
-
-BUG
+- Check that nothing requires a refactoring + Norm.
 - Check that all stones in all levels do work, especially Wrath.

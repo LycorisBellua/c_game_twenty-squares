@@ -4,6 +4,7 @@ static int	can_stone_move_classic(t_game *game, t_stone *stone);
 static int	can_stone_move_deadlysins(t_game *game, t_stone *stone);
 static int	can_stone_move_wrath(t_game *game, t_stone *stone, int cell_index);
 static int	can_stone_move_greed(t_game *game, t_stone *stone, int cell_index);
+static void	set_moves_for_gluttony_sloth_envy(t_stone *stone);
 
 int	set_stone_can_move(t_game *game, t_stone *stone)
 {
@@ -19,13 +20,16 @@ static int	can_stone_move_classic(t_game *game, t_stone *stone)
 	int		cell_index;
 	t_cell	*cell;
 
+	memset(stone->moves, 0, sizeof(stone->moves));
 	cell_index = get_cell_index(game->player, stone);
 	if (!game->dice || cell_index < 0 || cell_index == INDEX_VICTORY
 		|| cell_index + game->dice > INDEX_VICTORY)
 		return (0);
 	cell = game->player->track[cell_index + game->dice];
-	return (!cell->stone
-		|| (!cell->is_rosette && cell->stone->player_id != game->player->id));
+	if (!cell->stone
+		|| (!cell->is_rosette && cell->stone->player_id != game->player->id))
+		stone->moves[0] = game->dice;
+	return (!!stone->moves[0]);
 }
 
 static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
@@ -39,9 +43,9 @@ static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
 	cell_index = get_cell_index(game->player, stone);
 	if (!game->dice || cell_index < 0 || cell_index == INDEX_VICTORY)
 		return (0);
-	else if (!strcmp(stone->name_long, "Wrath"))
+	else if (!strcmp(stone->name, "W"))
 		return (can_stone_move_wrath(game, stone, cell_index));
-	else if (!strcmp(stone->name_long, "Greed"))
+	else if (!strcmp(stone->name, "GR"))
 		return (can_stone_move_greed(game, stone, cell_index));
 	i = 0;
 	j = 0;
@@ -53,6 +57,7 @@ static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
 				&& cell->stone->player_id != game->player->id))
 			stone->moves[j++] = i;
 	}
+	set_moves_for_gluttony_sloth_envy(stone);
 	return (!!j);
 }
 
@@ -107,4 +112,26 @@ static int	can_stone_move_greed(t_game *game, t_stone *stone, int cell_index)
 	else
 		stone->moves[0] = move_farthest;
 	return (!!stone->moves[0]);
+}
+
+static void	set_moves_for_gluttony_sloth_envy(t_stone *stone)
+{
+	int	i_max;
+	int	move;
+
+	i_max = 0;
+	while (i_max < 4 && stone->moves[i_max + 1])
+		++i_max;
+	move = 0;
+	if (!strcmp(stone->name, "GL"))
+		move = stone->moves[i_max];
+	else if (!strcmp(stone->name, "S"))
+		move = stone->moves[0];
+	else if (!strcmp(stone->name, "E"))
+		move = stone->moves[rng_minmax(0, i_max)];
+	else
+		return ;
+	memset(stone->moves, 0, sizeof(stone->moves));
+	stone->moves[0] = move;
+	return ;
 }

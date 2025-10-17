@@ -85,6 +85,7 @@ void		display_guide_page1(void);
 void		display_guide_page2(void);
 void		display_guide_page3(void);
 const char	*get_player_name(int index);
+const char	*get_dist_name(int dist);
 const char	*get_level_name(int level);
 const char	*get_stone_name(int level, int index, int full);
 
