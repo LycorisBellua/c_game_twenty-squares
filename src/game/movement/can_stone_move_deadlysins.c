@@ -92,7 +92,7 @@ static void	set_moves_for_gluttony_sloth_envy(t_stone *stone)
 	int	move;
 
 	i_max = 0;
-	while (i_max < 4 && stone->moves[i_max + 1])
+	while (i_max + 1 < 4 && stone->moves[i_max + 1])
 		++i_max;
 	move = 0;
 	if (!strcmp(stone->name, "GL"))

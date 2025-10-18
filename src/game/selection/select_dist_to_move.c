@@ -10,7 +10,7 @@ int	select_dist_to_move(t_game *game)
 	int	dist;
 
 	i_max = 0;
-	while (i_max < 4 && game->stone->moves[i_max + 1])
+	while (i_max + 1 < 4 && game->stone->moves[i_max + 1])
 		++i_max;
 	if (!i_max)
 		dist = game->stone->moves[i_max];
@@ -72,12 +72,11 @@ static int	get_pride_choice(t_game *game, int i_max, int dist)
 {
 	int	pride_choice;
 
+	if (!i_max)
+		return (dist);
 	pride_choice = rng_minmax(0, i_max);
-	if (game->stone->moves[pride_choice] == dist)
-	{
-		printf("Pride refuses to move. The turn passes.\n\n");
-		return (0);
-	}
+	while (game->stone->moves[pride_choice] == dist)
+		pride_choice = rng_minmax(0, i_max);
 	printf("\"%s\", huh? Pride will move somewhere else.\n\n",
 		get_dist_name(dist));
 	return (game->stone->moves[pride_choice]);

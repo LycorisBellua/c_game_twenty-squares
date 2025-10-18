@@ -56,10 +56,8 @@ void	display_guide_page3(void)
 {
 	printl("- Lust has only eyes for you. It listens to everything you say and "
 		"will go to the cell you pick.");
-	printl("- Pride doesn't do well with orders. It rejects what you picked "
-		"and goes where it wants. It can also refuse to move just to be a "
-		"bother. If so, and if it happened to be on a rosette already, it has "
-		"the audacity to pick up the gifts again.");
+	printl("- Pride doesn't do well with orders. When different movements are "
+		"possible, it rejects what you picked and goes somewhere else.");
 	printl("- Gluttony doesn't think. It just goes the farthest it can.");
 	printl("- Sloth would rather be asleep. But since it doesn't have Pride's "
 		"force of will, it can't remain immobile if you tell it to move, and "
