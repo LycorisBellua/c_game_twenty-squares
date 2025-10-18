@@ -2,8 +2,9 @@
 
 int	can_any_stone_move(t_game *game)
 {
-	int	i;
-	int	nbr_moveable;
+	int		i;
+	int		nbr_moveable;
+	t_stone	*stone;
 
 	if (!game->dice)
 		return (0);
@@ -11,7 +12,12 @@ int	can_any_stone_move(t_game *game)
 	nbr_moveable = 0;
 	while (++i < 7)
 	{
-		if (set_stone_can_move(game, &game->player->stones[i]))
+		stone = &game->player->stones[i];
+		if (game->lvl <= 2)
+			stone->can_move = can_stone_move_classic(game, stone);
+		else
+			stone->can_move = can_stone_move_deadlysins(game, stone);
+		if (stone->can_move)
 			++nbr_moveable;
 	}
 	return (nbr_moveable);

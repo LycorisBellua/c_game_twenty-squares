@@ -1,38 +1,10 @@
 #include "twenty_squares.h"
 
-static int	can_stone_move_classic(t_game *game, t_stone *stone);
-static int	can_stone_move_deadlysins(t_game *game, t_stone *stone);
 static int	can_stone_move_wrath(t_game *game, t_stone *stone, int cell_index);
 static int	can_stone_move_greed(t_game *game, t_stone *stone, int cell_index);
 static void	set_moves_for_gluttony_sloth_envy(t_stone *stone);
 
-int	set_stone_can_move(t_game *game, t_stone *stone)
-{
-	if (game->lvl <= 2)
-		stone->can_move = can_stone_move_classic(game, stone);
-	else
-		stone->can_move = can_stone_move_deadlysins(game, stone);
-	return (stone->can_move);
-}
-
-static int	can_stone_move_classic(t_game *game, t_stone *stone)
-{
-	int		cell_index;
-	t_cell	*cell;
-
-	memset(stone->moves, 0, sizeof(stone->moves));
-	cell_index = get_cell_index(game->player, stone);
-	if (!game->dice || cell_index < 0 || cell_index == INDEX_VICTORY
-		|| cell_index + game->dice > INDEX_VICTORY)
-		return (0);
-	cell = game->player->track[cell_index + game->dice];
-	if (!cell->stone
-		|| (!cell->is_rosette && cell->stone->player_id != game->player->id))
-		stone->moves[0] = game->dice;
-	return (!!stone->moves[0]);
-}
-
-static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
+int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
 {
 	int		i;
 	int		j;
@@ -41,7 +13,7 @@ static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
 
 	memset(stone->moves, 0, sizeof(stone->moves));
 	cell_index = get_cell_index(game->player, stone);
-	if (!game->dice || cell_index < 0 || cell_index == INDEX_VICTORY)
+	if (!game->dice || cell_index < 0 || cell_index == 15)
 		return (0);
 	else if (!strcmp(stone->name, "W"))
 		return (can_stone_move_wrath(game, stone, cell_index));
@@ -49,7 +21,7 @@ static int	can_stone_move_deadlysins(t_game *game, t_stone *stone)
 		return (can_stone_move_greed(game, stone, cell_index));
 	i = 0;
 	j = 0;
-	while (++i <= game->dice && cell_index + i <= INDEX_VICTORY)
+	while (++i <= game->dice && cell_index + i <= 15)
 	{
 		cell = game->player->track[cell_index + i];
 		if (!cell->stone
@@ -70,7 +42,7 @@ static int	can_stone_move_wrath(t_game *game, t_stone *stone, int cell_index)
 	if (index_enemy < 0)
 	{
 		i = 0;
-		while (++i <= game->dice && cell_index + i <= INDEX_VICTORY)
+		while (++i <= game->dice && cell_index + i <= 15)
 		{
 			if (!game->player->track[cell_index + i]->stone)
 			{
@@ -100,7 +72,7 @@ static int	can_stone_move_greed(t_game *game, t_stone *stone, int cell_index)
 	index_enemy = get_cell_index_next_enemy(game->player, cell_index, 0);
 	move_farthest = 0;
 	i = 0;
-	while (++i <= game->dice && cell_index + i <= INDEX_VICTORY)
+	while (++i <= game->dice && cell_index + i <= 15)
 	{
 		if (!game->player->track[cell_index + i]->stone)
 			move_farthest = i;

@@ -13,13 +13,7 @@ int	start(int argc, char **argv)
 	set_utf8_encoding();
 	if (!check_args(argc, argv))
 		return (1);
-	display_guide_intro();
-	if (!ask_yes_no("Do you know the rules of the game?"))
-	{
-		display_guide_page1();
-		display_guide_page2();
-		display_guide_page3();
-	}
+	display_guide();
 	start_game(argv[1]);
 	clear_window();
 	return (0);

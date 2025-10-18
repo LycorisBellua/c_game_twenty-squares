@@ -10,26 +10,7 @@
 #  include <windows.h>
 # endif
 
-# define FS '\x1C'
-
-# define INDEX_HOME                0
-# define INDEX_1_ON_4_INITIAL_ROAD 1
-# define INDEX_2_ON_4_INITIAL_ROAD 2
-# define INDEX_3_ON_4_INITIAL_ROAD 3
-# define INDEX_4_ON_4_INITIAL_ROAD 4
-# define INDEX_1_ON_8_COMMON_ROAD  5
-# define INDEX_2_ON_8_COMMON_ROAD  6
-# define INDEX_3_ON_8_COMMON_ROAD  7
-# define INDEX_4_ON_8_COMMON_ROAD  8
-# define INDEX_5_ON_8_COMMON_ROAD  9
-# define INDEX_6_ON_8_COMMON_ROAD  10
-# define INDEX_7_ON_8_COMMON_ROAD  11
-# define INDEX_8_ON_8_COMMON_ROAD  12
-# define INDEX_1_ON_2_END_ROAD     13
-# define INDEX_2_ON_2_END_ROAD     14
-# define INDEX_VICTORY             15
-
-typedef struct s_stone t_stone;
+typedef struct s_stone	t_stone;
 
 typedef struct s_cell
 {
@@ -74,20 +55,23 @@ typedef struct s_game
 /* Board -------------------------------------------------------------------- */
 
 void		print_board(t_game *game);
-void		print_stone(const t_stone* s, int player_id, int col_num);
-void		print_stone_rosette(const t_stone* s, int player_id, int col_num);
-void		print_stone_p(const t_stone* s, t_cell** track);
+void		print_turn_line(int turn_nbr);
+void		print_col_p1(int line, int player_id, t_player *players);
+void		print_col_1(int line, int player_id, t_cell cells[8][3]);
+void		print_col_2(int line, int player_id, t_cell cells[8][3]);
+void		print_col_3(int line, int player_id, t_cell cells[8][3]);
+void		print_col_p2(int line, int player_id, t_player *players);
+void		print_stone(const t_stone *s, int player_id, int col_num);
+void		print_stone_rosette(const t_stone *s, int player_id, int col_num);
+void		print_stone_p(const t_stone *s, t_cell **track);
 
 /* Guide -------------------------------------------------------------------- */
 
+void		display_guide(void);
 void		display_guide_intro(void);
 void		display_guide_page1(void);
 void		display_guide_page2(void);
 void		display_guide_page3(void);
-const char	*get_player_name(int index);
-const char	*get_dist_name(int dist);
-const char	*get_level_name(int level);
-const char	*get_stone_name(int level, int index, int full);
 
 /* Init --------------------------------------------------------------------- */
 
@@ -113,8 +97,16 @@ int			get_cell_index_next_enemy(t_player *player, int start_index,
 int			get_cell_index_next_rosette(t_player *player, int start_index,
 				int even_if_occupied);
 int			can_any_stone_move(t_game *game);
-int			set_stone_can_move(t_game *game, t_stone *stone);
+int			can_stone_move_classic(t_game *game, t_stone *stone);
+int			can_stone_move_deadlysins(t_game *game, t_stone *stone);
 void		move_stone(t_game *game);
+
+/* Names -------------------------------------------------------------------- */
+
+const char	*get_dist_name(int dist);
+const char	*get_level_name(int level);
+const char	*get_player_name(int index);
+const char	*get_stone_name(int level, int index, int full);
 
 /* Selection ---------------------------------------------------------------- */
 

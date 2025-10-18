@@ -5,12 +5,15 @@ static void	set_game(t_game *game);
 
 void	start_game(const char *arg)
 {
+	int		first_pass;
 	t_game	game;
 
 	init_cells(&game);
 	init_players(&game);
-	do
+	first_pass = 1;
+	while (first_pass || ask_yes_no("\nPlay again?") > 0)
 	{
+		first_pass = 0;
 		clear_window();
 		printf("TWENTY SQUARES\n\n");
 		printf("Level 1: %s.\nLevel 2: %s.\nLevel 3: %s.\nLevel 4: %s.\n\n",
@@ -24,9 +27,8 @@ void	start_game(const char *arg)
 			break ;
 		printf("Setting the game...\n");
 		set_game(&game);
-		sleep(1);
 		game_loop(&game);
-	} while (ask_yes_no("\nPlay again?") > 0);
+	}
 	return ;
 }
 
@@ -44,9 +46,9 @@ static int	set_ai_player(const char *arg, t_player *players)
 			return (0);
 		ai_player = ai_player % 2;
 		printf("Player: %s.\n\n", get_player_name(!ai_player));
-		players[0].is_ai = ai_player == players[0].id ? 1 : 0;
-		players[1].is_ai = ai_player == players[1].id ? 1 : 0;
 	}
+	players[0].is_ai = ai_player == players[0].id;
+	players[1].is_ai = ai_player == players[1].id;
 	return (1);
 }
 

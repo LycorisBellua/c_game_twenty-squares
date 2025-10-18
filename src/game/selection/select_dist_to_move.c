@@ -21,7 +21,10 @@ int	select_dist_to_move(t_game *game)
 		display_dist_options(game, i_max);
 		dist = select_dist_with_input(game);
 	}
-	printf("Movement: %d %s forwards.\n\n", dist, dist < 2 ? "cell" : "cells");
+	if (dist < 2)
+		printf("Movement: %d cell forwards.\n\n", dist);
+	else
+		printf("Movement: %d cells forwards.\n\n", dist);
 	if (!strcmp(game->stone->name, "P"))
 		dist = get_pride_choice(game, i_max, dist);
 	return (dist);
@@ -56,7 +59,7 @@ static int	select_dist_with_input(t_game *game)
 			dist = atoi(tokens[0]);
 			free_arr((void **)tokens, free);
 			i = -1;
-			while (++i < 4 && game->stone->moves[i] == dist)
+			while (++i < 4 && game->stone->moves[i] != dist)
 				;
 			if (dist && i < 4)
 				return (dist);
@@ -67,7 +70,7 @@ static int	select_dist_with_input(t_game *game)
 
 static int	get_pride_choice(t_game *game, int i_max, int dist)
 {
-	int pride_choice;
+	int	pride_choice;
 
 	pride_choice = rng_minmax(0, i_max);
 	if (game->stone->moves[pride_choice] == dist)

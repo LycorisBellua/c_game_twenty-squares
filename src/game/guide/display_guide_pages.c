@@ -2,25 +2,8 @@
 
 static void	display_guide_board(void);
 
-void	display_guide_intro(void)
-{
-	clear_window();
-	printl("TWENTY SQUARES\n");
-	printl("This game is based upon a mesopotamian game which is at least 4.5 "
-		"millennia old. Known today as the \"Royal Game of Ur\" or the \"Game "
-		"of Twenty Squares\", this board game was later on overthrown by "
-		"Backgammon. This project, Twenty Squares, is the opportunity to "
-		"discover the oldest board game known to mankind. And, on top of a "
-		"classic way of playing, following the Finkel rules, I've provided my "
-		"own twist by giving life to the stones in the Deadly Sins modes. "
-		"Pawns thinking for themselves... Unbelievable.\n");
-	return ;
-}
-
 void	display_guide_page1(void)
 {
-	clear_window();
-	printl("GUIDE - PAGE 1/3\n");
 	printl("This board game is a race game. Two players, seven stones each, "
 		"and the winner is whoever led all of their stones beyond the finish "
 		"line. To help, a dice going from 0 to 4. Let's explain the rules!\n");
@@ -45,14 +28,11 @@ void	display_guide_page1(void)
 		"a rosette. Stepping upon one protects the stone from being captured, "
 		"and it gives you another turn.\n");
 	printl("Let's see the different levels!\n");
-	press_enter_to_continue();
 	return ;
 }
 
 void	display_guide_page2(void)
 {
-	clear_window();
-	printl("GUIDE - PAGE 2/3\n");
 	printl("Level 1: Classic Infinite.");
 	printl("Level 2: Classic Dispatch.");
 	printl("Level 3: Deadly Sins Infinite.");
@@ -69,14 +49,11 @@ void	display_guide_page2(void)
 		"yourself. Whichever Deadly Sins stone you move has its own behavior."
 		"\n");
 	printl("Let's see how Deadly Sins stones pick their cell!\n");
-	press_enter_to_continue();
 	return ;
 }
 
 void	display_guide_page3(void)
 {
-	clear_window();
-	printl("GUIDE - PAGE 3/3\n");
 	printl("- Lust has only eyes for you. It listens to everything you say and "
 		"will go to the cell you pick.");
 	printl("- Pride doesn't do well with orders. It rejects what you picked "
@@ -96,7 +73,6 @@ void	display_guide_page3(void)
 		"wait for enemies to arrive.");
 	printl("- Greed follows a set of priorities: the closest rosette, then the "
 		"closest enemy, and finally the finish line.\n");
-	press_enter_to_continue();
 	return ;
 }
 

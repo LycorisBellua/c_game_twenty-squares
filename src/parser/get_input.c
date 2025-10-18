@@ -1,5 +1,7 @@
 #include "twenty_squares.h"
 
+#define FS '\x1C'
+
 static void	set_to_uppercase(char *s);
 static void	set_whitespaces_to_fs(char *s);
 

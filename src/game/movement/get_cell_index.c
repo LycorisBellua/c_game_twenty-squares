@@ -22,7 +22,7 @@ int	get_cell_index_next_enemy(t_player *player, int start_index,
 	int	i;
 
 	i = start_index;
-	while (++i < INDEX_VICTORY)
+	while (++i < 15)
 	{
 		if (player->track[i]->stone
 			&& player->track[i]->stone->player_id != player->id
@@ -38,7 +38,7 @@ int	get_cell_index_next_rosette(t_player *player, int start_index,
 	int	i;
 
 	i = start_index;
-	while (++i < INDEX_VICTORY)
+	while (++i < 15)
 	{
 		if (player->track[i]->is_rosette
 			&& (even_if_occupied || !player->track[i]->stone))
