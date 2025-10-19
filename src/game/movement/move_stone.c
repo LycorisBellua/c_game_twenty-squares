@@ -4,10 +4,10 @@ void	move_stone(t_game *game)
 {
 	t_cell	*dest_cell;
 
-	if (game->stone->cell != game->player->track[0])
-		game->stone->cell->stone = 0;
 	dest_cell = game->player->track[get_cell_index(game->player, game->stone)
 		+ game->dist_to_move];
+	game->stone->cell->stone = 0;
+	game->stone->cell = dest_cell;
 	if (dest_cell->stone)
 	{
 		if (game->lvl == 1 || game->lvl == 3)
@@ -18,8 +18,7 @@ void	move_stone(t_game *game)
 			--game->other_player->nbr_playable;
 		}
 	}
-	game->stone->cell = dest_cell;
-	if (dest_cell != game->player->track[0])
+	if (dest_cell != game->player->track[15])
 		dest_cell->stone = game->stone;
 	else
 	{
